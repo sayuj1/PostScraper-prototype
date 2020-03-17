@@ -1,0 +1,36 @@
+.postsContent {
+    height: 100vh;
+    background-color: whitesmoke;
+    width: 100%;
+    text-align: left;
+    padding: 20px 20px 20px 20px;
+    overflow: auto;
+}
+
+.postsContent::-webkit-scrollbar {
+    width: 8px;
+    background-color: white;
+}
+
+.postsContent::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: dodgerblue;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background-color: white;
+}
+
+.footer {
+    position: relative;
+    float: left;
+    bottom: 0;
+    background-color: dodgerblue;
+    width: 100%;
+    filter: opacity(0.8);
+    color: white;
+    font-size: large;
+    font-weight: bolder;
+    line-height: 50px;
+}
