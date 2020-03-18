@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../../../node_modules/antd/dist/antd.css";
 import PostSearch from "../posts/PostsSearch";
 import { Menu } from "antd";
@@ -59,7 +60,7 @@ const Navbar = () => {
       </Item>
       <Item key="home" style={{ float: "right" }}>
         <HomeOutlined />
-        Home
+        <Link to="/">Home</Link>
       </Item>
     </Menu>
   );

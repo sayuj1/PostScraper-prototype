@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Posts from "../posts/Posts";
 
 const Home = () => {
   return (
-    <div className="postContainer">
+    <Fragment>
       <Posts />
-    </div>
+    </Fragment>
   );
 };
 

@@ -1,41 +1,33 @@
 import React, { Fragment } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Styles from "../../styles/Layouts.module.css";
-import Navbar from "./Navbar";
 import Home from "../pages/Home";
+import ViewPost from "../pages/ViewPost";
+import Page404 from "../pages/Page404";
+import Header from "./Header";
 import PostState from "../../context/postContext/PostState";
-import { BackTop, Affix } from "antd";
-import { UpCircleOutlined } from "@ant-design/icons";
+import BackToTop from "./BackToTop";
+
 const Layouts = () => {
   return (
     <Fragment>
-      <div className="header">
-        {/* setting navbar at the top */}
-        <Affix offsetTop={0}>
-          <Navbar />
-        </Affix>
-      </div>
-      <div className={Styles.postsContent} id="style1">
-        {/* for sharing post values across the components */}
-        <PostState>
-          {/* for going back to top */}
-          <BackTop
-            target={() =>
-              document.querySelector(".Layouts_postsContent__14i80")
-            }
-          >
-            <strong>
-              <UpCircleOutlined
-                style={{
-                  fontSize: "40px",
-                  color: "#1890ff"
-                }}
-              />
-            </strong>
-          </BackTop>
-          <Home />
-        </PostState>
-      </div>
-      <div className={Styles.footer}>Get Learn ©2020 Created By App-Devs</div>
+      <Router>
+        <div className="header">
+          <Header />
+        </div>
+        <div className={Styles.postsContent} id="style1">
+          <BackToTop />
+          {/* for sharing post values across the components */}
+          <PostState>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/post/:id" component={ViewPost} />
+              <Route path="/page-not-found" component={Page404} />
+            </Switch>
+          </PostState>
+        </div>
+        <div className={Styles.footer}>Get Learn ©2020 Created By App-Devs</div>
+      </Router>
     </Fragment>
   );
 };

@@ -4,7 +4,7 @@ import "../../../node_modules/antd/dist/antd.css";
 const { Search } = Input;
 
 const PostSearch = () => {
-  const data = "hi";
+  // const data = "hi";
   const handleChange = () => {
     console.log("Autocomplete loading data");
   };

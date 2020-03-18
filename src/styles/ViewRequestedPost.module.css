@@ -1,0 +1,9 @@
+.postDescription::-webkit-scrollbar {
+    width: 2px;
+    background-color: white;
+}
+
+.postDescription::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: dodgerblue;
+}
