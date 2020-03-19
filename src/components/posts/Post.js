@@ -28,7 +28,7 @@ const Post = props => {
         xs={{ span: 24 }}
         sm={{ span: 12 }}
         md={{ span: 6 }}
-        lg={{ span: 4 }}
+        lg={{ span: 6 }}
       >
         {/* post information is shown */}
         <Card

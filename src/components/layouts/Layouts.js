@@ -15,7 +15,7 @@ const Layouts = () => {
         <div className="header">
           <Header />
         </div>
-        <div className={Styles.postsContent} id="style1">
+        <div className={Styles.postsContent}>
           <BackToTop />
           {/* for sharing post values across the components */}
           <PostState>

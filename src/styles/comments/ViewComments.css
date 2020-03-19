@@ -1,0 +1,16 @@
+.ant-spin-container {
+    max-height: 220px;
+    overflow: auto;
+    padding-right: 10px;
+    text-align: justify;
+}
+
+.ant-spin-container::-webkit-scrollbar {
+    width: 2px;
+    background-color: white;
+}
+
+.ant-spin-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: dodgerblue;
+}

@@ -7,8 +7,10 @@ import {
   UserOutlined,
   ArrowLeftOutlined
 } from "@ant-design/icons";
-import Styles from "../../styles/ViewRequestedPost.module.css";
+import Styles from "../../styles/posts/ViewRequestedPost.module.css";
 import PostContext from "../../context/postContext/postContext";
+import CommentBox from "../comments/CommentBox";
+import ViewComments from "../comments/ViewComments";
 const { Paragraph } = Typography;
 
 const ViewRequestedPost = props => {
@@ -71,7 +73,7 @@ const ViewRequestedPost = props => {
               lg={{ span: 12 }}
             >
               <div className="postImg">
-                <img src={postImg} width="100%" />
+                <img alt="No img found!" src={postImg} width="100%" />
               </div>
             </Col>
             {/* second div containing information about image */}
@@ -83,6 +85,7 @@ const ViewRequestedPost = props => {
             >
               <div className="postContent">
                 {/* back button for going back to home page */}
+
                 <div className="backButton" style={{ margin: "20px" }}>
                   <Link to="/">
                     <Button
@@ -95,7 +98,7 @@ const ViewRequestedPost = props => {
                 </div>
                 {/* header containing download button and save button */}
                 <div className={Styles.postHeader}>
-                  {/* download button for downloading an image */}
+                  {/* // download button for downloading an image */}
                   <a href={postImg} download target="_blank">
                     <Button
                       type="primary"
@@ -116,6 +119,7 @@ const ViewRequestedPost = props => {
                     Save
                   </Button>
                 </div>
+
                 {/* // post title */}
                 <div className={Styles.postTitle}>{postTitle}</div>
                 {/* // post description */}
@@ -156,17 +160,12 @@ const ViewRequestedPost = props => {
                 <div className={Styles.postAuthor}>
                   {/* // checking whether user has a avatar or not */}
                   {avatar ? (
-                    <Avatar
-                      size={50}
-                      src={avatar}
-                      icon={!avatar ? <UserOutlined /> : null}
-                    />
+                    <Avatar size={50} src={avatar} />
                   ) : (
                     <Avatar
                       style={{ backgroundColor: "#87d068" }}
                       size={50}
-                      src={avatar}
-                      icon={!avatar ? <UserOutlined /> : null}
+                      icon={<UserOutlined />}
                     />
                   )}
                   <span
@@ -180,6 +179,15 @@ const ViewRequestedPost = props => {
                     {postAuthor}
                   </span>
                 </div>
+              </div>
+              {/* postContent end */}
+              {/* comment box Component */}
+              <div className={Styles.commentBox}>
+                <CommentBox />
+              </div>
+              {/* Comment-list Component goes here */}
+              <div className={Styles.postCommentsBox}>
+                <ViewComments />
               </div>
             </Col>
           </Row>
