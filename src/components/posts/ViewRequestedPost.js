@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../../node_modules/antd/dist/antd";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
@@ -8,15 +8,21 @@ import {
   ArrowLeftOutlined
 } from "@ant-design/icons";
 import Styles from "../../styles/ViewRequestedPost.module.css";
+import PostContext from "../../context/postContext/postContext";
 const { Paragraph } = Typography;
 
 const ViewRequestedPost = props => {
+  // for clearing view post information from the post state on clicking back button
+  const { clearViewPost } = useContext(PostContext);
+
+  //for toggling expand & close in post description
   const [toggleExpand, settoggleExpand] = useState({
     expand: false,
     counter: 0
   });
 
-  const typoExpand = () => {
+  // on expanding post description
+  const handlingExpand = () => {
     settoggleExpand({
       expand: true,
       counter: !toggleExpand.expand
@@ -25,7 +31,8 @@ const ViewRequestedPost = props => {
     });
   };
 
-  const typoClose = () => {
+  // on closing expanded post description
+  const handlingClose = () => {
     settoggleExpand({
       expand: false,
       counter: !toggleExpand.expand
@@ -52,6 +59,7 @@ const ViewRequestedPost = props => {
         md={{ span: 20, offset: 2 }}
         lg={{ span: 20, offset: 2 }}
       >
+        {/* post box containing both image and information about image */}
         <div
           className="postBox"
           style={{ width: "100%", backgroundColor: "white" }}
@@ -76,15 +84,18 @@ const ViewRequestedPost = props => {
               lg={{ span: 12 }}
             >
               <div className="postContent">
+                {/* back button for going back to home page */}
                 <div className="backButton" style={{ margin: "20px" }}>
                   <Link to="/">
                     <Button
+                      onClick={() => clearViewPost}
                       shape="round"
                       icon={<ArrowLeftOutlined />}
                       size="large"
                     />
                   </Link>
                 </div>
+                {/* header containing download button and save button */}
                 <div
                   className="postHeader"
                   style={{
@@ -94,6 +105,7 @@ const ViewRequestedPost = props => {
                     marginBottom: "20px"
                   }}
                 >
+                  {/* download button for downloading an image */}
                   <a href={postImg} download target="_blank">
                     <Button
                       type="primary"
@@ -104,6 +116,7 @@ const ViewRequestedPost = props => {
                       Download
                     </Button>
                   </a>
+                  {/* save button for saving into users collection */}
                   <Button
                     type="primary"
                     shape="round"
@@ -113,6 +126,7 @@ const ViewRequestedPost = props => {
                     Save
                   </Button>
                 </div>
+                {/* // post title */}
                 <div
                   className="postTitle"
                   style={{
@@ -127,6 +141,7 @@ const ViewRequestedPost = props => {
                 >
                   {postTitle}
                 </div>
+                {/* // post description */}
                 <div
                   className={Styles.postDescription}
                   key={toggleExpand.counter}
@@ -137,11 +152,12 @@ const ViewRequestedPost = props => {
                     textAlign: "justify"
                   }}
                 >
+                  {/* for expanding & collapsing post description */}
                   <Paragraph
                     ellipsis={{
                       rows: 3,
                       expandable: true,
-                      onExpand: typoExpand
+                      onExpand: handlingExpand
                     }}
                     style={{ padding: "20px" }}
                   >
@@ -157,16 +173,22 @@ const ViewRequestedPost = props => {
                       paddingBottom: "5px"
                     }}
                   >
-                    <a onClick={typoClose} style={{ float: "right" }}>
+                    <a onClick={handlingClose} style={{ float: "right" }}>
                       Close
                     </a>
                   </div>
                 )}
-                <div className="postTags" style={{ margin: "20px" }}>
-                  {tags.map(tag => (
-                    <Tag color="#2db7f5">{tag}</Tag>
-                  ))}
-                </div>
+                {/* // checking first if no tags available */}
+                {tags ? (
+                  <div className="postTags" style={{ margin: "20px" }}>
+                    {tags.map((tag, index) => (
+                      <Tag color="#2db7f5" key={Date.now() * _id + index}>
+                        {tag}
+                      </Tag>
+                    ))}
+                  </div>
+                ) : null}
+                {/* containing post author & post avatar */}
                 <div
                   className="postAuthor"
                   style={{
@@ -176,6 +198,7 @@ const ViewRequestedPost = props => {
                     marginBottom: "20px"
                   }}
                 >
+                  {/* // checking whether user has a avatar or not */}
                   {avatar ? (
                     <Avatar
                       size={50}
@@ -184,7 +207,7 @@ const ViewRequestedPost = props => {
                     />
                   ) : (
                     <Avatar
-                      style={{ backgroundColor: "dodgerblue" }}
+                      style={{ backgroundColor: "#87d068" }}
                       size={50}
                       src={avatar}
                       icon={!avatar ? <UserOutlined /> : null}
@@ -197,6 +220,7 @@ const ViewRequestedPost = props => {
                       marginLeft: "10px"
                     }}
                   >
+                    {/* displaying post author */}
                     {postAuthor}
                   </span>
                 </div>

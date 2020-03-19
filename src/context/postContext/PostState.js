@@ -9,9 +9,9 @@ import {
 
 const PostState = props => {
   const initialState = {
-    filterPost: false,
+    filterPost: false, // for showing users post only (on user profile page) [does not include post from saved collections]
     viewRequestedPost: null, // contains requested post id
-    requestedPost: null, // contains requested post
+    requestedPost: null, // contains requested post information
     posts: [
       {
         _id: 1,
@@ -19,11 +19,11 @@ const PostState = props => {
         postTitle: "Here we Go!",
         postDescription:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi turpis diam, pulvinar at ex at, mollis dictum justo. Aenean at aliquam ipsum. Duis tristique, lectus sodales pulvinar finibus, justo libero convallis ligula, ac bibendum magna mauris eget arcu. Sed suscipit augue at turpis rutrum rutrum. Nulla nec diam ut massa congue mollis finibus at tortor. Nunc suscipit elit ut elit lobortis maximus. Nulla facilisis euismod orci sed vulputate. Nulla posuere neque eu tellus pharetra, vitae tincidunt libero pellentesque. Vestibulum elit est, commodo id sapien sed, sodales vestibulum ante. Quisque eleifend, libero a hendrerit dictum, risus eros sagittis magna, ut mattis odio quam at odio. Curabitur vestibulum tincidunt erat sed ullamcorper. Aenean erat magna, lobortis sit amet risus non, hendrerit dapibus ex Duis sed leo in enim ultrices volutpat vel vel arcu. Pellentesque faucibus blandit condimentum. Aenean augue tellus, maximus vitae libero quis, tincidunt faucibus tellus. Fusce viverra ultrices feugiat. Nam non justo vel eros lobortis interdum eu maximus justo. Morbi et semper lectus, et dignissim quam. Pellentesque venenatis nisl nec blandit finibus. Donec laoreet, mauris eget commodo gravida, ipsum ipsum semper quam, in consectetur urna sapien id massa. Aenean condimentum viverra augue, ut interdum purus lobortis ac. Praesent at neque id massa consectetur congue quis in nibh. Nunc commodo at nisi non gravida. Morbi congue tincidunt nunc, vel mollis massa ultrices posuere. Integer feugiat urna ac orci auctor, nec consequat lectus consectetur. In cursus nisi commodo convallis sagittis.Ut nisi leo, pharetra quis laoreet a, hendrerit tempus enim. In at laoreet nisl. Maecenas vehicula, leo non condimentum tempus, libero ante suscipit dolor, sed venenatis purus tellus nec urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent hendrerit, mauris sed volutpat scelerisque, libero purus finibus massa, et facilisis eros ex consequat risus. Curabitur nulla augue, interdum vel urna sit amet, ultrices interdum libero. Donec a risus commodo, porttitor ante et, finibus sem. Morbi sagittis quam vel massa venenatis posuere. Vivamus ullamcorper, est at venenatis fermentum, ante nisl vehicula mi, nec tristique diam sem at mauris. Vivamus odio ligula, tristique eget magna ut, ultricies rhoncus magna. Aliquam quis lectus fringilla, sollicitudin tellus vitae, dignissim diam.",
-        tags: ["HTML", "CSS", "JavaScript"],
+        tags: "", //optional
         postAuthor: "Varun",
         thumbnail: "",
         avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" //optional
       },
       {
         _id: 2,
@@ -88,21 +88,26 @@ const PostState = props => {
       }
     ]
   };
+  // for mananging state
   const [state, dispatch] = useReducer(postReducer, initialState);
 
+  // setting up the view post
   const setViewPost = postId => {
     dispatch(Set_View_Post(postId));
   };
 
+  // clearing view post information from the state
   const clearViewPost = () => {
     dispatch(Clear_View_Post());
   };
 
+  // getting requested post information
   const getRequestedPost = postId => {
     dispatch(Get_Requested_Post(postId));
   };
 
   return (
+    // sharing post state values
     <PostContext.Provider
       value={{
         posts: state.posts,

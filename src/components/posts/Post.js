@@ -5,12 +5,16 @@ import { Card, Col } from "antd";
 import { useHistory } from "react-router-dom";
 const { Meta } = Card;
 
+// this component will display each post which is coming from "Posts" component
 const Post = props => {
+  // for getting clicked post information
   const { setViewPost } = useContext(PostContext);
+  // post information
   const { _id, postImg, postTitle, tags } = props.post;
+  //for navigation
   const history = useHistory();
 
-  // handle view clicked post
+  // handle which post is clicked and get the information
   const handlePostClick = () => {
     setViewPost(_id);
     //loading view post component
@@ -19,12 +23,14 @@ const Post = props => {
 
   return (
     <Fragment>
+      {/* defining how much space should each post take */}
       <Col
         xs={{ span: 24 }}
         sm={{ span: 12 }}
-        md={{ span: 8 }}
-        lg={{ span: 6 }}
+        md={{ span: 6 }}
+        lg={{ span: 4 }}
       >
+        {/* post information is shown */}
         <Card
           onClick={handlePostClick}
           bordered={false}
@@ -35,7 +41,7 @@ const Post = props => {
         >
           <Meta
             style={{ fontWeight: "bolder" }}
-            description={"Related To: " + tags}
+            description={tags ? "Related To: " + tags : null}
           />
         </Card>
       </Col>

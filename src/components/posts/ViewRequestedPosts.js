@@ -18,6 +18,7 @@ const ViewRequestedPosts = () => {
     getRequestedPost(viewRequestedPost);
   }, [viewRequestedPost]);
   return (
+    // passing requested post
     <div className={`postContainer_${viewRequestedPost}`}>
       {requestedPost !== null
         ? requestedPost.map(post => (
