@@ -16,6 +16,7 @@ const Post = props => {
 
   // handle which post is clicked and get the information
   const handlePostClick = () => {
+    // console.log(_id);
     setViewPost(_id);
     //loading view post component
     history.push(`/post/${_id}`);

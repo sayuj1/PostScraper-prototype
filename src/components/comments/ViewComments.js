@@ -5,8 +5,8 @@ import { UserOutlined } from "@ant-design/icons";
 import "../../styles/comments/ViewComments.css";
 import moment from "moment";
 
-const ViewComments = props => {
-  const { viewRequestedPost } = useContext(PostContext);
+const ViewComments = () => {
+  const { viewPost } = useContext(PostContext);
   const [state, setstate] = useState({
     loading: false,
     comments: [
@@ -52,8 +52,8 @@ const ViewComments = props => {
     });
   };
   useEffect(() => {
-    if (!viewRequestedPost) {
-      getComments(viewRequestedPost);
+    if (!viewPost) {
+      getComments(viewPost);
     }
     // eslint-disable-next-line
   }, []);

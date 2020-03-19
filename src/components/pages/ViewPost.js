@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
-import ViewRequestedPosts from "../posts/ViewRequestedPosts";
+import ViewPosts from "../posts/ViewPosts";
 
 const ViewPost = () => {
   return (
     <Fragment>
-      <ViewRequestedPosts />
+      <ViewPosts />
     </Fragment>
   );
 };

@@ -1,19 +1,19 @@
 import React, { Fragment, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import "../../../node_modules/antd/dist/antd";
+import "antd/dist/antd";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
 import {
   DownloadOutlined,
   UserOutlined,
   ArrowLeftOutlined
 } from "@ant-design/icons";
-import Styles from "../../styles/posts/ViewRequestedPost.module.css";
+import Styles from "../../styles/posts/ViewPost.module.css";
 import PostContext from "../../context/postContext/postContext";
 import CommentBox from "../comments/CommentBox";
 import ViewComments from "../comments/ViewComments";
 const { Paragraph } = Typography;
 
-const ViewRequestedPost = props => {
+const ViewPost = props => {
   // for clearing view post information from the post state on clicking back button
   const { clearViewPost } = useContext(PostContext);
 
@@ -197,4 +197,4 @@ const ViewRequestedPost = props => {
   );
 };
 
-export default ViewRequestedPost;
+export default ViewPost;

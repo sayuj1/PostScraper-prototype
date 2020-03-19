@@ -2,7 +2,7 @@ import {
   TOGGLE_POST_FILTER,
   SET_VIEW_POST,
   CLEAR_VIEW_POST,
-  GET_REQUESTED_POST
+  GET_VIEW_POST
 } from "./postTypes";
 
 export const Filter_Post = () => {
@@ -24,9 +24,9 @@ export const Clear_View_Post = () => {
   };
 };
 
-export const Get_Requested_Post = postId => {
+export const Get_View_Post = postId => {
   return {
-    type: GET_REQUESTED_POST,
+    type: GET_VIEW_POST,
     payload: postId
   };
 };

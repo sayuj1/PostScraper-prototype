@@ -2,7 +2,7 @@ import {
   TOGGLE_POST_FILTER,
   SET_VIEW_POST,
   CLEAR_VIEW_POST,
-  GET_REQUESTED_POST
+  GET_VIEW_POST
 } from "./postTypes";
 
 const postReducer = (state, action) => {
@@ -11,17 +11,17 @@ const postReducer = (state, action) => {
       return { ...state, filterPost: !state.filterPost };
 
     case SET_VIEW_POST:
-      return { ...state, viewRequestedPost: action.payload };
-    case GET_REQUESTED_POST:
+      return { ...state, viewPostId: action.payload };
+    case GET_VIEW_POST:
       return {
         ...state,
-        requestedPost: state.posts.filter(post => post._id === action.payload)
+        viewPost: state.posts.filter(post => post._id === action.payload)
       };
     case CLEAR_VIEW_POST:
       return {
         ...state,
-        viewRequestedPost: null,
-        requestedPost: null
+        viewPostId: null,
+        viewPost: null
       };
     default:
       return state;

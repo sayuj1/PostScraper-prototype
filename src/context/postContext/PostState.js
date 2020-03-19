@@ -4,14 +4,14 @@ import postReducer from "./postReducer";
 import {
   Set_View_Post,
   Clear_View_Post,
-  Get_Requested_Post
+  Get_View_Post
 } from "./postActions.js";
 
 const PostState = props => {
   const initialState = {
     filterPost: false, // for showing users post only (on user profile page) [does not include post from saved collections]
-    viewRequestedPost: null, // contains requested post id
-    requestedPost: null, // contains requested post information
+    viewPostId: null, // contains requested post id
+    viewPost: null, // contains requested post information
     posts: [
       {
         _id: 1,
@@ -102,8 +102,8 @@ const PostState = props => {
   };
 
   // getting requested post information
-  const getRequestedPost = postId => {
-    dispatch(Get_Requested_Post(postId));
+  const getViewPost = postId => {
+    dispatch(Get_View_Post(postId));
   };
 
   return (
@@ -111,11 +111,11 @@ const PostState = props => {
     <PostContext.Provider
       value={{
         posts: state.posts,
-        viewRequestedPost: state.viewRequestedPost,
-        requestedPost: state.requestedPost,
+        viewPostId: state.viewPostId,
+        viewPost: state.viewPost,
         setViewPost: setViewPost,
         clearViewPost: clearViewPost,
-        getRequestedPost: getRequestedPost
+        getViewPost: getViewPost
       }}
     >
       {props.children}
