@@ -1,3 +1,32 @@
+.postBox {
+    width: 100%;
+    background-color: white
+}
+
+.postHeader {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px
+}
+
+.postTitle {
+    line-height: normal;
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    color: #111111
+}
+
+.postDescription {
+    max-height: 300px;
+    overflow: auto;
+    margin-top: 10px;
+    text-align: justify
+}
+
 .postDescription::-webkit-scrollbar {
     width: 2px;
     background-color: white;
@@ -6,4 +35,22 @@
 .postDescription::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: dodgerblue;
+}
+
+.closeButton {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px
+}
+
+.postTags {
+    margin: 20px
+}
+
+.postAuthor {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px
 }

@@ -41,6 +41,7 @@ const ViewRequestedPost = props => {
     });
   };
 
+  // post information destructuring
   const {
     _id,
     postImg,
@@ -60,10 +61,7 @@ const ViewRequestedPost = props => {
         lg={{ span: 20, offset: 2 }}
       >
         {/* post box containing both image and information about image */}
-        <div
-          className="postBox"
-          style={{ width: "100%", backgroundColor: "white" }}
-        >
+        <div className={Styles.postBox}>
           <Row>
             {/* first div column containing image */}
             <Col
@@ -96,15 +94,7 @@ const ViewRequestedPost = props => {
                   </Link>
                 </div>
                 {/* header containing download button and save button */}
-                <div
-                  className="postHeader"
-                  style={{
-                    marginTop: "20px",
-                    marginLeft: "20px",
-                    marginRight: "20px",
-                    marginBottom: "20px"
-                  }}
-                >
+                <div className={Styles.postHeader}>
                   {/* download button for downloading an image */}
                   <a href={postImg} download target="_blank">
                     <Button
@@ -127,30 +117,11 @@ const ViewRequestedPost = props => {
                   </Button>
                 </div>
                 {/* // post title */}
-                <div
-                  className="postTitle"
-                  style={{
-                    lineHeight: "normal",
-                    fontSize: "2rem",
-                    fontWeight: "bolder",
-                    marginLeft: "20px",
-                    marginRight: "20px",
-                    marginTop: "20px",
-                    color: "#111111"
-                  }}
-                >
-                  {postTitle}
-                </div>
+                <div className={Styles.postTitle}>{postTitle}</div>
                 {/* // post description */}
                 <div
                   className={Styles.postDescription}
                   key={toggleExpand.counter}
-                  style={{
-                    maxHeight: "300px",
-                    overflow: "auto",
-                    marginTop: "10px",
-                    textAlign: "justify"
-                  }}
                 >
                   {/* for expanding & collapsing post description */}
                   <Paragraph
@@ -165,14 +136,7 @@ const ViewRequestedPost = props => {
                   </Paragraph>
                 </div>
                 {toggleExpand.expand && (
-                  <div
-                    style={{
-                      paddingLeft: "20px",
-                      paddingRight: "20px",
-                      paddingTop: "5px",
-                      paddingBottom: "5px"
-                    }}
-                  >
+                  <div className={Styles.closeButton}>
                     <a onClick={handlingClose} style={{ float: "right" }}>
                       Close
                     </a>
@@ -180,7 +144,7 @@ const ViewRequestedPost = props => {
                 )}
                 {/* // checking first if no tags available */}
                 {tags ? (
-                  <div className="postTags" style={{ margin: "20px" }}>
+                  <div className={Styles.postTags}>
                     {tags.map((tag, index) => (
                       <Tag color="#2db7f5" key={Date.now() * _id + index}>
                         {tag}
@@ -189,15 +153,7 @@ const ViewRequestedPost = props => {
                   </div>
                 ) : null}
                 {/* containing post author & post avatar */}
-                <div
-                  className="postAuthor"
-                  style={{
-                    marginTop: "20px",
-                    marginLeft: "20px",
-                    marginRight: "20px",
-                    marginBottom: "20px"
-                  }}
-                >
+                <div className={Styles.postAuthor}>
                   {/* // checking whether user has a avatar or not */}
                   {avatar ? (
                     <Avatar
