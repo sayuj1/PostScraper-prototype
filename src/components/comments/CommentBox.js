@@ -1,8 +1,12 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import { Comment, Avatar, Form, Button, Input } from "antd";
+import CommentContext from "../../context/commentContext/commentContext";
+import moment from "moment";
+import Styles from "../../styles/comments/CommentBox.module.css";
 const { TextArea } = Input;
 
 const CommentBox = () => {
+  const { addComment } = useContext(CommentContext);
   const [comment, setcomment] = useState({
     submitting: false,
     rows: 1,
@@ -33,11 +37,28 @@ const CommentBox = () => {
       value: e.target.value
     });
   };
+
+  // clearing comment box value
+  const clearComment = () => {
+    setcomment({
+      ...comment,
+      value: ""
+    });
+  };
+
   // handling the submitted comment
   const handleFinish = () => {
-    const commentValue = comment.value;
-    if (commentValue) {
-      console.log("submitted data!", commentValue);
+    if (comment.value) {
+      const commentValue = {
+        comment: comment.value,
+        date: moment().format("ll"),
+        username: "sayuj",
+        avatar:
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+      };
+
+      addComment(commentValue);
+      clearComment();
     }
   };
   return (
@@ -68,10 +89,17 @@ const CommentBox = () => {
                     Add a Comment
                   </Button>
                   <Button
+                    danger
+                    className={Styles.clearButton}
+                    onClick={clearComment}
+                  >
+                    Clear
+                  </Button>
+                  <Button
                     loading={false}
                     onClick={handleCancel}
                     type="danger"
-                    style={{ marginLeft: "5px" }}
+                    className={Styles.cancelButton}
                   >
                     Cancel
                   </Button>

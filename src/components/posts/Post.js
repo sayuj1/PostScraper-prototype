@@ -1,5 +1,6 @@
 import React, { Fragment, useContext } from "react";
 import PostContext from "../../context/postContext/postContext";
+import CommentContext from "../../context/commentContext/commentContext";
 import "../../../node_modules/antd/dist/antd";
 import { Card, Col } from "antd";
 import { useHistory } from "react-router-dom";
@@ -9,6 +10,8 @@ const { Meta } = Card;
 const Post = props => {
   // for getting clicked post information
   const { setViewPost } = useContext(PostContext);
+  // for getting comments
+  const { setPostId } = useContext(CommentContext);
   // post information
   const { _id, postImg, postTitle, tags } = props.post;
   //for navigation
@@ -18,6 +21,9 @@ const Post = props => {
   const handlePostClick = () => {
     // console.log(_id);
     setViewPost(_id);
+    // for getting comments
+    setPostId(_id);
+
     //loading view post component
     history.push(`/post/${_id}`);
   };
