@@ -56,7 +56,7 @@ const Navbar = () => {
       <Item style={{ float: "right" }}>Avatar Sayuj</Item>
       <Item key="following" style={{ float: "right" }}>
         <UsergroupAddOutlined />
-        Following
+        <Link to="/following">Following</Link>
       </Item>
       <Item key="home" style={{ float: "right" }}>
         <HomeOutlined />

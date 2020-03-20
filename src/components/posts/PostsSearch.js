@@ -9,7 +9,7 @@ const PostSearch = () => {
     console.log("Autocomplete loading data");
   };
   const handleSearch = () => {
-    console.log("load data after hiting search button or enter");
+    console.log("load data after hitting search button or enter");
   };
   return (
     <AutoComplete

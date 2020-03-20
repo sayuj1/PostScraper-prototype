@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import PostContext from "./postContext";
 import postReducer from "./postReducer";
 import {
+  Get_Posts,
   Set_View_Post,
   Clear_View_Post,
   Get_View_Post
@@ -91,6 +92,11 @@ const PostState = props => {
   // for mananging state
   const [state, dispatch] = useReducer(postReducer, initialState);
 
+  // getting posts
+  const getPosts = () => {
+    dispatch(Get_Posts());
+  };
+
   // setting up the view post
   const setViewPost = postId => {
     dispatch(Set_View_Post(postId));
@@ -113,6 +119,7 @@ const PostState = props => {
         posts: state.posts,
         viewPostId: state.viewPostId,
         viewPost: state.viewPost,
+        getPosts: getPosts,
         setViewPost: setViewPost,
         clearViewPost: clearViewPost,
         getViewPost: getViewPost

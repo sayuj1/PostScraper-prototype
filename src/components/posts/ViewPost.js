@@ -17,6 +17,7 @@ const { Paragraph } = Typography;
 const ViewPost = props => {
   // for clearing view post information from the post state on clicking back button
   const { clearViewPost } = useContext(PostContext);
+  // for getting comments of that posts only
   const { clearPostId } = useContext(CommentContext);
 
   //for toggling expand & close in post description

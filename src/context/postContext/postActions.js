@@ -1,5 +1,6 @@
 import {
   TOGGLE_POST_FILTER,
+  GET_POSTS,
   SET_VIEW_POST,
   CLEAR_VIEW_POST,
   GET_VIEW_POST
@@ -11,6 +12,11 @@ export const Filter_Post = () => {
   };
 };
 
+export const Get_Posts = () => {
+  return {
+    type: GET_POSTS
+  };
+};
 export const Set_View_Post = post => {
   return {
     type: SET_VIEW_POST,

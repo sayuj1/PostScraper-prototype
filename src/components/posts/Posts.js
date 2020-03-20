@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import PostContext from "../../context/postContext/postContext";
 import Post from "./Post";
 import { Row } from "antd";
 
 // this component get the post from backend/react-state (for testing purpose) and pass each post to "Posts" component
 const Posts = () => {
-  const { posts } = useContext(PostContext);
+  const { posts, getPosts } = useContext(PostContext);
+  useEffect(() => {
+    getPosts();
+    // eslint-disable-next-line
+  }, []);
   return (
     <div className="postContainer">
       <div className="posts">
@@ -17,9 +21,11 @@ const Posts = () => {
           ]}
         >
           {/* passing each post to "Post" component for displaying */}
-          {posts.map(post => (
-            <Post key={post._id} post={post} />
-          ))}
+          {posts.length !== 0 ? (
+            posts.map(post => <Post key={post._id} post={post} />)
+          ) : (
+            <h1>No Posts Found!</h1>
+          )}
         </Row>
       </div>
     </div>
