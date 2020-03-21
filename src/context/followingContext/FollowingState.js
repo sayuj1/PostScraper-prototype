@@ -10,7 +10,7 @@ import followingReducer from "./followingReducer";
 
 const FollowingState = props => {
   const initialState = {
-    selectedTags: [],
+    selectedTags: ["HTML", "CSS"],
     tags: [
       "HTML",
       "CSS",

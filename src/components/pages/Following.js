@@ -23,7 +23,7 @@ const Following = () => {
               lg={{ span: 12 }}
             >
               {/* all tags available in the database */}
-              <div className="tagsAvailable">
+              <div className="tagsAvailable" style={{ padding: "20px" }}>
                 <Topics />
               </div>
             </Col>
@@ -35,7 +35,7 @@ const Following = () => {
               md={{ span: 12 }}
               lg={{ span: 12 }}
             >
-              <div className="selectedTagsBox">
+              <div className="selectedTagsBox" style={{ padding: "20px" }}>
                 <FollowingTopics />
               </div>
             </Col>
