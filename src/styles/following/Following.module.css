@@ -1,0 +1,29 @@
+.tagBox {
+    background-color: white;
+}
+
+.backButton {
+    padding: 20px;
+}
+
+.tagsAvailableHeader {
+    padding: 20px;
+    text-transform: capitalize
+}
+
+.tagsAvailableBox {
+    padding: 20px;
+}
+
+.selectedAvailableHeader {
+    padding: 20px;
+    text-transform: capitalize
+}
+
+.selectedTagsBox {
+    padding: 20px;
+}
+
+.saveSelectedTagButton {
+    margin: 20px 0px 20px;
+}

@@ -5,6 +5,7 @@ import FollowingTopics from "../followings/FollowingTopics";
 import { Col, Row, Button, Typography, Alert, notification } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import FollowingContext from "../../context/followingContext/followingContext";
+import Styles from "../../styles/following/Following.module.css";
 const { Title } = Typography;
 const Following = () => {
   const { selectedTagsSaveWarning, removeSelectedTagsSaveWarning } = useContext(
@@ -34,16 +35,11 @@ const Following = () => {
         lg={{ span: 20, offset: 2 }}
       >
         {/* post box containing both image and information about image */}
-        <div className="tagBox" style={{ backgroundColor: "white" }}>
+        <div className={Styles.tagBox}>
           {/* back button for going back to home page */}
-          <div className="backButton" style={{ padding: "20px" }}>
+          <div className={Styles.backButton}>
             <Link to="/">
-              <Button
-                //   onClick={handleBackButton}
-                shape="round"
-                icon={<ArrowLeftOutlined />}
-                size="large"
-              >
+              <Button shape="round" icon={<ArrowLeftOutlined />} size="large">
                 Home
               </Button>
             </Link>
@@ -56,14 +52,11 @@ const Following = () => {
               md={{ span: 12 }}
               lg={{ span: 12 }}
             >
-              <div
-                className="tagsAvailableHeader"
-                style={{ padding: "20px", textTransform: "capitalize" }}
-              >
+              <div className={Styles.tagsAvailableHeader}>
                 <Title level={2}>Select your favorite topics </Title>
               </div>
               {/* all tags available in the database */}
-              <div className="tagsAvailableBox" style={{ padding: "20px" }}>
+              <div className={Styles.tagsAvailableBox}>
                 <div className="tagsAvailable">
                   <Topics />
                 </div>
@@ -77,20 +70,14 @@ const Following = () => {
               md={{ span: 12 }}
               lg={{ span: 12 }}
             >
-              <div
-                className="selectedAvailableHeader"
-                style={{ padding: "20px", textTransform: "capitalize" }}
-              >
+              <div className={Styles.selectedAvailableHeader}>
                 <Title level={2}>Your favorite topics </Title>
               </div>
-              <div className="selectedTagsBox" style={{ padding: "20px" }}>
+              <div className={Styles.selectedTagsBox}>
                 <div className="selectedTags">
                   <FollowingTopics />
                 </div>
-                <div
-                  className="saveSelectedTagButton"
-                  style={{ margin: "20px 0px 20px" }}
-                >
+                <div className={Styles.saveSelectedTagButton}>
                   {/* for warning display  */}
                   {selectedTagsSaveWarning ? (
                     <Alert

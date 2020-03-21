@@ -2,8 +2,6 @@ import React, { Fragment, useContext, useEffect } from "react";
 import CommentContext from "../../context/commentContext/commentContext";
 import ViewComment from "./ViewComment";
 
-// import moment from "moment";
-
 const ViewComments = () => {
   const { postId, getComments, postComments } = useContext(CommentContext);
 

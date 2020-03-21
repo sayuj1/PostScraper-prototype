@@ -24,7 +24,7 @@ const Navbar = () => {
     const currentPath = location.pathname;
     const pathValue = menuKeys[currentPath];
     setCurrentSelected(pathValue);
-  });
+  }, [[location.pathname, menuKeys]]);
 
   return (
     <Menu

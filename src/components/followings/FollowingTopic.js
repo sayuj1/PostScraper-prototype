@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 import { Tag } from "antd";
 const FollowingTopic = props => {
   const { selectedTag } = props;
