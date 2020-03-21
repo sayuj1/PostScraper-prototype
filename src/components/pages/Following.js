@@ -1,11 +1,30 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import Topics from "../followings/Topics";
 import FollowingTopics from "../followings/FollowingTopics";
-import { Col, Row, Button, Typography } from "antd";
+import { Col, Row, Button, Typography, Alert, notification } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import FollowingContext from "../../context/followingContext/followingContext";
 const { Title } = Typography;
 const Following = () => {
+  const { selectedTagsSaveWarning, removeSelectedTagsSaveWarning } = useContext(
+    FollowingContext
+  );
+  const openNotificationWithIcon = type => {
+    notification[type]({
+      message: "Changes Saved Successfully!",
+      duration: 5
+    });
+  };
+
+  const handleCloseWarning = () => {
+    removeSelectedTagsSaveWarning();
+  };
+
+  const handleSaveButton = () => {
+    handleCloseWarning();
+    openNotificationWithIcon("success");
+  };
   return (
     <Fragment>
       <Col
@@ -72,7 +91,25 @@ const Following = () => {
                   className="saveSelectedTagButton"
                   style={{ margin: "20px 0px 20px" }}
                 >
-                  <Button type="primary" shape="round" size="large">
+                  {/* for warning display  */}
+                  {selectedTagsSaveWarning ? (
+                    <Alert
+                      message="Warning"
+                      description="Save your changes!"
+                      type="warning"
+                      showIcon
+                      closable
+                      afterClose={handleCloseWarning}
+                      style={{ marginBottom: "20px" }}
+                    />
+                  ) : null}
+
+                  <Button
+                    type="primary"
+                    shape="round"
+                    size="large"
+                    onClick={handleSaveButton}
+                  >
                     Save Topics
                   </Button>
                 </div>

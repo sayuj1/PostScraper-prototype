@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import FollowingContext from "../../context/followingContext/followingContext";
 import FollowingTopic from "./FollowingTopic";
+import { Alert } from "antd";
 
 const FollowingTopics = () => {
   const { getSelectedTags, selectedTags } = useContext(FollowingContext);
@@ -16,7 +17,7 @@ const FollowingTopics = () => {
           <FollowingTopic key={selectedTag} selectedTag={selectedTag} />
         ))
       ) : (
-        <h1>You have not selected any topic</h1>
+        <Alert message="You haven't selected any topic." type="info" showIcon />
       )}
     </Fragment>
   );

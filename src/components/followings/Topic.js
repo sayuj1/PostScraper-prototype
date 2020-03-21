@@ -6,11 +6,20 @@ const { CheckableTag } = Tag;
 
 const Topic = props => {
   const { tag } = props;
-  const { selectedTags, setSelectedTag, removeSelectedTag } = useContext(
-    FollowingContext
-  );
+  const {
+    selectedTags,
+    setSelectedTag,
+    removeSelectedTag,
+    setSelectedTagsSaveWarning
+  } = useContext(FollowingContext);
+
+  const handleSetWarning = () => {
+    setSelectedTagsSaveWarning();
+  };
   const handleChange = (tag, checked) => {
-    checked ? setSelectedTag(tag) : removeSelectedTag(tag);
+    const result = checked
+      ? [setSelectedTag(tag), handleSetWarning()]
+      : [removeSelectedTag(tag), handleSetWarning()];
   };
   return (
     <Fragment>

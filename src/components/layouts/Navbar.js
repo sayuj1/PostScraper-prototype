@@ -13,24 +13,21 @@ const { SubMenu, Item, Divider } = Menu;
 const Navbar = () => {
   // selecting "home" menu by default
   const [currentSelected, setCurrentSelected] = useState("");
+
+  // setting menu keys
   const menuKeys = { "/": "home", "/following": "following" };
+
+  // for getting current location
   const location = useLocation();
   useEffect(() => {
+    // setting selected path menu
     const currentPath = location.pathname;
     const pathValue = menuKeys[currentPath];
     setCurrentSelected(pathValue);
   });
 
-  // handleActiveMenu();
-
-  // setting up the current selected menu on click
-  const handleClick = e => {
-    setCurrentSelected(e.key);
-  };
-
   return (
     <Menu
-      onClick={handleClick}
       selectedKeys={currentSelected}
       mode="horizontal"
       theme="light"
