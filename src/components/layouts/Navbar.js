@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "../../../node_modules/antd/dist/antd.css";
 import PostSearch from "../posts/PostsSearch";
 import { Menu } from "antd";
@@ -12,7 +12,16 @@ import {
 const { SubMenu, Item, Divider } = Menu;
 const Navbar = () => {
   // selecting "home" menu by default
-  const [currentSelected, setCurrentSelected] = useState("home");
+  const [currentSelected, setCurrentSelected] = useState("");
+  const menuKeys = { "/": "home", "/following": "following" };
+  const location = useLocation();
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const pathValue = menuKeys[currentPath];
+    setCurrentSelected(pathValue);
+  });
+
+  // handleActiveMenu();
 
   // setting up the current selected menu on click
   const handleClick = e => {
