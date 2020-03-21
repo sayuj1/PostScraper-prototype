@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import "../../../node_modules/antd/dist/antd.css";
 import PostSearch from "../posts/PostsSearch";
 import { Menu } from "antd";
@@ -14,7 +14,7 @@ const Navbar = () => {
   // selecting "home" menu by default
   const [currentSelected, setCurrentSelected] = useState("home");
 
-  // setting up the current selected menu
+  // setting up the current selected menu on click
   const handleClick = e => {
     setCurrentSelected(e.key);
   };

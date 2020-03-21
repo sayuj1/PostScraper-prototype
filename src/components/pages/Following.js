@@ -1,8 +1,10 @@
 import React, { Fragment } from "react";
-import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
 import { Link } from "react-router-dom";
 import Topics from "../followings/Topics";
 import FollowingTopics from "../followings/FollowingTopics";
+import { Col, Row, Button, Typography } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+const { Title } = Typography;
 const Following = () => {
   return (
     <Fragment>
@@ -14,6 +16,19 @@ const Following = () => {
       >
         {/* post box containing both image and information about image */}
         <div className="tagBox" style={{ backgroundColor: "white" }}>
+          {/* back button for going back to home page */}
+          <div className="backButton" style={{ padding: "20px" }}>
+            <Link to="/">
+              <Button
+                //   onClick={handleBackButton}
+                shape="round"
+                icon={<ArrowLeftOutlined />}
+                size="large"
+              >
+                Home
+              </Button>
+            </Link>
+          </div>
           <Row>
             {/* first div column containing all tags */}
             <Col
@@ -22,9 +37,17 @@ const Following = () => {
               md={{ span: 12 }}
               lg={{ span: 12 }}
             >
+              <div
+                className="tagsAvailableHeader"
+                style={{ padding: "20px", textTransform: "capitalize" }}
+              >
+                <Title level={2}>Select your favorite topics </Title>
+              </div>
               {/* all tags available in the database */}
-              <div className="tagsAvailable" style={{ padding: "20px" }}>
-                <Topics />
+              <div className="tagsAvailableBox" style={{ padding: "20px" }}>
+                <div className="tagsAvailable">
+                  <Topics />
+                </div>
               </div>
             </Col>
 
@@ -35,8 +58,24 @@ const Following = () => {
               md={{ span: 12 }}
               lg={{ span: 12 }}
             >
+              <div
+                className="selectedAvailableHeader"
+                style={{ padding: "20px", textTransform: "capitalize" }}
+              >
+                <Title level={2}>Your favorite topics </Title>
+              </div>
               <div className="selectedTagsBox" style={{ padding: "20px" }}>
-                <FollowingTopics />
+                <div className="selectedTags">
+                  <FollowingTopics />
+                </div>
+                <div
+                  className="saveSelectedTagButton"
+                  style={{ margin: "20px 0px 20px" }}
+                >
+                  <Button type="primary" shape="round" size="large">
+                    Save Topics
+                  </Button>
+                </div>
               </div>
             </Col>
           </Row>
