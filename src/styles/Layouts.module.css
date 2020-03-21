@@ -1,4 +1,4 @@
-.postsContent {
+.content {
     height: 100vh;
     background-color: whitesmoke;
     width: 100%;
@@ -7,12 +7,12 @@
     overflow: auto;
 }
 
-.postsContent::-webkit-scrollbar {
+.content::-webkit-scrollbar {
     width: 2px;
     background-color: white;
 }
 
-.postsContent::-webkit-scrollbar-thumb {
+.content::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: dodgerblue;
 }

@@ -4,7 +4,9 @@ import Posts from "../posts/Posts";
 const Home = () => {
   return (
     <Fragment>
-      <Posts />
+      <div className="postsContent">
+        <Posts />
+      </div>
     </Fragment>
   );
 };

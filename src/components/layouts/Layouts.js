@@ -18,7 +18,7 @@ const Layouts = () => {
         <div className="header">
           <Header />
         </div>
-        <div className={Styles.postsContent}>
+        <div className={Styles.content}>
           <BackToTop />
           {/* for sharing post values across the components */}
           <FollowingState>
