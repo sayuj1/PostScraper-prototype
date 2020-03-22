@@ -80,7 +80,7 @@ const ViewPost = props => {
               md={{ span: 12 }}
               lg={{ span: 12 }}
             >
-              <div className="postImg">
+              <div className={Styles.postImg}>
                 <img alt="No img found!" src={postImg} width="100%" />
               </div>
             </Col>
