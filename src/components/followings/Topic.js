@@ -1,6 +1,7 @@
 import React, { Fragment, useContext } from "react";
 import FollowingContext from "../../context/followingContext/followingContext";
 import { Tag } from "antd";
+import Styles from "../../styles/following/Topic.module.css";
 
 const { CheckableTag } = Tag;
 
@@ -24,10 +25,10 @@ const Topic = props => {
   return (
     <Fragment>
       <CheckableTag
+        className={Styles.availableTag}
         key={tag}
         checked={selectedTags.indexOf(tag) > -1}
         onChange={checked => handleChange(tag, checked)}
-        style={{ fontSize: "20px", padding: "10px", marginBottom: "10px" }}
       >
         {tag}
       </CheckableTag>

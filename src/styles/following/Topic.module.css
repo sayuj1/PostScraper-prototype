@@ -1,0 +1,9 @@
+.availableTag {
+    font-size: 20px !important;
+    padding: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.availableTag:hover {
+    cursor: pointer;
+}
