@@ -7,6 +7,7 @@ import {
   Clear_View_Post,
   Get_View_Post
 } from "./postActions.js";
+import { typeOf } from "antd/dist/antd";
 
 const PostState = props => {
   const initialState = {

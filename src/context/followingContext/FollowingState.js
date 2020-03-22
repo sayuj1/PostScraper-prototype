@@ -48,7 +48,7 @@ const FollowingState = props => {
   const removeSelectedTagsSaveWarning = () => {
     dispatch(Remove_Selected_Tags_Save_Warning());
   };
-  console.log(state.selectedTagsSaveWarning);
+
   return (
     <FollowingContext.Provider
       value={{

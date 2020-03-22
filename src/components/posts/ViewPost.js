@@ -8,18 +8,11 @@ import {
   ArrowLeftOutlined
 } from "@ant-design/icons";
 import Styles from "../../styles/posts/ViewPost.module.css";
-import PostContext from "../../context/postContext/postContext";
-import CommentContext from "../../context/commentContext/commentContext";
 import CommentBox from "../comments/CommentBox";
 import ViewComments from "../comments/ViewComments";
 const { Paragraph } = Typography;
 
 const ViewPost = props => {
-  // for clearing view post information from the post state on clicking back button
-  const { clearViewPost } = useContext(PostContext);
-  // for getting comments of that posts only
-  const { clearPostId } = useContext(CommentContext);
-
   //for toggling expand & close in post description
   const [toggleExpand, settoggleExpand] = useState({
     expand: false,
@@ -44,11 +37,6 @@ const ViewPost = props => {
         ? toggleExpand.counter + 0
         : toggleExpand.counter + 1
     });
-  };
-
-  const handleBackButton = () => {
-    clearViewPost();
-    clearPostId();
   };
 
   // post information destructuring
@@ -97,7 +85,6 @@ const ViewPost = props => {
                 <div className="backButton" style={{ margin: "20px" }}>
                   <Link to="/">
                     <Button
-                      onClick={handleBackButton}
                       shape="round"
                       icon={<ArrowLeftOutlined />}
                       size="large"

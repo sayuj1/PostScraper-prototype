@@ -28,7 +28,7 @@ const Layouts = () => {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/post/:id" component={ViewPost} />
                   <Route exact path="/following" component={Following} />
-                  <Route path="/page-not-found" component={Page404} />
+                  <Route path="*" component={Page404} />
                 </Switch>
               </CommentState>
             </PostState>
