@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../../../node_modules/antd/dist/antd.css";
 import PostSearch from "../posts/PostsSearch";
-import { Menu } from "antd";
+import UserContext from "../../context/userContext/userContext";
+import { Menu, Avatar } from "antd";
 import {
   HomeOutlined,
   SettingOutlined,
@@ -11,11 +12,18 @@ import {
 } from "@ant-design/icons";
 const { SubMenu, Item, Divider } = Menu;
 const Navbar = () => {
+  const { user } = useContext(UserContext);
+
   // selecting "home" menu by default
   const [currentSelected, setCurrentSelected] = useState("");
-
+  const username = "/user/" + user.username;
+  // console.log(name);
   // setting menu keys
-  const menuKeys = { "/": "home", "/following": "following" };
+  const menuKeys = {
+    "/": "home",
+    "/following": "following"
+  };
+  menuKeys[username] = "user-profile";
 
   // for getting current location
   const location = useLocation();
@@ -59,7 +67,18 @@ const Navbar = () => {
         <Divider />
         <Item key="logout">Logout</Item>
       </SubMenu>
-      <Item style={{ float: "right" }}>Avatar Sayuj</Item>
+      <Item style={{ float: "right" }} key="user-profile">
+        <Link to={user && `/user/${user.username}`}>
+          {user && [
+            <Avatar
+              src={user.avatar}
+              size={24}
+              style={{ verticalAlign: "text-bottom" }}
+            />,
+            user.firstname
+          ]}
+        </Link>
+      </Item>
       <Item key="following" style={{ float: "right" }}>
         <UsergroupAddOutlined />
         <Link to="/following">Following</Link>

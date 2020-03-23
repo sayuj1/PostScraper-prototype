@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import UserContext from "./userContext";
-import userReducer from "./userReducer";
+import { userReducer } from "./userReducer";
 import { Get_User } from "./userActions";
 
 const UserState = props => {
@@ -17,6 +17,7 @@ const UserState = props => {
 
   const [state, dispatch] = useReducer(userReducer, initialState);
 
+  // for loading the user detail from the backend
   const getUser = () => {
     dispatch(Get_User());
   };

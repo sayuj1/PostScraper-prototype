@@ -23,27 +23,32 @@ const Layouts = () => {
   return (
     <Fragment>
       <Router>
-        <div className="header">
-          <Header />
-        </div>
-        <div className={Styles.content}>
-          <BackToTop />
-          {/* for sharing post values across the components */}
-          <FollowingState>
-            <PostState>
-              <CommentState>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/post/:id" component={ViewPost} />
-                  <Route exact path="/following" component={Following} />
-                  <Route exact path="/:user" component={User} />
-                  <Route path="*" component={Page404} />
-                </Switch>
-              </CommentState>
-            </PostState>
-          </FollowingState>
-        </div>
-        <div className={Styles.footer}>Get Learn ©2020 Created By App-Devs</div>
+        <UserState>
+          <div className="header">
+            <Header />
+          </div>
+          <div className={Styles.content}>
+            <BackToTop />
+            {/* for sharing post values across the components */}
+
+            <FollowingState>
+              <PostState>
+                <CommentState>
+                  <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/post/:id" component={ViewPost} />
+                    <Route exact path="/following" component={Following} />
+                    <Route exact path="/user/:user" component={User} />
+                    <Route path="*" component={Page404} />
+                  </Switch>
+                </CommentState>
+              </PostState>
+            </FollowingState>
+          </div>
+          <div className={Styles.footer}>
+            Get Learn ©2020 Created By App-Devs
+          </div>
+        </UserState>
       </Router>
     </Fragment>
   );
