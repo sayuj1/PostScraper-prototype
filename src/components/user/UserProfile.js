@@ -1,11 +1,15 @@
 import React, { useEffect, useContext, Fragment } from "react";
 import UserContext from "../../context/userContext/userContext";
 import { Row, Col, Button, Typography, Avatar, Tag } from "antd";
+// Buttons
 import CreatePostBtn from "../buttons/user/UserProfile/CreatePostBtn";
 import EditProfileBtn from "../buttons/user/UserProfile/EditProfileBtn";
+// icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+// styles
 import Styles from "../../styles/Global/GlobalResponsiveQueries.module.css";
+import UserProfileStyles from "../../styles/user/UserProfile.module.css";
 const { Title } = Typography;
 
 const UserProfile = () => {
@@ -38,13 +42,7 @@ const UserProfile = () => {
           md={{ span: 10, offset: 2 }}
           lg={{ span: 10, offset: 2 }}
         >
-          <div
-            className="userProfileContainer"
-            style={{
-              textTransform: "capitalize",
-              padding: "10px 10px 10px 14px"
-            }}
-          >
+          <div className={UserProfileStyles.userProfileContainer}>
             <div className="profileName">
               <Title level={2} style={{ fontWeight: "700" }}>
                 {user.firstname} {user.lastname}
@@ -55,7 +53,7 @@ const UserProfile = () => {
                       size={64}
                       src={user.avatar}
                       shape="circle"
-                      style={{ border: "1px solid grey", marginLeft: "20px" }}
+                      className={UserProfileStyles.smallUserAvatar}
                     />
                   ) : (
                     <Avatar
@@ -66,10 +64,7 @@ const UserProfile = () => {
                 </span>
               </Title>
             </div>
-            <div
-              className="profileTags"
-              style={{ fontSize: "18px", fontWeight: "700" }}
-            >
+            <div className={UserProfileStyles.profileTags}>
               <span>Following: </span>
               {user.topicsFollow.length !== 0
                 ? user.topicsFollow.map(topic => (
@@ -92,7 +87,7 @@ const UserProfile = () => {
                 size={106}
                 src={user.avatar}
                 shape="circle"
-                style={{ border: "1px solid grey" }}
+                className={UserProfileStyles.largeUserAvatar}
               />
             ) : (
               <Avatar
