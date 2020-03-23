@@ -11,7 +11,16 @@ const UserState = props => {
       firstname: "sayuj",
       lastname: "sehgal",
       username: "sayuj1",
-      avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+      avatar:
+        "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png", // default --> null
+      topicsFollow: [
+        "JavaScript",
+        "HTML",
+        "ReactJs",
+        "JavaScript",
+        "HTML",
+        "ReactJs"
+      ] // default --> null
     } // by default it will be null
   };
 
