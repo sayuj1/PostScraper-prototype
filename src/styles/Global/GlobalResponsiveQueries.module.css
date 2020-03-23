@@ -1,0 +1,106 @@
+/* for extra-small devices */
+
+@media only screen and (max-width: 575px) {
+    .hideOnXs {
+        display: none;
+    }
+}
+
+
+/* for small and below */
+
+@media only screen and (max-width: 768px) {
+    .hideOnSmAndBelow {
+        display: none
+    }
+}
+
+
+/* for small devices */
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+    .hideOnSm {
+        display: none
+    }
+}
+
+
+/* for small & above devices */
+
+@media only screen and (min-width: 576px) {
+    .hideOnSmAndAbove {
+        display: none
+    }
+}
+
+
+/* for medium and below */
+
+@media only screen and (max-width: 992px) {
+    .hideOnMdAndBelow {
+        display: none
+    }
+}
+
+
+/* for Medium devices */
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .hideOnMd {
+        display: none
+    }
+}
+
+
+/* for large and below */
+
+@media only screen and (max-width: 1200px) {
+    .hideOnLgAndBelow {
+        display: none
+    }
+}
+
+
+/* for large devices */
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .hideOnLg {
+        display: none
+    }
+}
+
+
+/* for large & above devices */
+
+@media only screen and (min-width: 992px) {
+    .hideOnLgAndAbove {
+        display: none
+    }
+}
+
+
+/* for extra large and below */
+
+@media only screen and (max-width: 1600px) {
+    .hideOnXlAndBelow {
+        display: none
+    }
+}
+
+
+/* for extra large devices */
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+    .hideOnXl {
+        display: none
+    }
+}
+
+
+/* for extra extra large devices */
+
+@media only screen and (min-width: 1600px) {
+    .hideOnXxl {
+        display: none
+    }
+}
