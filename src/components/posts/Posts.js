@@ -13,7 +13,7 @@ const Posts = () => {
   return (
     <div className="postContainer">
       <div className="posts">
-        {/* defining spacing of grid or between columns */}
+        {/* defining horizontal & vertical spacing of columns */}
         <Row
           gutter={[
             { xs: 8, sm: 16, md: 24, lg: 32 },
