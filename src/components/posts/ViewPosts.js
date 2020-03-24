@@ -4,7 +4,7 @@ import CommentContext from "../../context/commentContext/commentContext";
 import { useParams } from "react-router-dom";
 import ViewPost from "./ViewPost";
 
-const ViewRequestedPosts = () => {
+const ViewPosts = () => {
   const {
     viewPostId,
     getViewPost,
@@ -53,4 +53,4 @@ const ViewRequestedPosts = () => {
   );
 };
 
-export default ViewRequestedPosts;
+export default ViewPosts;

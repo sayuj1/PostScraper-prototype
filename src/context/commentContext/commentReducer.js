@@ -1,6 +1,6 @@
 import {
   ADD_COMMENT,
-  GET_COMMENTS,
+  SET_COMMENTS,
   SET_POST_ID,
   CLEAR_POST_ID
 } from "./commentTypes";
@@ -12,7 +12,7 @@ const commentReducer = (state, action) => {
         ...state,
         postComments: [action.payload, ...state.postComments]
       };
-    case GET_COMMENTS:
+    case SET_COMMENTS:
       // console.log("reducer state", state);
       return {
         ...state

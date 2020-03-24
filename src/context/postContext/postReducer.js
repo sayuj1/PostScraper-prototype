@@ -3,7 +3,8 @@ import {
   GET_POSTS,
   SET_VIEW_POST,
   CLEAR_VIEW_POST,
-  GET_VIEW_POST
+  GET_VIEW_POST,
+  SET_USER_POSTS
 } from "./postTypes";
 
 const postReducer = (state, action) => {
@@ -24,6 +25,10 @@ const postReducer = (state, action) => {
         ...state,
         viewPostId: null,
         viewPost: null
+      };
+    case SET_USER_POSTS:
+      return {
+        ...state
       };
     default:
       return state;

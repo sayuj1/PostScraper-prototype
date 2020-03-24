@@ -1,6 +1,8 @@
-import React, { useEffect, useContext, Fragment } from "react";
+import React, { useContext, Fragment } from "react";
 import UserContext from "../../context/userContext/userContext";
-import { Row, Col, Button, Typography, Avatar, Tag } from "antd";
+//components
+import PostsTabs from "../posts/PostsTabs";
+import { Row, Col, Typography, Avatar, Tag } from "antd";
 // Buttons
 import CreatePostBtn from "../buttons/user/UserProfile/CreatePostBtn";
 import EditProfileBtn from "../buttons/user/UserProfile/EditProfileBtn";
@@ -11,10 +13,12 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 // styles
 import Styles from "../../styles/Global/GlobalResponsiveQueries.module.css";
 import UserProfileStyles from "../../styles/user/UserProfile.module.css";
+
 const { Title } = Typography;
 
 const UserProfile = () => {
   const { user } = useContext(UserContext);
+
   return (
     <Fragment>
       {/* buttons */}
@@ -110,7 +114,19 @@ const UserProfile = () => {
         </span>
       </Row>
       {/* user posts */}
-      <Row></Row>
+      <Row style={{ backgroundColor: "white" }}>
+        {/* tabs */}
+        <Col
+          xs={{ span: 24 }}
+          sm={{ span: 24 }}
+          md={{ span: 20, offset: 2 }}
+          lg={{ span: 20, offset: 2 }}
+        >
+          <div className="postsTabs" style={{ margin: "20px" }}>
+            <PostsTabs />
+          </div>
+        </Col>
+      </Row>
     </Fragment>
   );
 };

@@ -3,7 +3,8 @@ import {
   GET_POSTS,
   SET_VIEW_POST,
   CLEAR_VIEW_POST,
-  GET_VIEW_POST
+  GET_VIEW_POST,
+  SET_USER_POSTS
 } from "./postTypes";
 
 export const Filter_Post = () => {
@@ -34,5 +35,12 @@ export const Get_View_Post = postId => {
   return {
     type: GET_VIEW_POST,
     payload: postId
+  };
+};
+
+export const Set_User_Posts = userPosts => {
+  return {
+    type: SET_USER_POSTS,
+    payload: userPosts
   };
 };
