@@ -4,6 +4,7 @@ import { Row, Col, Button, Typography, Avatar, Tag } from "antd";
 // Buttons
 import CreatePostBtn from "../buttons/user/UserProfile/CreatePostBtn";
 import EditProfileBtn from "../buttons/user/UserProfile/EditProfileBtn";
+import GoHomeBtn from "../buttons/global/GoHomeBtn";
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +17,13 @@ const UserProfile = () => {
   const { user } = useContext(UserContext);
   return (
     <Fragment>
+      {/* buttons */}
       <Row style={{ backgroundColor: "white", paddingTop: "20px" }}>
+        {/* go back btn */}
+        <Col xs={{ span: 20, offset: 1 }}>
+          <GoHomeBtn margin="0px 0px 20px 0px" shape="circle" border="0px" />
+        </Col>
+        {/* create post btn */}
         <Col
           xs={{ span: 12 }}
           sm={{ span: 12 }}
@@ -25,6 +32,7 @@ const UserProfile = () => {
         >
           <CreatePostBtn />
         </Col>
+        {/* edit profile btn */}
         <Col
           xs={{ span: 12 }}
           sm={{ span: 12 }}
@@ -34,6 +42,7 @@ const UserProfile = () => {
           <EditProfileBtn />
         </Col>
       </Row>
+      {/* user basic info & avatar */}
       <Row style={{ backgroundColor: "white" }}>
         {/* user basic information */}
         <Col
@@ -50,7 +59,7 @@ const UserProfile = () => {
                 <span className={Styles.hideOnSmAndAbove}>
                   {user.avatar ? (
                     <Avatar
-                      size={64}
+                      size={50}
                       src={user.avatar}
                       shape="circle"
                       className={UserProfileStyles.smallUserAvatar}
@@ -66,15 +75,17 @@ const UserProfile = () => {
             </div>
             <div className={UserProfileStyles.profileTags}>
               <span>Following: </span>
-              {user.topicsFollow.length !== 0
-                ? user.topicsFollow.map(topic => (
-                    <Tag color="#2db7f5">{topic}</Tag>
-                  ))
-                : "You are not following any topic."}
+              {user.topicsFollow.length !== 0 ? (
+                user.topicsFollow.map(topic => (
+                  <Tag color="#2db7f5">{topic}</Tag>
+                ))
+              ) : (
+                <span>0</span>
+              )}
             </div>
           </div>
         </Col>
-        {/* for user avatar */}
+        {/* showing avatar on small and above devices*/}
         <span className={Styles.hideOnXs}>
           <Col
             xs={{ span: 24 }}
@@ -98,6 +109,8 @@ const UserProfile = () => {
           </Col>
         </span>
       </Row>
+      {/* user posts */}
+      <Row></Row>
     </Fragment>
   );
 };

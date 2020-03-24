@@ -1,15 +1,10 @@
-import React, { Fragment, useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import "antd/dist/antd";
+import React, { Fragment, useState } from "react";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
-import {
-  DownloadOutlined,
-  UserOutlined,
-  ArrowLeftOutlined
-} from "@ant-design/icons";
+import { DownloadOutlined, UserOutlined } from "@ant-design/icons";
 import Styles from "../../styles/posts/ViewPost.module.css";
 import CommentBox from "../comments/CommentBox";
 import ViewComments from "../comments/ViewComments";
+import GoHomeBtn from "../buttons/global/GoHomeBtn";
 const { Paragraph } = Typography;
 
 const ViewPost = props => {
@@ -82,15 +77,7 @@ const ViewPost = props => {
               <div className="postContent">
                 {/* back button for going back to home page */}
 
-                <div className="backButton" style={{ margin: "20px" }}>
-                  <Link to="/">
-                    <Button
-                      shape="round"
-                      icon={<ArrowLeftOutlined />}
-                      size="large"
-                    />
-                  </Link>
-                </div>
+                <GoHomeBtn margin="20px" shape="round" />
                 {/* header containing download button and save button */}
                 <div className={Styles.postHeader}>
                   {/* // download button for downloading an image */}
