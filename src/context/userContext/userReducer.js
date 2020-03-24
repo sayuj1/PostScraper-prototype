@@ -6,10 +6,11 @@ export const userReducer = (state, action) => {
     case GETUSER:
       return { ...state };
     case SAVETOPICS:
-      const userState = { ...state };
-      userState.user.topicsFollow = action.payload;
+      // const userState = { ...state };
+      // userState.user.topicsFollow = action.payload;
       return {
-        ...state
+        ...state,
+        user: { ...state.user, topicsFollow: action.payload }
       };
     default:
       return { ...state };
