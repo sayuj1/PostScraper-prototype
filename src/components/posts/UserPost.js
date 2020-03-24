@@ -22,6 +22,16 @@ const UserPost = props => {
     history.push(`/post/${_id}`);
   };
 
+  const handleDelete = () => {
+    console.log(_id);
+    alert(`Delete btn clicked of post ${_id}`);
+  };
+
+  const handleEdit = () => {
+    console.log(_id);
+    alert(`Edit btn clicked of post ${_id}`);
+  };
+
   return (
     <Fragment>
       {/* defining how much space should each post take */}
@@ -39,10 +49,10 @@ const UserPost = props => {
             </Button>
           }
           actions={[
-            <Button type="default" block>
+            <Button type="default" block onClick={handleEdit}>
               <FontAwesomeIcon icon={faEdit} size="lg" />
             </Button>,
-            <Button type="danger" block>
+            <Button type="danger" block onClick={handleDelete}>
               <FontAwesomeIcon icon={faTrash} size="lg" />
             </Button>
           ]}

@@ -7,10 +7,10 @@ const { TabPane } = Tabs;
 const PostsTabs = () => {
   return (
     <Fragment>
-      <Tabs defaultActiveKey="1">
+      <Tabs defaultActiveKey="userPosts">
         <TabPane
           tab="Posts"
-          key="1"
+          key="userPosts"
           style={{
             backgroundColor: "whitesmoke",
             padding: "10px"
@@ -19,7 +19,7 @@ const PostsTabs = () => {
           <UserPosts />
         </TabPane>
 
-        <TabPane tab="Saved Posts" key="2">
+        <TabPane tab="Saved Posts" key="userSavedPosts">
           <UserSavePosts />
         </TabPane>
       </Tabs>

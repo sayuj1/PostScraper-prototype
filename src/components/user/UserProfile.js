@@ -81,7 +81,9 @@ const UserProfile = () => {
               <span>Following: </span>
               {user.topicsFollow.length !== 0 ? (
                 user.topicsFollow.map(topic => (
-                  <Tag color="#2db7f5">{topic}</Tag>
+                  <Tag key={topic} color="#2db7f5">
+                    {topic}
+                  </Tag>
                 ))
               ) : (
                 <span>0</span>
