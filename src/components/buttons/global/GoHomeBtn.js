@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const GoHomeBtn = props => {
-  const { margin, shape, border } = props;
+  const { margin, shape } = props;
   return (
     <div className="backButton" style={{ margin: margin }}>
       <Link to="/">
@@ -14,8 +14,9 @@ const GoHomeBtn = props => {
           shape={shape}
           icon={<FontAwesomeIcon icon={faArrowLeft} size="lg" />}
           size="large"
-          style={{ border: border }}
-        />
+        >
+          <span style={{ paddingLeft: "10px" }}>Home</span>
+        </Button>
       </Link>
     </div>
   );

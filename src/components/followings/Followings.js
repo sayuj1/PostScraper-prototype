@@ -1,9 +1,8 @@
 import React, { Fragment, useContext } from "react";
-import { Link } from "react-router-dom";
 import Topics from "./Topics";
 import FollowingTopics from "./FollowingTopics";
 import { Col, Row, Button, Typography, Alert, notification } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import GoHomeBtn from "../buttons/global/GoHomeBtn";
 import FollowingContext from "../../context/followingContext/followingContext";
 import Styles from "../../styles/following/Following.module.css";
 const { Title } = Typography;
@@ -38,11 +37,7 @@ const Followings = () => {
         <div className={Styles.tagBox}>
           {/* back button for going back to home page */}
           <div className={Styles.backButton}>
-            <Link to="/">
-              <Button shape="round" icon={<ArrowLeftOutlined />} size="large">
-                Home
-              </Button>
-            </Link>
+            <GoHomeBtn margin="20px" shape="round" />
           </div>
           <Row>
             {/* first div column containing all tags */}

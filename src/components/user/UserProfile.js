@@ -25,7 +25,7 @@ const UserProfile = () => {
       <Row style={{ backgroundColor: "white", paddingTop: "20px" }}>
         {/* go back btn */}
         <Col xs={{ span: 20, offset: 1 }}>
-          <GoHomeBtn margin="0px 0px 20px 0px" shape="circle" border="0px" />
+          <GoHomeBtn margin="0px 0px 20px 0px" shape="round" />
         </Col>
         {/* create post btn */}
         <Col

@@ -196,6 +196,7 @@ const PostState = props => {
     // dispatch(Set_User_Posts(userPosts));
   };
 
+  // deleting user posts
   const deleteUserPost = postId => {
     dispatch(Delete_User_Post(postId));
   };
