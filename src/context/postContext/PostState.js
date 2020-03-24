@@ -6,7 +6,8 @@ import {
   Set_View_Post,
   Clear_View_Post,
   Get_View_Post,
-  Set_User_Posts
+  Set_User_Posts,
+  Delete_User_Post
 } from "./postActions.js";
 import { typeOf } from "antd/dist/antd";
 
@@ -195,6 +196,10 @@ const PostState = props => {
     // dispatch(Set_User_Posts(userPosts));
   };
 
+  const deleteUserPost = postId => {
+    dispatch(Delete_User_Post(postId));
+  };
+
   return (
     // sharing post state values
     <PostContext.Provider
@@ -207,7 +212,8 @@ const PostState = props => {
         setViewPost: setViewPost,
         clearViewPost: clearViewPost,
         getViewPost: getViewPost,
-        getUserPosts: getUserPosts
+        getUserPosts: getUserPosts,
+        deleteUserPost: deleteUserPost
       }}
     >
       {props.children}

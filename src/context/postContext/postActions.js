@@ -4,7 +4,8 @@ import {
   SET_VIEW_POST,
   CLEAR_VIEW_POST,
   GET_VIEW_POST,
-  SET_USER_POSTS
+  SET_USER_POSTS,
+  DELETE_USER_POSTS
 } from "./postTypes";
 
 export const Filter_Post = () => {
@@ -42,5 +43,12 @@ export const Set_User_Posts = userPosts => {
   return {
     type: SET_USER_POSTS,
     payload: userPosts
+  };
+};
+
+export const Delete_User_Post = postId => {
+  return {
+    type: DELETE_USER_POSTS,
+    payload: postId
   };
 };

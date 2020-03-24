@@ -1,10 +1,12 @@
-import React, { Fragment } from "react";
-import "../../../node_modules/antd/dist/antd";
+import React, { Fragment, useContext } from "react";
+// components
 import { Card, Col, Button } from "antd";
+import PostContext from "../../context/postContext/postContext";
+import DeletePostBtn from "../buttons/posts/UserPost/DeletePostBtn";
 import { useHistory } from "react-router-dom";
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const { Meta } = Card;
 
@@ -20,11 +22,6 @@ const UserPost = props => {
   const handlePostClick = () => {
     //loading view post component
     history.push(`/post/${_id}`);
-  };
-
-  const handleDelete = () => {
-    console.log(_id);
-    alert(`Delete btn clicked of post ${_id}`);
   };
 
   const handleEdit = () => {
@@ -52,9 +49,8 @@ const UserPost = props => {
             <Button type="default" block onClick={handleEdit}>
               <FontAwesomeIcon icon={faEdit} size="lg" />
             </Button>,
-            <Button type="danger" block onClick={handleDelete}>
-              <FontAwesomeIcon icon={faTrash} size="lg" />
-            </Button>
+            // delete btn component
+            <DeletePostBtn _id={_id} />
           ]}
           bordered={false}
           title={postTitle}
