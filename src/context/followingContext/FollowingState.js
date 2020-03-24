@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import FollowingContext from "./followingContext";
 import {
   Get_All_Tags,
@@ -9,18 +9,24 @@ import {
   Remove_Selected_Tags_Save_Warning
 } from "./followingActions";
 import followingReducer from "./followingReducer";
+import UserContext from "../userContext/userContext";
 
 const FollowingState = props => {
+  const { user } = useContext(UserContext);
+  const userTopics = [...user.topicsFollow];
+
   const initialState = {
     selectedTagsSaveWarning: false,
-    selectedTags: ["HTML", "CSS"],
+    selectedTags: userTopics,
     tags: [
       "HTML",
       "CSS",
       "JAVASCRIPT",
       "WEBDEVELOPMENT",
       "REACTJS",
-      "BOOTSTRAP"
+      "BOOTSTRAP",
+      "PHP",
+      "RUBY"
     ]
   };
 

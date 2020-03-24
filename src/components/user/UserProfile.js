@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from "react";
 import UserContext from "../../context/userContext/userContext";
 //components
 import PostsTabs from "../posts/PostsTabs";
-import { Row, Col, Typography, Avatar, Tag } from "antd";
+import { Row, Col, Avatar } from "antd";
 // Buttons
 import CreatePostBtn from "../buttons/user/UserProfile/CreatePostBtn";
 import EditProfileBtn from "../buttons/user/UserProfile/EditProfileBtn";
@@ -13,8 +13,8 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 // styles
 import Styles from "../../styles/Global/GlobalResponsiveQueries.module.css";
 import UserProfileStyles from "../../styles/user/UserProfile.module.css";
-
-const { Title } = Typography;
+import UserName from "./UserName";
+import UserFollowingTopics from "./UserFollowingTopics";
 
 const UserProfile = () => {
   const { user } = useContext(UserContext);
@@ -55,39 +55,18 @@ const UserProfile = () => {
           md={{ span: 10, offset: 2 }}
           lg={{ span: 10, offset: 2 }}
         >
+          {/* user details */}
           <div className={UserProfileStyles.userProfileContainer}>
             <div className="profileName">
-              <Title level={2} style={{ fontWeight: "700" }}>
-                {user.firstname} {user.lastname}
-                {/* showing avatar on small extra small screens */}
-                <span className={Styles.hideOnSmAndAbove}>
-                  {user.avatar ? (
-                    <Avatar
-                      size={50}
-                      src={user.avatar}
-                      shape="circle"
-                      className={UserProfileStyles.smallUserAvatar}
-                    />
-                  ) : (
-                    <Avatar
-                      size={64}
-                      icon={<FontAwesomeIcon icon={faUser} size="lg" />}
-                    />
-                  )}
-                </span>
-              </Title>
+              <UserName
+                firstname={user.firstname}
+                lastname={user.lastname}
+                avatar={user.avatar}
+              />
             </div>
+            {/* following topics */}
             <div className={UserProfileStyles.profileTags}>
-              <span>Following: </span>
-              {user.topicsFollow.length !== 0 ? (
-                user.topicsFollow.map(topic => (
-                  <Tag key={topic} color="#2db7f5">
-                    {topic}
-                  </Tag>
-                ))
-              ) : (
-                <span>0</span>
-              )}
+              <UserFollowingTopics topicsFollow={user.topicsFollow} />
             </div>
           </div>
         </Col>

@@ -4,12 +4,17 @@ import FollowingTopics from "./FollowingTopics";
 import { Col, Row, Button, Typography, Alert, notification } from "antd";
 import GoHomeBtn from "../buttons/global/GoHomeBtn";
 import FollowingContext from "../../context/followingContext/followingContext";
+import UserContext from "../../context/userContext/userContext.js";
 import Styles from "../../styles/following/Following.module.css";
 const { Title } = Typography;
 const Followings = () => {
-  const { selectedTagsSaveWarning, removeSelectedTagsSaveWarning } = useContext(
-    FollowingContext
-  );
+  const {
+    selectedTagsSaveWarning,
+    removeSelectedTagsSaveWarning,
+    selectedTags
+  } = useContext(FollowingContext);
+  const { saveTopics } = useContext(UserContext);
+
   const openNotificationWithIcon = type => {
     notification[type]({
       message: "Changes Saved Successfully!",
@@ -23,6 +28,8 @@ const Followings = () => {
 
   const handleSaveButton = () => {
     handleCloseWarning();
+
+    saveTopics(selectedTags);
     openNotificationWithIcon("success");
   };
   return (

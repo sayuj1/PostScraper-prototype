@@ -3,11 +3,6 @@
     padding: 10px 10px 10px 14px
 }
 
-.smallUserAvatar {
-    border: 1px solid grey;
-    margin-left: 20px !important;
-}
-
 .profileTags {
     font-size: 18px !important;
     font-weight: 700
