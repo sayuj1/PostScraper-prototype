@@ -17,9 +17,9 @@ const UserState = props => {
         "JavaScript",
         "HTML",
         "ReactJs",
-        "JavaScript",
-        "HTML",
-        "ReactJs"
+        "WebDevelopment",
+        "PHP",
+        "Ruby"
       ] // default --> null
     } // by default it will be null
   };
