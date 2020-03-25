@@ -18,7 +18,7 @@ const Followings = () => {
   const openNotificationWithIcon = type => {
     notification[type]({
       message: "Changes Saved Successfully!",
-      duration: 2
+      duration: 1
     });
   };
 
