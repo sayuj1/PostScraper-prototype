@@ -7,14 +7,13 @@ import { Row, Col, Avatar } from "antd";
 import CreatePostBtn from "../buttons/user/UserProfile/CreatePostBtn";
 import EditProfileBtn from "../buttons/user/UserProfile/EditProfileBtn";
 import GoHomeBtn from "../buttons/global/GoHomeBtn";
-// icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+
 // styles
 import Styles from "../../styles/Global/GlobalResponsiveQueries.module.css";
 import UserProfileStyles from "../../styles/user/UserProfile.module.css";
 import UserName from "./UserName";
 import UserFollowingTopics from "./UserFollowingTopics";
+import UserLargeAvatar from "./UserLargeAvatar";
 
 const UserProfile = () => {
   const { user } = useContext(UserContext);
@@ -78,19 +77,7 @@ const UserProfile = () => {
             md={{ span: 10, offset: 2 }}
             lg={{ span: 10, offset: 2 }}
           >
-            {user.avatar ? (
-              <Avatar
-                size={106}
-                src={user.avatar}
-                shape="circle"
-                className={UserProfileStyles.largeUserAvatar}
-              />
-            ) : (
-              <Avatar
-                size={106}
-                icon={<FontAwesomeIcon icon={faUser} size="lg" />}
-              />
-            )}
+            <UserLargeAvatar avatar={user.avatar} />
           </Col>
         </span>
       </Row>
