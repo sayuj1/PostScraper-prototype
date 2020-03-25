@@ -1,11 +1,13 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, lazy, Suspense } from "react";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
 import { DownloadOutlined, UserOutlined } from "@ant-design/icons";
 import Styles from "../../styles/posts/ViewPost.module.css";
-import CommentBox from "../comments/CommentBox";
-import ViewComments from "../comments/ViewComments";
+// import CommentBox from "../comments/CommentBox";
+// import ViewComments from "../comments/ViewComments";
 import GoHomeBtn from "../buttons/global/GoHomeBtn";
 const { Paragraph } = Typography;
+const CommentBox = lazy(() => import("../comments/CommentBox"));
+const ViewComments = lazy(() => import("../comments/ViewComments"));
 
 const ViewPost = props => {
   //for toggling expand & close in post description
@@ -165,11 +167,25 @@ const ViewPost = props => {
               {/* postContent end */}
               {/* comment box Component */}
               <div className={Styles.commentBox}>
-                <CommentBox />
+                <Suspense
+                  fallback={
+                    <div style={{ fontSize: "30px" }}>
+                      Loading comment box....
+                    </div>
+                  }
+                >
+                  <CommentBox />
+                </Suspense>
               </div>
               {/* Comment-list Component goes here */}
               <div className={Styles.postCommentsBox}>
-                <ViewComments />
+                <Suspense
+                  fallback={
+                    <div style={{ fontSize: "30px" }}>Fetching comments...</div>
+                  }
+                >
+                  <ViewComments />
+                </Suspense>
               </div>
             </Col>
           </Row>
