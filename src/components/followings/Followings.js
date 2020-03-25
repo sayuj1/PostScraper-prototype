@@ -1,12 +1,15 @@
-import React, { Fragment, useContext } from "react";
-import Topics from "./Topics";
-import FollowingTopics from "./FollowingTopics";
+import React, { Fragment, useContext, lazy, Suspense } from "react";
+// import Topics from "./Topics";
+// import FollowingTopics from "./FollowingTopics";
 import { Col, Row, Button, Typography, Alert, notification } from "antd";
 import GoHomeBtn from "../buttons/global/GoHomeBtn";
 import FollowingContext from "../../context/followingContext/followingContext";
 import UserContext from "../../context/userContext/userContext.js";
 import Styles from "../../styles/following/Following.module.css";
+const Topics = lazy(() => import("./Topics"));
+const FollowingTopics = lazy(() => import("./FollowingTopics"));
 const { Title } = Typography;
+
 const Followings = () => {
   const {
     selectedTagsSaveWarning,
@@ -60,7 +63,15 @@ const Followings = () => {
               {/* all tags available in the database */}
               <div className={Styles.tagsAvailableBox}>
                 <div className="tagsAvailable">
-                  <Topics />
+                  <Suspense
+                    fallback={
+                      <div style={{ fontSize: "50px" }}>
+                        Loading Topics Component
+                      </div>
+                    }
+                  >
+                    <Topics />
+                  </Suspense>
                 </div>
               </div>
             </Col>
@@ -77,7 +88,15 @@ const Followings = () => {
               </div>
               <div className={Styles.selectedTagsBox}>
                 <div className="selectedTags">
-                  <FollowingTopics />
+                  <Suspense
+                    fallback={
+                      <div style={{ fontSize: "50px" }}>
+                        Loading FollowingTopics Component
+                      </div>
+                    }
+                  >
+                    <FollowingTopics />
+                  </Suspense>
                 </div>
                 <div className={Styles.saveSelectedTagButton}>
                   {/* for warning display  */}

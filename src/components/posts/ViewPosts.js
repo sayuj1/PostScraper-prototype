@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from "react";
 import PostContext from "../../context/postContext/postContext";
 import CommentContext from "../../context/commentContext/commentContext";
 import { useParams } from "react-router-dom";
-import ViewPost from "./ViewPost";
 
+import ViewPost from "./ViewPost";
 const ViewPosts = () => {
   const {
     viewPostId,
@@ -45,6 +45,7 @@ const ViewPosts = () => {
   }, []);
   return (
     // passing requested post
+
     <div className={`postContainer_${viewPostId}`}>
       {viewPost !== null
         ? viewPost.map(post => <ViewPost key={post._id} post={post} />)

@@ -1,28 +1,57 @@
-import React, { Fragment } from "react";
-import UserPosts from "../posts/UserPosts";
-import UserSavePosts from "../posts/UserSavePosts";
-import { Tabs } from "antd";
+import React, { Fragment, lazy, Suspense } from "react";
+// import UserPosts from "../posts/UserPosts";
+// import UserSavePosts from "../posts/UserSavePosts";
+import { Row, Col, Tabs } from "antd";
 const { TabPane } = Tabs;
-
+const UserPosts = lazy(() => import("../posts/UserPosts"));
+const UserSavePosts = lazy(() => import("../posts/UserSavePosts"));
 const PostsTabs = () => {
   return (
     <Fragment>
-      <Tabs defaultActiveKey="userPosts">
-        <TabPane
-          tab="Posts"
-          key="userPosts"
-          style={{
-            backgroundColor: "whitesmoke",
-            padding: "10px"
-          }}
+      <Row style={{ backgroundColor: "white" }}>
+        {/* tabs */}
+        <Col
+          xs={{ span: 24 }}
+          sm={{ span: 24 }}
+          md={{ span: 20, offset: 2 }}
+          lg={{ span: 20, offset: 2 }}
         >
-          <UserPosts />
-        </TabPane>
+          <div className="postsTabs" style={{ margin: "20px" }}>
+            <Tabs defaultActiveKey="userPosts">
+              <TabPane
+                tab="Posts"
+                key="userPosts"
+                style={{
+                  backgroundColor: "whitesmoke",
+                  padding: "10px"
+                }}
+              >
+                <Suspense
+                  fallback={
+                    <div style={{ fontSize: "50px" }}>
+                      Loading User Posts....
+                    </div>
+                  }
+                >
+                  <UserPosts />
+                </Suspense>
+              </TabPane>
 
-        <TabPane tab="Saved Posts" key="userSavedPosts">
-          <UserSavePosts />
-        </TabPane>
-      </Tabs>
+              <TabPane tab="Saved Posts" key="userSavedPosts">
+                <Suspense
+                  fallback={
+                    <div style={{ fontSize: "50px" }}>
+                      Loading User Saved Posts....
+                    </div>
+                  }
+                >
+                  <UserSavePosts />
+                </Suspense>
+              </TabPane>
+            </Tabs>
+          </div>
+        </Col>
+      </Row>
     </Fragment>
   );
 };
