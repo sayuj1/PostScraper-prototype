@@ -8,7 +8,8 @@ import {
   Get_View_Post,
   Set_User_Posts,
   Delete_User_Post,
-  Save_Img
+  Save_Img,
+  Remove_img
 } from "./postActions.js";
 
 const PostState = props => {
@@ -173,9 +174,13 @@ const PostState = props => {
   // for mananging state
   const [state, dispatch] = useReducer(postReducer, initialState);
 
-  // for img upload
+  // for saving img in post state
   const saveImg = imgLocation => {
     dispatch(Save_Img(imgLocation));
+  };
+
+  const removeImg = () => {
+    dispatch(Remove_img());
   };
 
   // getting posts
@@ -223,7 +228,8 @@ const PostState = props => {
         getViewPost: getViewPost,
         getUserPosts: getUserPosts,
         deleteUserPost: deleteUserPost,
-        saveImg: saveImg
+        saveImg: saveImg,
+        removeImg: removeImg
       }}
     >
       {props.children}

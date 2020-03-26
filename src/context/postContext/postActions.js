@@ -6,7 +6,8 @@ import {
   GET_VIEW_POST,
   SET_USER_POSTS,
   DELETE_USER_POSTS,
-  SAVE_IMG
+  SAVE_IMG,
+  REMOVE_IMG
 } from "./postTypes";
 
 export const Filter_Post = () => {
@@ -58,5 +59,11 @@ export const Save_Img = imgLocation => {
   return {
     type: SAVE_IMG,
     payload: imgLocation
+  };
+};
+
+export const Remove_img = () => {
+  return {
+    type: REMOVE_IMG
   };
 };

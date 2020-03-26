@@ -1,12 +1,16 @@
 import React, { Fragment, useState, useContext } from "react";
 import "antd/dist/antd";
-import { Upload, message, Modal, Button, Alert } from "antd";
+import { Upload, message, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import PostContext from "../../context/postContext/postContext";
+import PostImagePreview from "./PostImagePreview";
+import PreviewImagePostModal from "./PreviewImagePostModal";
+import InvalidFileWarning from "./InvalidFileWarning";
 
 const UploadImg = () => {
-  const { saveImg } = useContext(PostContext);
+  const { saveImg, removeImg } = useContext(PostContext);
 
+  // image upload states
   const [fileState, setfileState] = useState({
     imgFile: null,
     previewImg: null,
@@ -14,24 +18,49 @@ const UploadImg = () => {
     previewImgShowModal: false,
     invalidFile: false
   });
-  // const [previewImg, setpreviewImg] = useState(null);
-  // const [previewImgShow, setpreviewImgShow] = useState(false);
-  // const [previewImgShowModal, setpreviewImgShowModal] = useState(false);
 
+  //checking image file if its valid or not before uploading to the server, if it return false then image will not be uploaded to the server
+  const handleBeforeUpload = file => {
+    // console.log(file.size);
+    // supported img --> jpeg, png
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      message.error("You can only upload JPG/PNG file!");
+      message.error("Can't Preview this image!");
+      setfileState({
+        ...fileState,
+        invalidFile: true
+      });
+    }
+    // image size can't be greater than 25MB
+    const isLt25MB = file.size / 1024 / 1024 < 25;
+    if (!isLt25MB) {
+      message.error("Image must smaller than 25MB!");
+      setfileState({
+        ...fileState,
+        invalidFile: true
+      });
+    }
+    // checking both conditions are true or not
+    return isJpgOrPng && isLt25MB;
+  };
+
+  // for live previewing on the client page
   const getBase64 = file => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-
       reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result);
       reader.onerror = error => reject(error);
     });
   };
 
+  // for handling changes on the image upload
   const handleChange = async info => {
     // console.log("response", info.file.error);
     // console.log("file", info.file);
     const file = info.file;
+    // handling server errors
     if (file.error) {
       message.error("Server Error! We are Sorry :(, Please try again!");
       setfileState({
@@ -39,6 +68,7 @@ const UploadImg = () => {
         invalidFile: true
       });
     }
+    // checking file status (if user deleting the file)
     if (file.status === "removed") {
       setfileState({
         ...fileState,
@@ -46,16 +76,19 @@ const UploadImg = () => {
         previewImg: null,
         previewImgShow: false
       });
+      //removing img from the post state
+      removeImg();
     } else {
-      if (file.status === "uploading") {
-        console.log("uploading");
-      }
+      // if (file.status === "uploading") {
+      //   console.log("uploading");
+      // }
       if (file.status === "done") {
         setfileState({
           ...fileState,
           invalidFile: false
         });
         message.success("Image upload successfully.");
+        // for previewing image on the client side
         if (!file.url && !file.preview) {
           await getBase64(file.originFileObj)
             .then(response => (file.preview = response))
@@ -71,7 +104,7 @@ const UploadImg = () => {
           previewImgShow: true
         });
 
-        console.log("Done", file.response.url);
+        // console.log("Done", file.response.url);
         saveImg(file.response.url);
         // save this response to create post state (in future)
       }
@@ -85,23 +118,19 @@ const UploadImg = () => {
     }
   };
 
+  // for previewing in the modal box
   const handlePreview = () => {
     setfileState({
       ...fileState,
       previewImgShowModal: true
     });
-    // setpreviewImgShowModal(true);
   };
-  const handleCancel = () => {
-    setfileState({
-      ...fileState,
-      previewImgShowModal: false
-    });
-    // setpreviewImgShowModal(false);
-  };
+
+  // deleting image file from the server
   const handleRemove = file => {
     return new Promise((resolve, reject) => {
       resolve(console.log("removing from server"));
+      // logic for removing file from the server goes here
       message.success("File removed successfully!");
       setfileState({
         ...fileState,
@@ -111,57 +140,13 @@ const UploadImg = () => {
     });
   };
 
-  const handleBeforeUpload = file => {
-    // console.log(file.size);
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-      message.error("Can't Preview this image!");
-      setfileState({
-        ...fileState,
-        invalidFile: true
-      });
-    }
-    const isLt25MB = file.size / 1024 / 1024 < 25;
-    if (!isLt25MB) {
-      message.error("Image must smaller than 25MB!");
-      setfileState({
-        ...fileState,
-        invalidFile: true
-      });
-    }
-
-    return isJpgOrPng && isLt25MB;
-  };
-
   return (
     <Fragment>
-      <div
-        className="imgPreviewContainer"
-        style={{
-          backgroundColor: "whitesmoke",
-          border: "4px dashed gray",
-          maxHeight: "auto",
-          lineHeight: "350px",
-          borderRadius: "2%"
-        }}
-      >
-        <h3>
-          {fileState.previewImgShow ? (
-            <img
-              src={fileState.previewImg}
-              alt="img not supported"
-              style={{
-                width: "100%",
-                padding: "10px",
-                borderRadius: "3%"
-              }}
-            />
-          ) : (
-            "Image preview will show here"
-          )}
-        </h3>
-      </div>
+      {/* Image preview box  */}
+      <PostImagePreview
+        previewImgShow={fileState.previewImgShow}
+        previewImg={fileState.previewImg}
+      />
 
       <Upload
         multiple={false}
@@ -184,37 +169,16 @@ const UploadImg = () => {
         </div>
       </Upload>
 
-      <Modal
-        centered
-        title="Image Preview"
-        visible={fileState.previewImgShowModal}
-        footer={null}
-        onCancel={handleCancel}
-        maskClosable={false}
-        footer={
-          <Button type="primary" block onClick={handleCancel}>
-            Close
-          </Button>
-        }
-      >
-        <p>
-          <img
-            alt="Not a valid image"
-            style={{ width: "100%" }}
-            src={fileState.previewImg}
-          />
-        </p>
-      </Modal>
-      {fileState.invalidFile ? (
-        <div className="uploadWarning" style={{ padding: "10px" }}>
-          <Alert
-            message="Warning"
-            description="Please Delete the above file first before uploading second file."
-            type="warning"
-            showIcon
-          />
-        </div>
-      ) : null}
+      {/* previewing image in modal */}
+      <PreviewImagePostModal
+        previewImgShowModal={fileState.previewImgShowModal}
+        previewImg={fileState.previewImg}
+        setfileState={setfileState}
+        fileState={fileState}
+      />
+
+      {/* warning for invalid files */}
+      <InvalidFileWarning invalidFile={fileState.invalidFile} />
     </Fragment>
   );
 };
