@@ -5,6 +5,9 @@ import GoHomeBtn from "../buttons/global/GoHomeBtn";
 import UploadImg from "../uploader/UploadImg";
 
 const CreatePost = () => {
+  const handleFinish = () => {
+    //store the form data to the backend
+  };
   return (
     <Fragment>
       <Row style={{ backgroundColor: "white" }}>
@@ -16,7 +19,7 @@ const CreatePost = () => {
         >
           {/* post box containing both image and information about image */}
           <div className="postBox">
-            <Form>
+            <Form onFinish={handleFinish}>
               {/* first div column containing image */}
               <Row>
                 <Col
@@ -52,7 +55,7 @@ const CreatePost = () => {
                     {/* back button for going back to home page */}
                     <GoHomeBtn margin="20px" shape="round" />
                   </div>
-                  <div className="postFields">
+                  <div className="postFields" style={{ margin: "20px" }}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Officia est dicta temporibus beatae nam deserunt sit earum,
                     provident veritatis fuga?

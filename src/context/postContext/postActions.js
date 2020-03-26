@@ -5,7 +5,8 @@ import {
   CLEAR_VIEW_POST,
   GET_VIEW_POST,
   SET_USER_POSTS,
-  DELETE_USER_POSTS
+  DELETE_USER_POSTS,
+  SAVE_IMG
 } from "./postTypes";
 
 export const Filter_Post = () => {
@@ -50,5 +51,12 @@ export const Delete_User_Post = postId => {
   return {
     type: DELETE_USER_POSTS,
     payload: postId
+  };
+};
+
+export const Save_Img = imgLocation => {
+  return {
+    type: SAVE_IMG,
+    payload: imgLocation
   };
 };

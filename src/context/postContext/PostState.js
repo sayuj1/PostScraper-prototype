@@ -7,9 +7,9 @@ import {
   Clear_View_Post,
   Get_View_Post,
   Set_User_Posts,
-  Delete_User_Post
+  Delete_User_Post,
+  Save_Img
 } from "./postActions.js";
-import { typeOf } from "antd/dist/antd";
 
 const PostState = props => {
   const initialState = {
@@ -165,10 +165,18 @@ const PostState = props => {
         thumbnail: "",
         avatar: ""
       }
-    ] // default null
+    ], // default null
+    createPost: {
+      postImg: ""
+    }
   };
   // for mananging state
   const [state, dispatch] = useReducer(postReducer, initialState);
+
+  // for img upload
+  const saveImg = imgLocation => {
+    dispatch(Save_Img(imgLocation));
+  };
 
   // getting posts
   const getPosts = () => {
@@ -214,7 +222,8 @@ const PostState = props => {
         clearViewPost: clearViewPost,
         getViewPost: getViewPost,
         getUserPosts: getUserPosts,
-        deleteUserPost: deleteUserPost
+        deleteUserPost: deleteUserPost,
+        saveImg: saveImg
       }}
     >
       {props.children}

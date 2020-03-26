@@ -5,7 +5,8 @@ import {
   CLEAR_VIEW_POST,
   GET_VIEW_POST,
   SET_USER_POSTS,
-  DELETE_USER_POSTS
+  DELETE_USER_POSTS,
+  SAVE_IMG
 } from "./postTypes";
 
 const postReducer = (state, action) => {
@@ -37,6 +38,11 @@ const postReducer = (state, action) => {
         userPosts: state.userPosts.filter(
           userPost => userPost._id !== action.payload
         )
+      };
+    case SAVE_IMG:
+      return {
+        ...state,
+        createPost: { ...state.createPost, postImg: action.payload }
       };
     default:
       return state;
