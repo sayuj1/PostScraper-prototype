@@ -142,43 +142,45 @@ const UploadImg = () => {
 
   return (
     <Fragment>
-      {/* Image preview box  */}
-      <PostImagePreview
-        previewImgShow={fileState.previewImgShow}
-        previewImg={fileState.previewImg}
-      />
+      <div className="uploadContainer" style={{ textAlign: "center" }}>
+        {/* Image preview box  */}
+        <PostImagePreview
+          previewImgShow={fileState.previewImgShow}
+          previewImg={fileState.previewImg}
+        />
 
-      <Upload
-        multiple={false}
-        beforeUpload={handleBeforeUpload}
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76" // server location for uploading (upload route)
-        listType="picture"
-        onPreview={handlePreview}
-        onChange={handleChange}
-        onRemove={handleRemove}
-      >
-        <div style={{ width: "100% !important" }}>
-          {!fileState.previewImgShow ? (
-            <div style={{ marginTop: "20px" }}>
-              <Button type="primary">
-                Upload
-                <UploadOutlined />
-              </Button>
-            </div>
-          ) : null}
-        </div>
-      </Upload>
+        <Upload
+          multiple={false}
+          beforeUpload={handleBeforeUpload}
+          action="https://www.mocky.io/v2/5cc8019d300000980a055e76" // server location for uploading (upload route)
+          listType="picture"
+          onPreview={handlePreview}
+          onChange={handleChange}
+          onRemove={handleRemove}
+        >
+          <div style={{ width: "100% !important" }}>
+            {!fileState.previewImgShow ? (
+              <div style={{ marginTop: "20px" }}>
+                <Button type="primary">
+                  Upload
+                  <UploadOutlined />
+                </Button>
+              </div>
+            ) : null}
+          </div>
+        </Upload>
 
-      {/* previewing image in modal */}
-      <PreviewImagePostModal
-        previewImgShowModal={fileState.previewImgShowModal}
-        previewImg={fileState.previewImg}
-        setfileState={setfileState}
-        fileState={fileState}
-      />
+        {/* previewing image in modal */}
+        <PreviewImagePostModal
+          previewImgShowModal={fileState.previewImgShowModal}
+          previewImg={fileState.previewImg}
+          setfileState={setfileState}
+          fileState={fileState}
+        />
 
-      {/* warning for invalid files */}
-      <InvalidFileWarning invalidFile={fileState.invalidFile} />
+        {/* warning for invalid files */}
+        <InvalidFileWarning invalidFile={fileState.invalidFile} />
+      </div>
     </Fragment>
   );
 };
