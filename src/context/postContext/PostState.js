@@ -9,7 +9,9 @@ import {
   Set_User_Posts,
   Delete_User_Post,
   Save_Img,
-  Remove_img
+  Remove_img,
+  Save_Post_tag,
+  Remove_Post_tag
 } from "./postActions.js";
 
 const PostState = props => {
@@ -168,7 +170,8 @@ const PostState = props => {
       }
     ], // default null
     createPost: {
-      postImg: ""
+      postImg: "",
+      tags: []
     }
   };
   // for mananging state
@@ -214,6 +217,13 @@ const PostState = props => {
     dispatch(Delete_User_Post(postId));
   };
 
+  // saving tags for new posts
+  const savePostTag = postTags => {
+    dispatch(Save_Post_tag(postTags));
+  };
+  const removePostTag = postTags => {
+    dispatch(Remove_Post_tag(postTags));
+  };
   return (
     // sharing post state values
     <PostContext.Provider
@@ -222,6 +232,7 @@ const PostState = props => {
         viewPostId: state.viewPostId,
         viewPost: state.viewPost,
         userPosts: state.userPosts,
+        createPostTags: state.createPost.tags,
         getPosts: getPosts,
         setViewPost: setViewPost,
         clearViewPost: clearViewPost,
@@ -229,7 +240,9 @@ const PostState = props => {
         getUserPosts: getUserPosts,
         deleteUserPost: deleteUserPost,
         saveImg: saveImg,
-        removeImg: removeImg
+        removeImg: removeImg,
+        savePostTag: savePostTag,
+        removePostTag: removePostTag
       }}
     >
       {props.children}

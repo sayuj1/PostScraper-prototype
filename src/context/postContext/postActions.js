@@ -7,7 +7,9 @@ import {
   SET_USER_POSTS,
   DELETE_USER_POSTS,
   SAVE_IMG,
-  REMOVE_IMG
+  REMOVE_IMG,
+  SAVE_POST_TAG,
+  REMOVE_POST_TAG
 } from "./postTypes";
 
 export const Filter_Post = () => {
@@ -65,5 +67,18 @@ export const Save_Img = imgLocation => {
 export const Remove_img = () => {
   return {
     type: REMOVE_IMG
+  };
+};
+
+export const Save_Post_tag = postTag => {
+  return {
+    type: SAVE_POST_TAG,
+    payload: postTag
+  };
+};
+export const Remove_Post_tag = postTag => {
+  return {
+    type: REMOVE_POST_TAG,
+    payload: postTag
   };
 };

@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Form, Input } from "antd";
+import CreatePostFormTags from "./CreatePostFormTags";
+
 const { TextArea } = Input;
 
 const CreatePostForm = () => {
@@ -110,6 +112,19 @@ const CreatePostForm = () => {
               {`${postDescription.length}/500`}
             </div>
           ) : null}
+
+          {/* tags section  */}
+          <div
+            className="tags"
+            style={{
+              marginTop: "10px",
+              fontSize: "1.5rem",
+              fontWeight: "bold"
+            }}
+          >
+            {/* for post tags */}
+            <CreatePostFormTags />
+          </div>
         </Form>
       </div>
     </Fragment>

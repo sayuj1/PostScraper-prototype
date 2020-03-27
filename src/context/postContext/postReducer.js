@@ -7,7 +7,9 @@ import {
   SET_USER_POSTS,
   DELETE_USER_POSTS,
   SAVE_IMG,
-  REMOVE_IMG
+  REMOVE_IMG,
+  SAVE_POST_TAG,
+  REMOVE_POST_TAG
 } from "./postTypes";
 
 const postReducer = (state, action) => {
@@ -49,6 +51,22 @@ const postReducer = (state, action) => {
       return {
         ...state,
         createPost: { ...state.createPost, postImg: "" }
+      };
+    case SAVE_POST_TAG:
+      return {
+        ...state,
+        createPost: {
+          ...state.createPost,
+          tags: [...state.createPost.tags, action.payload]
+        }
+      };
+    case REMOVE_POST_TAG:
+      return {
+        ...state,
+        createPost: {
+          ...state.createPost,
+          tags: state.createPost.tags.filter(tag => tag !== action.payload)
+        }
       };
     default:
       return state;

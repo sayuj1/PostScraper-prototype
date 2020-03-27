@@ -7,3 +7,5 @@ export const SET_USER_POSTS = "SET_USER_POSTS";
 export const DELETE_USER_POSTS = "DELETE_USER_POSTS";
 export const SAVE_IMG = "SAVE_IMG";
 export const REMOVE_IMG = "REMOVE_IMG";
+export const SAVE_POST_TAG = "SAVE_POST_TAG";
+export const REMOVE_POST_TAG = "REMOVE_POST_TAG";
