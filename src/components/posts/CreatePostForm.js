@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
-import { Form, Input } from "antd";
+import { Form, Input, Button } from "antd";
 import CreatePostFormTags from "./CreatePostFormTags";
-
+import { SaveOutlined } from "@ant-design/icons";
 const { TextArea } = Input;
 
 const CreatePostForm = () => {
@@ -125,6 +125,19 @@ const CreatePostForm = () => {
             {/* for post tags */}
             <CreatePostFormTags />
           </div>
+          <Button
+            type="primary"
+            size="large"
+            block
+            style={{
+              marginTop: "20px",
+              fontWeight: "bolder",
+              fontSize: "1.5rem",
+              lineHeight: "1"
+            }}
+          >
+            Save Posts <SaveOutlined />
+          </Button>
         </Form>
       </div>
     </Fragment>

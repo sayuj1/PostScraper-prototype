@@ -46,10 +46,15 @@ const CreatePostFormTags = () => {
       </Mentions>
 
       {createPostTags.length !== 0 ? (
-        <div className="showSelectedTags">
-          <span style={{ marginRight: "2px" }}>Tags:</span>
+        <div className="showSelectedTags" style={{ marginTop: "10px" }}>
+          <span style={{ marginRight: "5px" }}>Tags:</span>
           {createPostTags.map(topic => (
-            <Tag key={topic} closable onClose={() => removeTag(topic)}>
+            <Tag
+              key={topic}
+              closable
+              onClose={() => removeTag(topic)}
+              color="#2db7f5"
+            >
               {topic}
             </Tag>
           ))}

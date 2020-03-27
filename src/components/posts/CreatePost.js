@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
 import "../../../node_modules/antd/dist/antd.css";
-import { Col, Row } from "antd";
+import { Col, Row, Button } from "antd";
 import GoHomeBtn from "../buttons/global/GoHomeBtn";
 import UploadImg from "../uploader/UploadImg";
 import CreatePostForm from "./CreatePostForm";
@@ -40,7 +40,7 @@ const CreatePost = () => {
                 </div>
               </Col>
 
-              {/* second div containing information about image */}
+              {/* second div containing information about posts image */}
 
               <Col
                 xs={{ span: 24 }}
