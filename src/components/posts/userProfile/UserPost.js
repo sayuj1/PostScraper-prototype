@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from "react";
 // components
 import { Card, Col, Button } from "antd";
-import UserContext from "../../context/userContext/userContext";
-import DeletePostBtn from "../buttons/posts/UserPost/DeletePostBtn";
+import UserContext from "../../../context/userContext/userContext";
+import DeletePostBtn from "../../buttons/posts/UserPost/DeletePostBtn";
 import { useHistory } from "react-router-dom";
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -62,7 +62,7 @@ const UserPost = props => {
         >
           <Meta
             style={{ fontWeight: "bolder" }}
-            description={tags ? "Related To: " + tags : null}
+            description={tags.length !== 0 ? "Related To: " + tags : null}
           />
         </Card>
       </Col>

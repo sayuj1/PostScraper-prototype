@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import "../../../node_modules/antd/dist/antd";
+import "antd/dist/antd";
 import { Card, Col } from "antd";
 import { useHistory } from "react-router-dom";
 const { Meta } = Card;

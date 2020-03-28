@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import UserContext from "../../context/userContext/userContext";
+import UserContext from "../../../context/userContext/userContext";
 import { Row, Col } from "antd";
 import UserName from "./UserName";
 import UserFollowingTopics from "./UserFollowingTopics";

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, Fragment, useEffect, useContext } from "react";
 import UserContext from "../../context/userContext/userContext.js";
 // import Posts from "../posts/Posts";
-const Posts = lazy(() => import("../posts/Posts"));
+const Posts = lazy(() => import("../posts/home/Posts"));
 
 const Home = () => {
   const { getUser } = useContext(UserContext);

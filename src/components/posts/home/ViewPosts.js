@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import PostContext from "../../context/postContext/postContext";
-import CommentContext from "../../context/commentContext/commentContext";
+import PostContext from "../../../context/postContext/postContext";
+import CommentContext from "../../../context/commentContext/commentContext";
 import { useParams } from "react-router-dom";
 
 import ViewPost from "./ViewPost";

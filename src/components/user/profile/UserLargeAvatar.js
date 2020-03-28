@@ -4,7 +4,7 @@ import { Col, Avatar } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 // styles
-import Styles from "../../styles/Global/GlobalResponsiveQueries.module.css";
+import Styles from "../../../styles/Global/GlobalResponsiveQueries.module.css";
 const UserLargeAvatar = props => {
   const { avatar } = props;
   return (

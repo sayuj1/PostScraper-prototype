@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import PostContext from "../../context/postContext/postContext";
+import PostContext from "../../../context/postContext/postContext";
 import Post from "./Post";
 import { Row } from "antd";
 

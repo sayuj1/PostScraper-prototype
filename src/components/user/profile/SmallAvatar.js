@@ -3,7 +3,7 @@ import { Avatar } from "antd";
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import Styles from "../../styles/Global/GlobalResponsiveQueries.module.css";
+import Styles from "../../../styles/Global/GlobalResponsiveQueries.module.css";
 
 const SmallAvatar = props => {
   const { avatar } = props;

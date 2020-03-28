@@ -1,15 +1,13 @@
 import React, { Fragment, useState, lazy, Suspense, useContext } from "react";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
 import { DownloadOutlined, UserOutlined } from "@ant-design/icons";
-import Styles from "../../styles/posts/ViewPost.module.css";
-// import CommentBox from "../comments/CommentBox";
-// import ViewComments from "../comments/ViewComments";
-import GoHomeBtn from "../buttons/global/GoHomeBtn";
+import Styles from "../../../styles/posts/ViewPost.module.css";
+import GoHomeBtn from "../../buttons/global/GoHomeBtn";
 import moment from "moment";
-import UserContext from "../../context/userContext/userContext";
+import UserContext from "../../../context/userContext/userContext";
 const { Paragraph } = Typography;
-const CommentBox = lazy(() => import("../comments/CommentBox"));
-const ViewComments = lazy(() => import("../comments/ViewComments"));
+const CommentBox = lazy(() => import("../../comments/CommentBox"));
+const ViewComments = lazy(() => import("../../comments/ViewComments"));
 
 const ViewPost = props => {
   const { user } = useContext(UserContext);

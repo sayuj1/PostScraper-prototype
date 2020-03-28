@@ -5,9 +5,9 @@ import "../../../../node_modules/antd/dist/antd";
 import GoHomeBtn from "../../buttons/global/GoHomeBtn";
 import UploadImg from "../../uploadImage/postImageUpload/UploadImg";
 import CreatePostForm from "./CreatePostForm";
-import UserLargeAvatar from "../../user/UserLargeAvatar";
+import UserLargeAvatar from "../../user/profile/UserLargeAvatar";
 import UserContext from "../../../context/userContext/userContext";
-import UserName from "../../user/UserName";
+import UserName from "../../user/profile/UserName";
 import PostContext from "../../../context/postContext/postContext";
 import "../../../styles/Global/GlobalAnt.css";
 
