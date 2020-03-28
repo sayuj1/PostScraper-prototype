@@ -1,15 +1,15 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import "../../../node_modules/antd/dist/antd.css";
+
 import { Col, Row, Spin } from "antd";
-import "../../../node_modules/antd/dist/antd.css";
-import GoHomeBtn from "../buttons/global/GoHomeBtn";
-import UploadImg from "../uploadImage/postImageUpload/UploadImg";
+import "../../../../node_modules/antd/dist/antd";
+import GoHomeBtn from "../../buttons/global/GoHomeBtn";
+import UploadImg from "../../uploadImage/postImageUpload/UploadImg";
 import CreatePostForm from "./CreatePostForm";
-import UserLargeAvatar from "../user/UserLargeAvatar";
-import UserContext from "../../context/userContext/userContext";
-import UserName from "../user/UserName";
-import PostContext from "../../context/postContext/postContext";
-import "../../styles/Global/GlobalAnt.css";
+import UserLargeAvatar from "../../user/UserLargeAvatar";
+import UserContext from "../../../context/userContext/userContext";
+import UserName from "../../user/UserName";
+import PostContext from "../../../context/postContext/postContext";
+import "../../../styles/Global/GlobalAnt.css";
 
 const CreatePost = () => {
   const { user } = useContext(UserContext);

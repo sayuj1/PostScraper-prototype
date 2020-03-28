@@ -53,7 +53,7 @@ const Layouts = () => {
                       <Route exact path="/post/:id" component={ViewPost} />
                       <Route
                         exact
-                        path="/user/post/:id"
+                        path="/:user/post/:id"
                         component={ViewUserPost}
                       />
                       <Route

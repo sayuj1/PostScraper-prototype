@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Form, Input } from "antd";
 import CreatePostFormTags from "./CreatePostFormTags";
-import SaveNewPostBtn from "../buttons/posts/CreatePostForm/SaveNewPostBtn";
+import SaveNewPostBtn from "../../buttons/posts/CreatePostForm/SaveNewPostBtn";
 const { TextArea } = Input;
 
 const CreatePostForm = props => {
