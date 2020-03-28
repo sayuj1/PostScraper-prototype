@@ -1,4 +1,4 @@
-import React, { Fragment, useState, lazy, Suspense } from "react";
+import React, { Fragment, useState, lazy, Suspense, useContext } from "react";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
 import { DownloadOutlined, UserOutlined } from "@ant-design/icons";
 import Styles from "../../styles/posts/ViewPost.module.css";
@@ -6,11 +6,13 @@ import Styles from "../../styles/posts/ViewPost.module.css";
 // import ViewComments from "../comments/ViewComments";
 import GoHomeBtn from "../buttons/global/GoHomeBtn";
 import moment from "moment";
+import UserContext from "../../context/userContext/userContext";
 const { Paragraph } = Typography;
 const CommentBox = lazy(() => import("../comments/CommentBox"));
 const ViewComments = lazy(() => import("../comments/ViewComments"));
 
 const ViewPost = props => {
+  const { user } = useContext(UserContext);
   //for toggling expand & close in post description
   const [toggleExpand, settoggleExpand] = useState({
     expand: false,
@@ -95,14 +97,16 @@ const ViewPost = props => {
                     </Button>
                   </a>
                   {/* save button for saving into users collection */}
-                  <Button
-                    type="primary"
-                    shape="round"
-                    size="large"
-                    style={{ float: "right" }}
-                  >
-                    Save
-                  </Button>
+                  {postAuthor.toLowerCase() !== user.username.toLowerCase() ? (
+                    <Button
+                      type="primary"
+                      shape="round"
+                      size="large"
+                      style={{ float: "right" }}
+                    >
+                      Save
+                    </Button>
+                  ) : null}
                 </div>
 
                 {/* // post title */}
@@ -132,7 +136,7 @@ const ViewPost = props => {
                   </div>
                 )}
                 {/* // checking first if no tags available */}
-                {tags ? (
+                {tags.length !== 0 ? (
                   <div className={Styles.postTags}>
                     {tags.map((tag, index) => (
                       <Tag

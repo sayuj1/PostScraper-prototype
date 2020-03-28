@@ -40,7 +40,7 @@ const Post = props => {
         >
           <Meta
             style={{ fontWeight: "bolder" }}
-            description={tags ? "Related To: " + tags : null}
+            description={tags.length !== 0 ? "Related To: " + tags : null}
           />
         </Card>
       </Col>

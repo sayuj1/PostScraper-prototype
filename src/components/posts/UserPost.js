@@ -21,7 +21,7 @@ const UserPost = props => {
   // handle which post is clicked and get the information
   const handlePostClick = () => {
     //loading view post component
-    history.push(`/post/${_id}`);
+    history.push(`post/${_id}`); // /user/post/:id
   };
 
   const handleEdit = () => {

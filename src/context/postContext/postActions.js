@@ -6,6 +6,7 @@ import {
   SET_VIEW_POST,
   CLEAR_VIEW_POST,
   GET_VIEW_POST,
+  GET_VIEW_USER_POST,
   SET_USER_POSTS,
   DELETE_USER_POSTS,
   SAVE_IMG,
@@ -60,7 +61,12 @@ export const Get_View_Post = postId => {
     payload: postId
   };
 };
-
+export const Get_View_User_Post = postId => {
+  return {
+    type: GET_VIEW_USER_POST,
+    payload: postId
+  };
+};
 export const Set_User_Posts = userPosts => {
   return {
     type: SET_USER_POSTS,

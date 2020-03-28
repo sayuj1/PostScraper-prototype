@@ -16,6 +16,7 @@ const Header = lazy(() => import("../layouts/Header"));
 // pages
 const Home = lazy(() => import("../pages/Home"));
 const ViewPost = lazy(() => import("../pages/ViewPost"));
+const ViewUserPost = lazy(() => import("../pages/ViewUserPost"));
 const Following = lazy(() => import("../pages/Following"));
 const User = lazy(() => import("../pages/User"));
 const PostCreate = lazy(() => import("../pages/PostCreate"));
@@ -50,6 +51,11 @@ const Layouts = () => {
                     <Switch>
                       <Route exact path="/" component={Home} />
                       <Route exact path="/post/:id" component={ViewPost} />
+                      <Route
+                        exact
+                        path="/user/post/:id"
+                        component={ViewUserPost}
+                      />
                       <Route
                         exact
                         path="/create-post/"

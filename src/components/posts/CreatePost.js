@@ -3,7 +3,7 @@ import "../../../node_modules/antd/dist/antd.css";
 import { Col, Row, Spin } from "antd";
 import "../../../node_modules/antd/dist/antd.css";
 import GoHomeBtn from "../buttons/global/GoHomeBtn";
-import UploadImg from "../uploader/UploadImg";
+import UploadImg from "../uploadImage/postImageUpload/UploadImg";
 import CreatePostForm from "./CreatePostForm";
 import UserLargeAvatar from "../user/UserLargeAvatar";
 import UserContext from "../../context/userContext/userContext";

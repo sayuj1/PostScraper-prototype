@@ -2,7 +2,8 @@ import React, { Fragment, useState, useContext } from "react";
 import "antd/dist/antd";
 import { Upload, message, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import PostContext from "../../context/postContext/postContext";
+
+import PostContext from "../../../context/postContext/postContext";
 import PostImagePreview from "./PostImagePreview";
 import PreviewImagePostModal from "./PreviewImagePostModal";
 import InvalidFileWarning from "./InvalidFileWarning";

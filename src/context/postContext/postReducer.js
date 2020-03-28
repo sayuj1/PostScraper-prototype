@@ -6,6 +6,7 @@ import {
   SET_VIEW_POST,
   CLEAR_VIEW_POST,
   GET_VIEW_POST,
+  GET_VIEW_USER_POST,
   SET_USER_POSTS,
   DELETE_USER_POSTS,
   SAVE_IMG,
@@ -39,6 +40,11 @@ const postReducer = (state, action) => {
       return {
         ...state,
         viewPost: state.posts.filter(post => post._id === action.payload)
+      };
+    case GET_VIEW_USER_POST:
+      return {
+        ...state,
+        viewPost: state.userPosts.filter(post => post._id === action.payload)
       };
     case CLEAR_VIEW_POST:
       return {
