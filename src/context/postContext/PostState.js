@@ -2,6 +2,8 @@ import React, { useReducer } from "react";
 import PostContext from "./postContext";
 import postReducer from "./postReducer";
 import {
+  Set_Loading,
+  Remove_Loading,
   Get_Posts,
   Set_View_Post,
   Clear_View_Post,
@@ -11,11 +13,15 @@ import {
   Save_Img,
   Remove_img,
   Save_Post_tag,
-  Remove_Post_tag
+  Remove_Post_tag,
+  Save_New_Post,
+  Clear_Create_New_Post
 } from "./postActions.js";
+import moment from "moment";
 
 const PostState = props => {
   const initialState = {
+    loading: false, // for loading (using in create-post component)
     filterPost: false, // for showing users post only (on user profile page) [does not include post from saved collections]
     viewPostId: null, // contains requested post id
     viewPost: null, // contains requested post information
@@ -30,7 +36,8 @@ const PostState = props => {
         postAuthor: "Varun",
         thumbnail: "",
         avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" //optional
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png", //optional
+        date: moment().format("ll")
       },
       {
         _id: 2,
@@ -41,7 +48,8 @@ const PostState = props => {
         tags: ["WEB", "CSS", "JavaScript"],
         postAuthor: "Sayuj",
         thumbnail: "",
-        avatar: ""
+        avatar: "",
+        date: moment().format("ll")
       },
       {
         _id: 3,
@@ -51,7 +59,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "Ram",
         thumbnail: "",
-        avatar: ""
+        avatar: "",
+        date: moment().format("ll")
       },
       {
         _id: 4,
@@ -61,7 +70,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "Rohan",
         thumbnail: "",
-        avatar: ""
+        avatar: "",
+        date: moment().format("ll")
       },
       {
         _id: 5,
@@ -71,7 +81,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "Shakir",
         thumbnail: "",
-        avatar: ""
+        avatar: "",
+        date: moment().format("ll")
       },
       {
         _id: 6,
@@ -81,7 +92,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "Sayuj",
         thumbnail: "",
-        avatar: ""
+        avatar: "",
+        date: moment().format("ll")
       },
       {
         _id: 7,
@@ -91,7 +103,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "Varun",
         thumbnail: "",
-        avatar: ""
+        avatar: "",
+        date: moment().format("ll")
       }
     ],
     userPosts: [
@@ -177,6 +190,13 @@ const PostState = props => {
   // for mananging state
   const [state, dispatch] = useReducer(postReducer, initialState);
 
+  const setLoading = loading => {
+    dispatch(Set_Loading(loading));
+  };
+  const removeLoading = loading => {
+    dispatch(Remove_Loading(loading));
+  };
+
   // for saving img in post state
   const saveImg = imgLocation => {
     dispatch(Save_Img(imgLocation));
@@ -224,15 +244,35 @@ const PostState = props => {
   const removePostTag = postTags => {
     dispatch(Remove_Post_tag(postTags));
   };
+
+  const saveNewPost = postData => {
+    // saving in the post state
+
+    try {
+      dispatch(Save_New_Post(postData));
+      return "New Post Saved Successfully!";
+    } catch (err) {
+      return "Something Went Wrong, Please Try Again!";
+    }
+  };
+
+  const clearCreateNewPost = () => {
+    dispatch(Clear_Create_New_Post());
+  };
+
   return (
     // sharing post state values
     <PostContext.Provider
       value={{
+        loading: state.loading,
         posts: state.posts,
         viewPostId: state.viewPostId,
         viewPost: state.viewPost,
         userPosts: state.userPosts,
         createPostTags: state.createPost.tags,
+        createPostImg: state.createPost.postImg,
+        setLoading: setLoading,
+        removeLoading: removeLoading,
         getPosts: getPosts,
         setViewPost: setViewPost,
         clearViewPost: clearViewPost,
@@ -242,7 +282,9 @@ const PostState = props => {
         saveImg: saveImg,
         removeImg: removeImg,
         savePostTag: savePostTag,
-        removePostTag: removePostTag
+        removePostTag: removePostTag,
+        saveNewPost: saveNewPost,
+        clearCreateNewPost: clearCreateNewPost
       }}
     >
       {props.children}

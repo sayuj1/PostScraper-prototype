@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input } from "antd";
 import CreatePostFormTags from "./CreatePostFormTags";
-import { SaveOutlined } from "@ant-design/icons";
+import SaveNewPostBtn from "../buttons/posts/CreatePostForm/SaveNewPostBtn";
 const { TextArea } = Input;
 
-const CreatePostForm = () => {
+const CreatePostForm = props => {
   // states for managing form fields
   const [postTitle, setpostTitle] = useState({
     length: 0,
@@ -62,13 +62,10 @@ const CreatePostForm = () => {
     });
   };
 
-  const handleFinish = () => {
-    //store the form data to the backend
-  };
   return (
     <Fragment>
       <div className="postFieldsContainer" style={{ margin: "20px" }}>
-        <Form onFinish={handleFinish}>
+        <Form>
           {/* post title */}
           <Input
             name="titleFocus"
@@ -82,6 +79,7 @@ const CreatePostForm = () => {
             onFocus={handleTitleFocus}
             onBlur={handleTitleBlur}
             maxLength={100}
+            required
           />
           {/* display the counter on focus */}
           {postTitle.focus ? (
@@ -125,19 +123,10 @@ const CreatePostForm = () => {
             {/* for post tags */}
             <CreatePostFormTags />
           </div>
-          <Button
-            type="primary"
-            size="large"
-            block
-            style={{
-              marginTop: "20px",
-              fontWeight: "bolder",
-              fontSize: "1.5rem",
-              lineHeight: "1"
-            }}
-          >
-            Save Posts <SaveOutlined />
-          </Button>
+          <SaveNewPostBtn
+            postTitle={postTitle.value}
+            postDescription={postDescription.value}
+          />
         </Form>
       </div>
     </Fragment>

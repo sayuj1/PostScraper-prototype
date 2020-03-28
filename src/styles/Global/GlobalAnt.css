@@ -1,0 +1,6 @@
+/* overriding spin container */
+
+.ant-spin-nested-loading.postBox>.ant-spin-container {
+    max-height: 100% !important;
+    overflow: unset !important;
+}

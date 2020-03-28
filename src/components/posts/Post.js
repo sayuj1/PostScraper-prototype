@@ -7,6 +7,7 @@ const { Meta } = Card;
 // this component will display each post which is coming from "Posts" component
 const Post = props => {
   // post information
+
   const { _id, postImg, postTitle, tags } = props.post;
 
   //for navigation

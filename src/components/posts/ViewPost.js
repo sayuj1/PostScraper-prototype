@@ -5,6 +5,7 @@ import Styles from "../../styles/posts/ViewPost.module.css";
 // import CommentBox from "../comments/CommentBox";
 // import ViewComments from "../comments/ViewComments";
 import GoHomeBtn from "../buttons/global/GoHomeBtn";
+import moment from "moment";
 const { Paragraph } = Typography;
 const CommentBox = lazy(() => import("../comments/CommentBox"));
 const ViewComments = lazy(() => import("../comments/ViewComments"));
@@ -134,7 +135,10 @@ const ViewPost = props => {
                 {tags ? (
                   <div className={Styles.postTags}>
                     {tags.map((tag, index) => (
-                      <Tag color="#2db7f5" key={Date.now() * _id + index}>
+                      <Tag
+                        color="#2db7f5"
+                        key={moment().format("ll") + _id + index}
+                      >
                         {tag}
                       </Tag>
                     ))}
