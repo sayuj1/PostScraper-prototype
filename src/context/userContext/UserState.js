@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import UserContext from "./userContext";
 import { userReducer } from "./userReducer";
-import { Get_User } from "./userActions";
+import { Get_User, Save_Topics } from "./userActions";
 
 const UserState = props => {
   const initialState = {
@@ -13,14 +13,7 @@ const UserState = props => {
       username: "sayuj1",
       avatar:
         "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png", // default --> null
-      topicsFollow: [
-        "JavaScript",
-        "HTML",
-        "ReactJs",
-        "JavaScript",
-        "HTML",
-        "ReactJs"
-      ] // default --> null
+      topicsFollow: ["JAVASCRIPT", "HTML"] // default --> null
     } // by default it will be null
   };
 
@@ -30,11 +23,16 @@ const UserState = props => {
   const getUser = () => {
     dispatch(Get_User());
   };
+
+  const saveTopics = topics => {
+    dispatch(Save_Topics(topics));
+  };
   return (
     <UserContext.Provider
       value={{
         user: state.user,
-        getUser: getUser
+        getUser: getUser,
+        saveTopics: saveTopics
       }}
     >
       {props.children}

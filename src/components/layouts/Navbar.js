@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import "../../../node_modules/antd/dist/antd.css";
 import PostSearch from "../posts/PostsSearch";
 import UserContext from "../../context/userContext/userContext";
-import { Menu, Avatar } from "antd";
+import { Menu, Avatar, Affix } from "antd";
 import {
   HomeOutlined,
   SettingOutlined,
@@ -35,59 +35,63 @@ const Navbar = () => {
   }, [[location.pathname, menuKeys]]);
 
   return (
-    <Menu
-      selectedKeys={currentSelected}
-      mode="horizontal"
-      theme="light"
-      style={{ lineHeight: "70px", paddingRight: "5%" }}
-    >
-      <Item className="logo" style={{ float: "left" }}>
-        <WeiboOutlined
-          style={{
-            fontSize: "30px",
-            verticalAlign: "middle",
-            color: "dodgerblue"
-          }}
-        />
-      </Item>
-      <Item style={{ width: "50%", float: "left" }}>
-        <PostSearch />
-      </Item>
-      <SubMenu
-        style={{ float: "right" }}
-        title={
-          <span className="submenu-title-wrapper">
-            <SettingOutlined />
-            Settings
-          </span>
-        }
-        key="settings"
+    // setting navbar at the top
+    <Affix offsetTop={0}>
+      <Menu
+        selectedKeys={currentSelected}
+        mode="horizontal"
+        theme="light"
+        style={{ lineHeight: "70px", paddingRight: "5%" }}
       >
-        <Item key="edit-profile">Edit-Profile</Item>
-        <Divider />
-        <Item key="logout">Logout</Item>
-      </SubMenu>
-      <Item style={{ float: "right" }} key="user-profile">
-        <Link to={user && `/user/${user.username}`}>
-          {user && [
-            <Avatar
-              src={user.avatar}
-              size={24}
-              style={{ verticalAlign: "text-bottom" }}
-            />,
-            user.firstname
-          ]}
-        </Link>
-      </Item>
-      <Item key="following" style={{ float: "right" }}>
-        <UsergroupAddOutlined />
-        <Link to="/following">Following</Link>
-      </Item>
-      <Item key="home" style={{ float: "right" }}>
-        <HomeOutlined />
-        <Link to="/">Home</Link>
-      </Item>
-    </Menu>
+        <Item className="logo" style={{ float: "left" }}>
+          <WeiboOutlined
+            style={{
+              fontSize: "30px",
+              verticalAlign: "middle",
+              color: "dodgerblue"
+            }}
+          />
+        </Item>
+        <Item style={{ width: "50%", float: "left" }}>
+          <PostSearch />
+        </Item>
+        <SubMenu
+          style={{ float: "right" }}
+          title={
+            <span className="submenu-title-wrapper">
+              <SettingOutlined />
+              Settings
+            </span>
+          }
+          key="settings"
+        >
+          <Item key="edit-profile">Edit-Profile</Item>
+          <Divider />
+          <Item key="logout">Logout</Item>
+        </SubMenu>
+        <Item style={{ float: "right" }} key="user-profile">
+          <Link to={user && `/user/${user.username}`}>
+            {user && [
+              <Avatar
+                key="user-avatar"
+                src={user.avatar}
+                size={24}
+                style={{ verticalAlign: "text-bottom" }}
+              />,
+              user.firstname
+            ]}
+          </Link>
+        </Item>
+        <Item key="following" style={{ float: "right" }}>
+          <UsergroupAddOutlined />
+          <Link to="/following">Following</Link>
+        </Item>
+        <Item key="home" style={{ float: "right" }}>
+          <HomeOutlined />
+          <Link to="/">Home</Link>
+        </Item>
+      </Menu>
+    </Affix>
   );
 };
 

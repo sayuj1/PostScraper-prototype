@@ -1,20 +1,27 @@
-import React, { Fragment, useContext } from "react";
-import { Link } from "react-router-dom";
-import Topics from "./Topics";
-import FollowingTopics from "./FollowingTopics";
+import React, { Fragment, useContext, lazy, Suspense } from "react";
+// import Topics from "./Topics";
+// import FollowingTopics from "./FollowingTopics";
 import { Col, Row, Button, Typography, Alert, notification } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import GoHomeBtn from "../buttons/global/GoHomeBtn";
 import FollowingContext from "../../context/followingContext/followingContext";
+import UserContext from "../../context/userContext/userContext.js";
 import Styles from "../../styles/following/Following.module.css";
+const Topics = lazy(() => import("./Topics"));
+const FollowingTopics = lazy(() => import("./FollowingTopics"));
 const { Title } = Typography;
+
 const Followings = () => {
-  const { selectedTagsSaveWarning, removeSelectedTagsSaveWarning } = useContext(
-    FollowingContext
-  );
+  const {
+    selectedTagsSaveWarning,
+    removeSelectedTagsSaveWarning,
+    selectedTags
+  } = useContext(FollowingContext);
+  const { saveTopics } = useContext(UserContext);
+
   const openNotificationWithIcon = type => {
     notification[type]({
       message: "Changes Saved Successfully!",
-      duration: 2
+      duration: 1
     });
   };
 
@@ -24,6 +31,8 @@ const Followings = () => {
 
   const handleSaveButton = () => {
     handleCloseWarning();
+
+    saveTopics(selectedTags);
     openNotificationWithIcon("success");
   };
   return (
@@ -38,11 +47,7 @@ const Followings = () => {
         <div className={Styles.tagBox}>
           {/* back button for going back to home page */}
           <div className={Styles.backButton}>
-            <Link to="/">
-              <Button shape="round" icon={<ArrowLeftOutlined />} size="large">
-                Home
-              </Button>
-            </Link>
+            <GoHomeBtn margin="20px" shape="round" />
           </div>
           <Row>
             {/* first div column containing all tags */}
@@ -58,7 +63,15 @@ const Followings = () => {
               {/* all tags available in the database */}
               <div className={Styles.tagsAvailableBox}>
                 <div className="tagsAvailable">
-                  <Topics />
+                  <Suspense
+                    fallback={
+                      <div style={{ fontSize: "50px" }}>
+                        Loading Topics Component
+                      </div>
+                    }
+                  >
+                    <Topics />
+                  </Suspense>
                 </div>
               </div>
             </Col>
@@ -75,7 +88,15 @@ const Followings = () => {
               </div>
               <div className={Styles.selectedTagsBox}>
                 <div className="selectedTags">
-                  <FollowingTopics />
+                  <Suspense
+                    fallback={
+                      <div style={{ fontSize: "50px" }}>
+                        Loading FollowingTopics Component
+                      </div>
+                    }
+                  >
+                    <FollowingTopics />
+                  </Suspense>
                 </div>
                 <div className={Styles.saveSelectedTagButton}>
                   {/* for warning display  */}

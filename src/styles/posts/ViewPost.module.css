@@ -8,10 +8,7 @@
 }
 
 .postHeader {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px
+    margin: 20px;
 }
 
 .postTitle {
@@ -49,14 +46,11 @@
 }
 
 .postTags {
-    margin: 20px
+    margin: 20px;
 }
 
 .postAuthor {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px
+    margin: 20px;
 }
 
 .commentBox {

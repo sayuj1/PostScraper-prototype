@@ -6,7 +6,7 @@ const BackToTop = () => {
   return (
     <Fragment>
       {/* for going back to top */}
-      <BackTop target={() => document.querySelector(".Layouts_content__3H9fc")}>
+      <BackTop>
         <strong>
           <UpCircleOutlined
             style={{

@@ -1,6 +1,6 @@
 import {
   ADD_COMMENT,
-  GET_COMMENTS,
+  SET_COMMENTS,
   SET_POST_ID,
   CLEAR_POST_ID
 } from "./commentTypes";
@@ -25,8 +25,9 @@ export const Add_Comment = comment => {
   };
 };
 
-export const Get_Comments = () => {
+export const Set_Comments = postId => {
   return {
-    type: GET_COMMENTS
+    type: SET_COMMENTS,
+    payload: postId
   };
 };

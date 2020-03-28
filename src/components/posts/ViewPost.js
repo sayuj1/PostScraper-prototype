@@ -1,16 +1,14 @@
-import React, { Fragment, useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import "antd/dist/antd";
+import React, { Fragment, useState, lazy, Suspense } from "react";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
-import {
-  DownloadOutlined,
-  UserOutlined,
-  ArrowLeftOutlined
-} from "@ant-design/icons";
+import { DownloadOutlined, UserOutlined } from "@ant-design/icons";
 import Styles from "../../styles/posts/ViewPost.module.css";
-import CommentBox from "../comments/CommentBox";
-import ViewComments from "../comments/ViewComments";
+// import CommentBox from "../comments/CommentBox";
+// import ViewComments from "../comments/ViewComments";
+import GoHomeBtn from "../buttons/global/GoHomeBtn";
+import moment from "moment";
 const { Paragraph } = Typography;
+const CommentBox = lazy(() => import("../comments/CommentBox"));
+const ViewComments = lazy(() => import("../comments/ViewComments"));
 
 const ViewPost = props => {
   //for toggling expand & close in post description
@@ -82,15 +80,7 @@ const ViewPost = props => {
               <div className="postContent">
                 {/* back button for going back to home page */}
 
-                <div className="backButton" style={{ margin: "20px" }}>
-                  <Link to="/">
-                    <Button
-                      shape="round"
-                      icon={<ArrowLeftOutlined />}
-                      size="large"
-                    />
-                  </Link>
-                </div>
+                <GoHomeBtn margin="20px" shape="round" />
                 {/* header containing download button and save button */}
                 <div className={Styles.postHeader}>
                   {/* // download button for downloading an image */}
@@ -145,7 +135,10 @@ const ViewPost = props => {
                 {tags ? (
                   <div className={Styles.postTags}>
                     {tags.map((tag, index) => (
-                      <Tag color="#2db7f5" key={Date.now() * _id + index}>
+                      <Tag
+                        color="#2db7f5"
+                        key={moment().format("ll") + _id + index}
+                      >
                         {tag}
                       </Tag>
                     ))}
@@ -178,11 +171,25 @@ const ViewPost = props => {
               {/* postContent end */}
               {/* comment box Component */}
               <div className={Styles.commentBox}>
-                <CommentBox />
+                <Suspense
+                  fallback={
+                    <div style={{ fontSize: "30px" }}>
+                      Loading comment box....
+                    </div>
+                  }
+                >
+                  <CommentBox />
+                </Suspense>
               </div>
               {/* Comment-list Component goes here */}
               <div className={Styles.postCommentsBox}>
-                <ViewComments />
+                <Suspense
+                  fallback={
+                    <div style={{ fontSize: "30px" }}>Fetching comments...</div>
+                  }
+                >
+                  <ViewComments />
+                </Suspense>
               </div>
             </Col>
           </Row>

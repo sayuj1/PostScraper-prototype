@@ -3,7 +3,7 @@ import CommentContext from "./commentContext";
 import commentReducer from "./commentReducer";
 import {
   Add_Comment,
-  Get_Comments,
+  Set_Comments,
   Set_Post_Id,
   Clear_Post_Id
 } from "./commentActions";
@@ -61,7 +61,8 @@ const CommentState = props => {
   };
 
   const getComments = () => {
-    dispatch(Get_Comments(state.postId));
+    // setting comments (coming from axios request) in the comment state
+    dispatch(Set_Comments(state.postId));
   };
 
   const setPostId = postId => {

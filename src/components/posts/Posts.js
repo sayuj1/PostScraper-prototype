@@ -21,6 +21,7 @@ const Posts = () => {
           ]}
         >
           {/* passing each post to "Post" component for displaying */}
+
           {posts.length !== 0 ? (
             posts.map(post => <Post key={post._id} post={post} />)
           ) : (
