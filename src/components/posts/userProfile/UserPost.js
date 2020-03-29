@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 // components
 import { Card, Col, Button } from "antd";
 import UserContext from "../../../context/userContext/userContext";
@@ -27,8 +27,11 @@ const UserPost = props => {
   };
 
   const handleEdit = () => {
-    console.log(_id);
-    alert(`Edit btn clicked of post ${_id}`);
+    console.log(_id, props.post);
+
+    // eslint-disable-next-line
+
+    history.push("/settings/edit-post");
   };
 
   return (

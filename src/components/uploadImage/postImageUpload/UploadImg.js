@@ -160,7 +160,7 @@ const UploadImg = () => {
           onRemove={handleRemove}
         >
           <div style={{ width: "100% !important" }}>
-            {!fileState.previewImgShow ? (
+            {!fileState.previewImgShow && !fileState.invalidFile ? (
               <div style={{ marginTop: "20px" }}>
                 <Button type="primary">
                   Upload
