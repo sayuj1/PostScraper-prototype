@@ -1,41 +1,35 @@
-import React from "react";
 import {
-  GETUSER,
-  SAVETOPICS,
-  EDITABLEUSER,
-  CLEAREDITABLEUSER,
-  SAVEAVATAR,
-  REMOVEAVATAR
+  GET_USER,
+  SAVE_TOPICS,
+  SAVE_AVATAR,
+  REMOVE_AVATAR,
+  UPDATE_USER
 } from "./userTypes";
 
 export const userReducer = (state, action) => {
   switch (action.type) {
-    case GETUSER:
+    case GET_USER:
       return { ...state };
-    case SAVETOPICS:
+    case SAVE_TOPICS:
       return {
         ...state,
         user: { ...state.user, topicsFollow: action.payload }
       };
-    case EDITABLEUSER:
-      return {
-        ...state,
-        editableUser: action.payload
-      };
-    case CLEAREDITABLEUSER:
-      return {
-        ...state,
-        editableUser: null
-      };
-    case SAVEAVATAR:
+
+    case SAVE_AVATAR:
       return {
         ...state,
         user: { ...state.user, avatar: action.payload }
       };
-    case REMOVEAVATAR:
+    case REMOVE_AVATAR:
       return {
         ...state,
         user: { ...state.user, avatar: null }
+      };
+    case UPDATE_USER:
+      return {
+        ...state,
+        user: action.payload
       };
     default:
       return { ...state };

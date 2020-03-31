@@ -1,21 +1,21 @@
-import React, { Fragment, useEffect, useContext } from "react";
-import UserContext from "../../../context/userContext/userContext";
-import UploadAvatar from "../../uploadImage/userAvatarUpload/UploadAvatar";
+import React, { Fragment } from "react";
 
+import UploadAvatar from "../../uploadImage/userAvatarUpload/UploadAvatar";
+import UserEditProfileForm from "./UserEditProfileForm";
 import { Typography, Row, Col } from "antd";
 const { Title } = Typography;
 
 const UserEditProfile = () => {
   return (
     <Fragment>
-      <Row>
+      <Row style={{ backgroundColor: "white" }}>
         <Col
-          xs={{ span: 24 }}
-          sm={{ span: 24 }}
+          xs={{ span: 22, offset: 1 }}
+          sm={{ span: 22, offset: 1 }}
           md={{ span: 22, offset: 1 }}
           lg={{ span: 22, offset: 1 }}
         >
-          <Row>
+          <Row style={{ marginTop: "20px" }}>
             <Col
               xs={{ span: 24 }}
               sm={{ span: 24 }}
@@ -26,8 +26,12 @@ const UserEditProfile = () => {
             </Col>
           </Row>
           <Row>
+            {/* for upload avatar */}
             <UploadAvatar />
           </Row>
+
+          {/* edit-user profile form */}
+          <UserEditProfileForm />
         </Col>
       </Row>
     </Fragment>

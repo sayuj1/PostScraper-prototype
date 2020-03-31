@@ -103,10 +103,10 @@ const UploadAvatar = () => {
       </Col>
       {/* for avatar upload */}
       <Col
-        xs={{ span: 12 }}
+        xs={{ span: 12, offset: 1 }}
         sm={{ span: 12 }}
-        md={{ span: 10, offset: 1 }}
-        lg={{ span: 10, offset: 1 }}
+        md={{ span: 10 }}
+        lg={{ span: 10 }}
         style={{ lineHeight: "7" }}
       >
         <Upload
