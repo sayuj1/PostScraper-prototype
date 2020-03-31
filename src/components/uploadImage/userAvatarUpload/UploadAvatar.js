@@ -11,7 +11,8 @@ const UploadAvatar = () => {
   const { user, saveAvatar, removeAvatar } = useContext(UserContext);
   const [avatarState, setavatarState] = useState({
     previewAvatar: user.avatar, // current avatar, on uploading successfully change the user avatar in user-state so that the previewAvatar will automatically gets updated
-    invalidFile: false // if avatar is not valid
+    invalidFile: false, // if avatar is not valid
+    fileList: []
   });
 
   useEffect(() => {
@@ -35,8 +36,9 @@ const UploadAvatar = () => {
   // for handling changes on the image upload
   const handleChange = async info => {
     // console.log("response", info.file.error);
-    // console.log("file", info.file);
+    console.log("file", info.file);
     const file = info.file;
+
     // handling server errors
     if (file.error) {
       message.error("Server Error! We are Sorry :( Please try again!");
@@ -50,13 +52,15 @@ const UploadAvatar = () => {
       // updating state value on image removal
       setavatarState({
         ...avatarState,
-        invalidFile: false
+        invalidFile: false,
+        fileList: []
       });
     } else {
       if (file.status === "done") {
         setavatarState({
           ...avatarState,
-          invalidFile: false
+          invalidFile: false,
+          fileList: [file]
         });
         message.success("Avatar uploaded successfully.");
 
@@ -108,8 +112,8 @@ const UploadAvatar = () => {
         <Upload
           multiple={false}
           beforeUpload={handleBeforeUpload}
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76" // server location for uploading (upload route)
           listType="picture"
+          action="https://www.mocky.io/v2/5cc8019d300000980a055e76" // server location for uploading (upload route)
           showUploadList={{
             showRemoveIcon: true,
             removeIcon: <DeleteFilled style={{ color: "red" }} />
@@ -120,9 +124,9 @@ const UploadAvatar = () => {
           }}
           onRemove={handleRemove}
         >
-          {!avatarState.invalidFile ? (
+          {avatarState.invalidFile || avatarState.fileList.length > 0 ? null : (
             <Button type="primary">Change</Button>
-          ) : null}
+          )}
         </Upload>
 
         {/* warning for invalid files */}
