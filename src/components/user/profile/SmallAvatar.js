@@ -15,12 +15,13 @@ const SmallAvatar = props => {
             size={50}
             src={avatar}
             shape="circle"
-            style={{ border: "1px solid grey", marginLeft: "20px" }}
+            style={{ border: "1px solid dodgerblue", marginLeft: "20px" }}
           />
         ) : (
           <Avatar
             size={50}
             icon={<FontAwesomeIcon icon={faUser} size="lg" />}
+            style={{ backgroundColor: "#87d068", marginLeft: "20px" }}
           />
         )}
       </span>

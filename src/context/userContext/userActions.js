@@ -2,7 +2,9 @@ import {
   GETUSER,
   SAVETOPICS,
   EDITABLEUSER,
-  CLEAREDITABLEUSER
+  CLEAREDITABLEUSER,
+  SAVEAVATAR,
+  REMOVEAVATAR
 } from "./userTypes";
 
 export const Get_User = () => {
@@ -28,5 +30,18 @@ export const Editable_User = editUser => {
 export const Clear_Editable_User = () => {
   return {
     type: CLEAREDITABLEUSER
+  };
+};
+
+export const Save_Avatar = userAvatar => {
+  return {
+    type: SAVEAVATAR,
+    payload: userAvatar
+  };
+};
+
+export const Remove_Avatar = () => {
+  return {
+    type: REMOVEAVATAR
   };
 };

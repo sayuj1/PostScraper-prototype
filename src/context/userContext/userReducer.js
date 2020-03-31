@@ -3,7 +3,9 @@ import {
   GETUSER,
   SAVETOPICS,
   EDITABLEUSER,
-  CLEAREDITABLEUSER
+  CLEAREDITABLEUSER,
+  SAVEAVATAR,
+  REMOVEAVATAR
 } from "./userTypes";
 
 export const userReducer = (state, action) => {
@@ -25,7 +27,16 @@ export const userReducer = (state, action) => {
         ...state,
         editableUser: null
       };
-
+    case SAVEAVATAR:
+      return {
+        ...state,
+        user: { ...state.user, avatar: action.payload }
+      };
+    case REMOVEAVATAR:
+      return {
+        ...state,
+        user: { ...state.user, avatar: null }
+      };
     default:
       return { ...state };
   }

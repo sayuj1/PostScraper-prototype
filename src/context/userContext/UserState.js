@@ -4,8 +4,8 @@ import { userReducer } from "./userReducer";
 import {
   Get_User,
   Save_Topics,
-  Editable_User,
-  Clear_Editable_User
+  Save_Avatar,
+  Remove_Avatar
 } from "./userActions";
 
 const UserState = props => {
@@ -22,8 +22,7 @@ const UserState = props => {
       userDescription: null,
       gender: null,
       location: null
-    }, // by default it will be null
-    editableUser: null
+    } // by default it will be null
   };
 
   const [state, dispatch] = useReducer(userReducer, initialState);
@@ -38,14 +37,13 @@ const UserState = props => {
     dispatch(Save_Topics(topics));
   };
 
-  // setting editable user
-  const editableUser = editUser => {
-    dispatch(Editable_User(editUser));
+  // saving avatar in user state
+  const saveAvatar = userAvatar => {
+    dispatch(Save_Avatar(userAvatar));
   };
 
-  // clearing editable user
-  const clearEditableUser = () => {
-    dispatch(Clear_Editable_User());
+  const removeAvatar = () => {
+    dispatch(Remove_Avatar());
   };
   return (
     <UserContext.Provider
@@ -53,8 +51,8 @@ const UserState = props => {
         user: state.user,
         getUser: getUser,
         saveTopics: saveTopics,
-        editableUser: editableUser,
-        clearEditableUser: clearEditableUser
+        saveAvatar: saveAvatar,
+        removeAvatar: removeAvatar
       }}
     >
       {props.children}

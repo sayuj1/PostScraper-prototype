@@ -21,12 +21,13 @@ const UserLargeAvatar = props => {
               size={106}
               src={avatar}
               shape="circle"
-              style={{ border: "1px solid grey" }}
+              style={{ border: "1px solid dodgerblue" }}
             />
           ) : (
             <Avatar
               size={106}
               icon={<FontAwesomeIcon icon={faUser} size="lg" />}
+              style={{ backgroundColor: "#87d068" }}
             />
           )}
         </Col>

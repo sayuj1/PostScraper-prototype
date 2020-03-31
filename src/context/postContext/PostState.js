@@ -16,7 +16,9 @@ import {
   Save_Post_tag,
   Remove_Post_tag,
   Save_New_Post,
-  Clear_Create_New_Post
+  Clear_Create_New_Post,
+  Update_User_Post_Info,
+  Update_User_Home_Post_Info
 } from "./postActions.js";
 import moment from "moment";
 
@@ -130,7 +132,8 @@ const PostState = props => {
         tags: ["WEB", "CSS", "JavaScript"],
         postAuthor: "sayuj1",
         thumbnail: "",
-        avatar: ""
+        avatar:
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
       },
       {
         _id: 3,
@@ -140,7 +143,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "sayuj1",
         thumbnail: "",
-        avatar: ""
+        avatar:
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
       },
       {
         _id: 4,
@@ -150,7 +154,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "sayuj1",
         thumbnail: "",
-        avatar: ""
+        avatar:
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
       },
       {
         _id: 5,
@@ -160,7 +165,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "sayuj1",
         thumbnail: "",
-        avatar: ""
+        avatar:
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
       },
       {
         _id: 6,
@@ -170,7 +176,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "sayuj1",
         thumbnail: "",
-        avatar: ""
+        avatar:
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
       },
       {
         _id: 7,
@@ -180,7 +187,8 @@ const PostState = props => {
         tags: ["HTML", "CSS", "JavaScript"],
         postAuthor: "sayuj1",
         thumbnail: "",
-        avatar: ""
+        avatar:
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
       }
     ], // default null
     createPost: {
@@ -265,6 +273,14 @@ const PostState = props => {
     dispatch(Clear_Create_New_Post());
   };
 
+  const updateUserPostInfo = user => {
+    dispatch(Update_User_Post_Info(user));
+  };
+
+  const updateUserHomePostInfo = user => {
+    dispatch(Update_User_Home_Post_Info(user));
+  };
+
   return (
     // sharing post state values
     <PostContext.Provider
@@ -290,7 +306,9 @@ const PostState = props => {
         savePostTag: savePostTag,
         removePostTag: removePostTag,
         saveNewPost: saveNewPost,
-        clearCreateNewPost: clearCreateNewPost
+        clearCreateNewPost: clearCreateNewPost,
+        updateUserPostInfo: updateUserPostInfo,
+        updateUserHomePostInfo: updateUserHomePostInfo
       }}
     >
       {props.children}

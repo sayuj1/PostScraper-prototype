@@ -1,12 +1,12 @@
 import React, { Fragment, useState, useContext } from "react";
 import "antd/dist/antd";
 import { Upload, message, Button } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined, DeleteFilled } from "@ant-design/icons";
 
 import PostContext from "../../../context/postContext/postContext";
 import PostImagePreview from "./PostImagePreview";
 import PreviewImagePostModal from "./PreviewImagePostModal";
-import InvalidFileWarning from "./InvalidFileWarning";
+import InvalidFileWarning from "../InvalidFileWarning";
 
 // image validation rules
 import { validateImageType, validateImageSize } from "../imageValidation";
@@ -78,7 +78,7 @@ const UploadImg = () => {
           ...fileState,
           invalidFile: false
         });
-        message.success("Image upload successfully.");
+        message.success("Image uploaded successfully.");
         // for previewing image on the client side
         if (!file.url && !file.preview) {
           await getBase64(file.originFileObj)
@@ -88,6 +88,7 @@ const UploadImg = () => {
               message.error("Can't Preview this image!");
             });
         }
+
         setfileState({
           ...fileState,
           imgFile: file,
@@ -149,6 +150,10 @@ const UploadImg = () => {
           onPreview={handlePreview}
           onChange={handleChange}
           onRemove={handleRemove}
+          showUploadList={{
+            showRemoveIcon: true,
+            removeIcon: <DeleteFilled style={{ color: "red" }} />
+          }}
         >
           <div style={{ width: "100% !important" }}>
             {!fileState.previewImgShow && !fileState.invalidFile ? (

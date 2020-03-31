@@ -14,7 +14,9 @@ import {
   SAVE_POST_TAG,
   REMOVE_POST_TAG,
   SAVE_NEW_POST,
-  CLEAR_CREATE_NEW_POST
+  CLEAR_CREATE_NEW_POST,
+  UPDATE_USER_POST_INFO,
+  UPDATE_USER_HOME_POST_INFO
 } from "./postTypes";
 
 export const Set_Loading = loading => {
@@ -117,5 +119,19 @@ export const Save_New_Post = postData => {
 export const Clear_Create_New_Post = () => {
   return {
     type: CLEAR_CREATE_NEW_POST
+  };
+};
+
+export const Update_User_Post_Info = user => {
+  return {
+    type: UPDATE_USER_POST_INFO,
+    payload: user
+  };
+};
+
+export const Update_User_Home_Post_Info = user => {
+  return {
+    type: UPDATE_USER_HOME_POST_INFO,
+    payload: user
   };
 };
