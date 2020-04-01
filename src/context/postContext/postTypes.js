@@ -11,7 +11,6 @@ export const DELETE_USER_POSTS = "DELETE_USER_POSTS";
 export const SAVE_IMG = "SAVE_IMG";
 export const REMOVE_IMG = "REMOVE_IMG";
 export const SAVE_POST_TAG = "SAVE_POST_TAG";
-export const REMOVE_POST_TAG = "REMOVE_POST_TAG";
 export const SAVE_NEW_POST = "SAVE_NEW_POST";
 export const CLEAR_CREATE_NEW_POST = "CLEAR_CREATE_NEW_POST";
 export const UPDATE_USER_POST_INFO = "UPDATE_USER_POST_INFO";

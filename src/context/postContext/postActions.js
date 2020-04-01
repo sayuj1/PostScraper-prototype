@@ -12,7 +12,6 @@ import {
   SAVE_IMG,
   REMOVE_IMG,
   SAVE_POST_TAG,
-  REMOVE_POST_TAG,
   SAVE_NEW_POST,
   CLEAR_CREATE_NEW_POST,
   UPDATE_USER_POST_INFO,
@@ -99,12 +98,6 @@ export const Remove_img = () => {
 export const Save_Post_tag = postTag => {
   return {
     type: SAVE_POST_TAG,
-    payload: postTag
-  };
-};
-export const Remove_Post_tag = postTag => {
-  return {
-    type: REMOVE_POST_TAG,
     payload: postTag
   };
 };

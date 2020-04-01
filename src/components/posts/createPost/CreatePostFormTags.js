@@ -1,65 +1,39 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import followingContext from "../../../context/followingContext/followingContext";
 import PostContext from "../../../context/postContext/postContext";
-import { Mentions, Tag } from "antd";
+import { Mentions, Tag, Select } from "antd";
 
 const { Option } = Mentions;
 const CreatePostFormTags = () => {
   const { tags, getAllTags } = useContext(followingContext);
-  const { createPostTags, savePostTag, removePostTag } = useContext(
-    PostContext
-  );
+  const { createPostTags, savePostTag } = useContext(PostContext);
   useEffect(() => {
     // loading all tags from the database in the following state
     getAllTags();
   });
 
-  const MOCK_DATA = {
-    "#": tags
-  };
-
-  // add tags on selection to the state
-  const handleSelect = ({ value }) => {
-    // saving mention tags
-    savePostTag(value);
-  };
-
-  const removeTag = removeTag => {
-    removePostTag(removeTag);
+  const OPTIONS = tags;
+  const filteredOptions = OPTIONS.filter(o => !createPostTags.includes(o));
+  const handleChange = selectedItems => {
+    // console.log(selectedItems);
+    savePostTag(selectedItems);
   };
 
   return (
     <Fragment>
-      <Mentions
+      <Select
+        mode="multiple"
+        placeholder="Inserted are removed"
+        value={createPostTags}
+        onChange={handleChange}
         style={{ width: "100%" }}
-        placeholder="input # and select the tag to mention it "
-        prefix={"#"}
-        onSelect={handleSelect}
       >
-        {(MOCK_DATA["#"] || []).map(value =>
-          createPostTags.indexOf(value) === -1 ? (
-            <Option key={value} value={value}>
-              {value}
-            </Option>
-          ) : null
-        )}
-      </Mentions>
-
-      {createPostTags.length !== 0 ? (
-        <div className="showSelectedTags" style={{ marginTop: "10px" }}>
-          <span style={{ marginRight: "5px" }}>Tags:</span>
-          {createPostTags.map(topic => (
-            <Tag
-              key={topic}
-              closable
-              onClose={() => removeTag(topic)}
-              color="#2db7f5"
-            >
-              {topic}
-            </Tag>
-          ))}
-        </div>
-      ) : null}
+        {filteredOptions.map(item => (
+          <Select.Option key={item} value={item}>
+            {item}
+          </Select.Option>
+        ))}
+      </Select>
     </Fragment>
   );
 };

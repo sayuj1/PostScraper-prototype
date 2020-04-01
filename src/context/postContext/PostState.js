@@ -14,7 +14,6 @@ import {
   Save_Img,
   Remove_img,
   Save_Post_tag,
-  Remove_Post_tag,
   Save_New_Post,
   Clear_Create_New_Post,
   Update_User_Post_Info,
@@ -235,6 +234,7 @@ const PostState = props => {
     dispatch(Get_View_Post(postId));
   };
 
+  // getting requested view user posts
   const getViewUserPost = postId => {
     dispatch(Get_View_User_Post(postId));
   };
@@ -253,9 +253,6 @@ const PostState = props => {
   // saving tags for new posts
   const savePostTag = postTags => {
     dispatch(Save_Post_tag(postTags));
-  };
-  const removePostTag = postTags => {
-    dispatch(Remove_Post_tag(postTags));
   };
 
   const saveNewPost = postData => {
@@ -304,7 +301,6 @@ const PostState = props => {
         saveImg: saveImg,
         removeImg: removeImg,
         savePostTag: savePostTag,
-        removePostTag: removePostTag,
         saveNewPost: saveNewPost,
         clearCreateNewPost: clearCreateNewPost,
         updateUserPostInfo: updateUserPostInfo,

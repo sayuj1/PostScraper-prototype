@@ -12,7 +12,6 @@ import {
   SAVE_IMG,
   REMOVE_IMG,
   SAVE_POST_TAG,
-  REMOVE_POST_TAG,
   SAVE_NEW_POST,
   CLEAR_CREATE_NEW_POST,
   UPDATE_USER_POST_INFO,
@@ -81,15 +80,7 @@ const postReducer = (state, action) => {
         ...state,
         createPost: {
           ...state.createPost,
-          tags: [...state.createPost.tags, action.payload]
-        }
-      };
-    case REMOVE_POST_TAG:
-      return {
-        ...state,
-        createPost: {
-          ...state.createPost,
-          tags: state.createPost.tags.filter(tag => tag !== action.payload)
+          tags: action.payload
         }
       };
     case SAVE_NEW_POST:

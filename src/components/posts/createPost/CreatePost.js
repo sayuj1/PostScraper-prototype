@@ -45,7 +45,7 @@ const CreatePost = () => {
             <Spin
               size="large"
               spinning={loading}
-              tip="Loading Your New Posts..."
+              tip="Saving Your New Posts..."
               wrapperClassName="postBox"
             >
               {/* first div column containing image */}
