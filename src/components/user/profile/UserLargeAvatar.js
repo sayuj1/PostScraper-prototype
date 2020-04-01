@@ -4,7 +4,7 @@ import { Col, Avatar } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 // styles
-import Styles from "../../styles/Global/GlobalResponsiveQueries.module.css";
+import Styles from "../../../styles/Global/GlobalResponsiveQueries.module.css";
 const UserLargeAvatar = props => {
   const { avatar } = props;
   return (
@@ -21,12 +21,13 @@ const UserLargeAvatar = props => {
               size={106}
               src={avatar}
               shape="circle"
-              style={{ border: "1px solid grey" }}
+              style={{ border: "1px solid dodgerblue" }}
             />
           ) : (
             <Avatar
               size={106}
               icon={<FontAwesomeIcon icon={faUser} size="lg" />}
+              style={{ backgroundColor: "#87d068" }}
             />
           )}
         </Col>

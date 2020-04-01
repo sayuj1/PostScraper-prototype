@@ -3,8 +3,8 @@ import React, { Fragment, lazy, Suspense } from "react";
 // import UserSavePosts from "../posts/UserSavePosts";
 import { Row, Col, Tabs } from "antd";
 const { TabPane } = Tabs;
-const UserPosts = lazy(() => import("../posts/UserPosts"));
-const UserSavePosts = lazy(() => import("../posts/UserSavePosts"));
+const UserPosts = lazy(() => import("../userProfile/UserPosts"));
+const UserSavePosts = lazy(() => import("./UserSavePosts"));
 const PostsTabs = () => {
   return (
     <Fragment>

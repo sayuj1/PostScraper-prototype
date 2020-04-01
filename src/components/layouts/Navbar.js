@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../../../node_modules/antd/dist/antd.css";
-import PostSearch from "../posts/PostsSearch";
+import PostSearch from "../posts/home/PostsSearch";
 import UserContext from "../../context/userContext/userContext";
 import { Menu, Avatar, Affix } from "antd";
 import {
   HomeOutlined,
   SettingOutlined,
   UsergroupAddOutlined,
-  WeiboOutlined
+  WeiboOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 const { SubMenu, Item, Divider } = Menu;
 const Navbar = () => {
@@ -72,12 +73,24 @@ const Navbar = () => {
         <Item style={{ float: "right" }} key="user-profile">
           <Link to={user && `/user/${user.username}`}>
             {user && [
-              <Avatar
-                key="user-avatar"
-                src={user.avatar}
-                size={24}
-                style={{ verticalAlign: "text-bottom" }}
-              />,
+              user.avatar ? (
+                <Avatar
+                  key="user-avatar"
+                  src={user.avatar}
+                  size={24}
+                  style={{ verticalAlign: "text-bottom" }}
+                />
+              ) : (
+                <Avatar
+                  key="user-avatar"
+                  icon={<UserOutlined />}
+                  size={24}
+                  style={{
+                    backgroundColor: "#87d068",
+                    verticalAlign: "text-bottom"
+                  }}
+                />
+              ),
               user.firstname
             ]}
           </Link>

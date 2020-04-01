@@ -1,12 +1,15 @@
 import React, { Fragment, useState, useContext } from "react";
 import "antd/dist/antd";
 import { Upload, message, Button } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined, DeleteFilled } from "@ant-design/icons";
 
 import PostContext from "../../../context/postContext/postContext";
 import PostImagePreview from "./PostImagePreview";
 import PreviewImagePostModal from "./PreviewImagePostModal";
-import InvalidFileWarning from "./InvalidFileWarning";
+import InvalidFileWarning from "../InvalidFileWarning";
+
+// image validation rules
+import { validateImageType, validateImageSize } from "../imageValidation";
 
 const UploadImg = () => {
   const { saveImg, removeImg } = useContext(PostContext);
@@ -24,24 +27,10 @@ const UploadImg = () => {
   const handleBeforeUpload = file => {
     // console.log(file.size);
     // supported img --> jpeg, png
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-      message.error("Can't Preview this image!");
-      setfileState({
-        ...fileState,
-        invalidFile: true
-      });
-    }
+    const isJpgOrPng = validateImageType(file, setfileState, fileState);
+
     // image size can't be greater than 25MB
-    const isLt25MB = file.size / 1024 / 1024 < 25;
-    if (!isLt25MB) {
-      message.error("Image must smaller than 25MB!");
-      setfileState({
-        ...fileState,
-        invalidFile: true
-      });
-    }
+    const isLt25MB = validateImageSize(file, setfileState, fileState);
     // checking both conditions are true or not
     return isJpgOrPng && isLt25MB;
   };
@@ -63,7 +52,7 @@ const UploadImg = () => {
     const file = info.file;
     // handling server errors
     if (file.error) {
-      message.error("Server Error! We are Sorry :(, Please try again!");
+      message.error("Server Error! We are Sorry :( Please try again!");
       setfileState({
         ...fileState,
         invalidFile: true
@@ -71,6 +60,7 @@ const UploadImg = () => {
     }
     // checking file status (if user deleting the file)
     if (file.status === "removed") {
+      // updating state value on image removal
       setfileState({
         ...fileState,
         imgFile: null,
@@ -88,7 +78,7 @@ const UploadImg = () => {
           ...fileState,
           invalidFile: false
         });
-        message.success("Image upload successfully.");
+        message.success("Image uploaded successfully.");
         // for previewing image on the client side
         if (!file.url && !file.preview) {
           await getBase64(file.originFileObj)
@@ -98,6 +88,7 @@ const UploadImg = () => {
               message.error("Can't Preview this image!");
             });
         }
+
         setfileState({
           ...fileState,
           imgFile: file,
@@ -129,6 +120,7 @@ const UploadImg = () => {
 
   // deleting image file from the server
   const handleRemove = file => {
+    // store the uploaded image path & then pass that path here to remove the image from the server
     return new Promise((resolve, reject) => {
       resolve(console.log("removing from server"));
       // logic for removing file from the server goes here
@@ -158,9 +150,13 @@ const UploadImg = () => {
           onPreview={handlePreview}
           onChange={handleChange}
           onRemove={handleRemove}
+          showUploadList={{
+            showRemoveIcon: true,
+            removeIcon: <DeleteFilled style={{ color: "red" }} />
+          }}
         >
           <div style={{ width: "100% !important" }}>
-            {!fileState.previewImgShow ? (
+            {!fileState.previewImgShow && !fileState.invalidFile ? (
               <div style={{ marginTop: "20px" }}>
                 <Button type="primary">
                   Upload

@@ -1,14 +1,40 @@
-import { GETUSER, SAVETOPICS } from "./userTypes";
+import {
+  GET_USER,
+  SAVE_TOPICS,
+  SAVE_AVATAR,
+  REMOVE_AVATAR,
+  UPDATE_USER
+} from "./userTypes";
 
 export const Get_User = () => {
   return {
-    type: GETUSER
+    type: GET_USER
   };
 };
 
 export const Save_Topics = topics => {
   return {
-    type: SAVETOPICS,
+    type: SAVE_TOPICS,
     payload: topics
+  };
+};
+
+export const Save_Avatar = userAvatar => {
+  return {
+    type: SAVE_AVATAR,
+    payload: userAvatar
+  };
+};
+
+export const Remove_Avatar = () => {
+  return {
+    type: REMOVE_AVATAR
+  };
+};
+
+export const Update_User = user => {
+  return {
+    type: UPDATE_USER,
+    payload: user
   };
 };

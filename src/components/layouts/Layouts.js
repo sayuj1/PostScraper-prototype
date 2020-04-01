@@ -11,6 +11,7 @@ import FollowingState from "../../context/followingContext/FollowingState";
 import UserState from "../../context/userContext/UserState";
 // for Going to top from bottom
 import BackToTop from "./BackToTop";
+import Settings from "../pages/Settings";
 // Navbar
 const Header = lazy(() => import("../layouts/Header"));
 // pages
@@ -53,7 +54,7 @@ const Layouts = () => {
                       <Route exact path="/post/:id" component={ViewPost} />
                       <Route
                         exact
-                        path="/user/post/:id"
+                        path="/:user/post/:id"
                         component={ViewUserPost}
                       />
                       <Route
@@ -63,6 +64,11 @@ const Layouts = () => {
                       />
                       <Route exact path="/following" component={Following} />
                       <Route exact path="/user/:user" component={User} />
+                      <Route
+                        exact
+                        path="/settings/:settingName"
+                        component={Settings}
+                      />
                       <Route path="*" component={Page404} />
                     </Switch>
                   </Suspense>

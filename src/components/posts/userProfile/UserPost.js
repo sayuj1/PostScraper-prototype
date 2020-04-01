@@ -1,8 +1,8 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 // components
 import { Card, Col, Button } from "antd";
-import PostContext from "../../context/postContext/postContext";
-import DeletePostBtn from "../buttons/posts/UserPost/DeletePostBtn";
+import UserContext from "../../../context/userContext/userContext";
+import DeletePostBtn from "../../buttons/posts/UserPost/DeletePostBtn";
 import { useHistory } from "react-router-dom";
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,8 @@ const { Meta } = Card;
 
 // this component will display each post which is coming from "Posts" component
 const UserPost = props => {
+  // user info
+  const { user } = useContext(UserContext);
   // post information
   const { _id, postImg, postTitle, tags } = props.post;
 
@@ -21,12 +23,15 @@ const UserPost = props => {
   // handle which post is clicked and get the information
   const handlePostClick = () => {
     //loading view post component
-    history.push(`post/${_id}`); // /user/post/:id
+    history.push(`/${user.username}/post/${_id}`); // /user/post/:id
   };
 
   const handleEdit = () => {
-    console.log(_id);
-    alert(`Edit btn clicked of post ${_id}`);
+    console.log(_id, props.post);
+
+    // eslint-disable-next-line
+
+    history.push("/settings/edit-post");
   };
 
   return (
@@ -60,7 +65,7 @@ const UserPost = props => {
         >
           <Meta
             style={{ fontWeight: "bolder" }}
-            description={tags ? "Related To: " + tags : null}
+            description={tags.length !== 0 ? "Related To: " + tags : null}
           />
         </Card>
       </Col>

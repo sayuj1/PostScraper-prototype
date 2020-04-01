@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import followingContext from "../../context/followingContext/followingContext";
-import PostContext from "../../context/postContext/postContext";
+import followingContext from "../../../context/followingContext/followingContext";
+import PostContext from "../../../context/postContext/postContext";
 import { Mentions, Tag } from "antd";
 
 const { Option } = Mentions;

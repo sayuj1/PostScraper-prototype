@@ -2,7 +2,8 @@ import {
   ADD_COMMENT,
   SET_COMMENTS,
   SET_POST_ID,
-  CLEAR_POST_ID
+  CLEAR_POST_ID,
+  UPDATE_USER_COMMENT
 } from "./commentTypes";
 
 const commentReducer = (state, action) => {
@@ -26,6 +27,16 @@ const commentReducer = (state, action) => {
       return {
         ...state,
         postId: null
+      };
+    case UPDATE_USER_COMMENT:
+      return {
+        ...state,
+        postComments: state.postComments.map(comment =>
+          comment.username.toLowerCase() ===
+          action.payload.username.toLowerCase()
+            ? { ...comment, avatar: action.payload.avatar }
+            : { ...comment }
+        )
       };
     default:
       return state;

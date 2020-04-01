@@ -2,8 +2,8 @@
     background-color: white;
 }
 
-.backButton {
-    padding: 20px;
+.goBackProfileBtn {
+    float: right;
 }
 
 .tagsAvailableHeader {

@@ -1,15 +1,23 @@
 import React, { useEffect, useContext, Fragment } from "react";
-import UserContext from "../../context/userContext/userContext";
-import PostContext from "../../context/postContext/postContext";
-import UserPost from "../posts/UserPost";
+import UserContext from "../../../context/userContext/userContext";
+import PostContext from "../../../context/postContext/postContext";
+import UserPost from "../userProfile/UserPost";
 import { Row } from "antd";
 const UserPosts = () => {
   const { user } = useContext(UserContext);
-  const { userPosts, getUserPosts } = useContext(PostContext);
+  const { userPosts, getUserPosts, updateUserPostInfo } = useContext(
+    PostContext
+  );
   useEffect(() => {
     // loading user posts after page load
     getUserPosts(user._id);
   }, []);
+  useEffect(() => {
+    // updating post state values on updating user details
+
+    updateUserPostInfo(user);
+  }, [user]);
+
   return (
     <Fragment>
       <Row

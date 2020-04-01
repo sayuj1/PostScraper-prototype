@@ -5,7 +5,8 @@ import {
   Add_Comment,
   Set_Comments,
   Set_Post_Id,
-  Clear_Post_Id
+  Clear_Post_Id,
+  Update_User_Comment
 } from "./commentActions";
 import moment from "moment";
 
@@ -19,7 +20,7 @@ const CommentState = props => {
         postId: 1,
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-        username: "Sayuj",
+        username: "sayuj1",
         comment: "Wow Its Great",
         date: moment().format("ll")
       },
@@ -73,6 +74,10 @@ const CommentState = props => {
     dispatch(Clear_Post_Id());
   };
 
+  const updateUserComment = user => {
+    dispatch(Update_User_Comment(user));
+  };
+
   return (
     <CommentContext.Provider
       value={{
@@ -81,7 +86,8 @@ const CommentState = props => {
         addComment: addComment,
         getComments: getComments,
         setPostId: setPostId,
-        clearPostId: clearPostId
+        clearPostId: clearPostId,
+        updateUserComment: updateUserComment
       }}
     >
       {props.children}

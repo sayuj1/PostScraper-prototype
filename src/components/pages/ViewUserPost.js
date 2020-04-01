@@ -1,5 +1,5 @@
 import React, { Fragment, lazy, Suspense } from "react";
-const ViewUserPost = lazy(() => import("../posts/ViewUserPost"));
+const ViewUserPost = lazy(() => import("../posts/userProfile/ViewUserPost"));
 const ViewPost = () => {
   return (
     <Fragment>

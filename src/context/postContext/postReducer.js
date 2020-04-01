@@ -14,7 +14,9 @@ import {
   SAVE_POST_TAG,
   REMOVE_POST_TAG,
   SAVE_NEW_POST,
-  CLEAR_CREATE_NEW_POST
+  CLEAR_CREATE_NEW_POST,
+  UPDATE_USER_POST_INFO,
+  UPDATE_USER_HOME_POST_INFO
 } from "./postTypes";
 import { Save_New_Post } from "./postActions";
 
@@ -103,6 +105,25 @@ const postReducer = (state, action) => {
           postImg: "",
           tags: []
         }
+      };
+    case UPDATE_USER_POST_INFO:
+      return {
+        ...state,
+        userPosts: state.userPosts.map(post =>
+          action.payload.avatar
+            ? { ...post, avatar: action.payload.avatar }
+            : { ...post, avatar: action.payload.avatar }
+        )
+      };
+    case UPDATE_USER_HOME_POST_INFO:
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post.postAuthor.toLowerCase() ===
+          action.payload.username.toLowerCase()
+            ? { ...post, avatar: action.payload.avatar }
+            : { ...post }
+        )
       };
     default:
       return state;

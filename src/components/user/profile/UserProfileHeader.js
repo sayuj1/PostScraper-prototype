@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import { Row, Col } from "antd";
 // Buttons
-import CreatePostBtn from "../buttons/user/UserProfile/CreatePostBtn";
-import EditProfileBtn from "../buttons/user/UserProfile/EditProfileBtn";
-import GoHomeBtn from "../buttons/global/GoHomeBtn";
+import CreatePostBtn from "../../buttons/user/UserProfile/CreatePostBtn";
+import EditProfileBtn from "../../buttons/user/UserProfile/EditProfileBtn";
+import GoHomeBtn from "../../buttons/global/GoHomeBtn";
 const UserProfileHeader = () => {
   return (
     <Fragment>
