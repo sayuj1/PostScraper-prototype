@@ -1,10 +1,10 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
-import { Row, Col, Form, Input, Radio, Select } from "antd";
+import { Row, Col, Form, Input, Radio, Select, message, Empty } from "antd";
 
 import UserContext from "../../../context/userContext/userContext";
 import EditUserProfileBtn from "../../buttons/user/UserEditProfileForm/EditUserProfileBtn";
 import SaveUserProfileBtn from "../../buttons/user/UserEditProfileForm/SaveUserProfileBtn";
-
+import Styles from "../../../styles/user/UserEditProfileForm.module.css";
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -18,10 +18,18 @@ const UserEditProfileForm = () => {
   }, [user]);
 
   const handleChange = e => {
-    setuserInfo({
-      ...userInfo,
-      [e.target.name]: e.target.value
-    });
+    if (e.target.name == "firstname" || e.target.name == "lastname") {
+      // removing whitespaces
+      setuserInfo({
+        ...userInfo,
+        [e.target.name]: e.target.value.trim()
+      });
+    } else {
+      setuserInfo({
+        ...userInfo,
+        [e.target.name]: e.target.value
+      });
+    }
   };
   const countryLists = [
     "Afghanistan",
@@ -274,55 +282,44 @@ const UserEditProfileForm = () => {
     "Zimbabwe",
     "Åland Islands"
   ];
+
   return (
     <Fragment>
       <Form>
         {/* username */}
-        <Row style={{ marginTop: "20px" }}>
+        <Row className={Styles.row}>
           <Col
             xs={{ span: 24 }}
             sm={{ span: 24 }}
             md={{ span: 8, offset: 2 }}
             lg={{ span: 8, offset: 2 }}
           >
-            <label style={{ fontSize: "1.2rem", fontWeight: "bolder" }}>
-              Username
-            </label>
+            <label className={Styles.label}>Username</label>
             <Input
               name="username"
               value={userInfo.username}
-              style={{
-                fontSize: "1.2rem",
-                fontWeight: "500",
-                textTransform: "capitalize",
-                padding: "10px"
-              }}
+              className={Styles.formInputs}
               disabled
+              required
             />
           </Col>
         </Row>
         {/* firstname & lastname */}
-        <Row style={{ marginTop: "20px" }}>
+        <Row className={Styles.row}>
           <Col
             xs={{ span: 11 }}
             sm={{ span: 11 }}
             md={{ span: 8, offset: 2 }}
             lg={{ span: 8, offset: 2 }}
           >
-            <label style={{ fontSize: "1.2rem", fontWeight: "bolder" }}>
-              Firstname
-            </label>
+            <label className={Styles.label}>Firstname</label>
             <Input
               name="firstname"
               value={userInfo.firstname}
               onChange={handleChange}
               readOnly={readOnly}
-              style={{
-                fontSize: "1.2rem",
-                fontWeight: "500",
-                textTransform: "capitalize",
-                padding: "10px"
-              }}
+              className={Styles.formInputs}
+              required
             />
           </Col>
           <Col
@@ -331,112 +328,76 @@ const UserEditProfileForm = () => {
             md={{ span: 8 }}
             lg={{ span: 8 }}
           >
-            <label style={{ fontSize: "1.2rem", fontWeight: "bolder" }}>
-              Lastname
-            </label>
+            <label className={Styles.label}>Lastname</label>
             <Input
               name="lastname"
               value={userInfo.lastname}
               onChange={handleChange}
               readOnly={readOnly}
-              style={{
-                fontSize: "1.2rem",
-                fontWeight: "500",
-                textTransform: "capitalize",
-                padding: "10px"
-              }}
+              className={Styles.formInputs}
+              required
             />
           </Col>
         </Row>
         {/* user description */}
-        <Row style={{ marginTop: "20px" }}>
+        <Row className={Styles.row}>
           <Col
             xs={{ span: 24 }}
             sm={{ span: 24 }}
             md={{ span: 18, offset: 2 }}
             lg={{ span: 18, offset: 2 }}
           >
-            <label style={{ fontSize: "1.2rem", fontWeight: "bolder" }}>
-              About You
-            </label>
+            <label className={Styles.label}>About You</label>
             <TextArea
               name="userDescription"
               onChange={handleChange}
               value={userInfo.userDescription}
               placeholder="A short brief description about you..."
-              style={{ resize: "none" }}
               autoSize={{ minRows: 6, maxRows: 6 }}
               maxLength={500}
               readOnly={readOnly}
-              style={{
-                fontSize: "1.2rem",
-                fontWeight: "500",
-                textAlign: "justify",
-                padding: "10px"
-              }}
+              className={Styles.userDescription}
+              allowClear={true}
             />
           </Col>
         </Row>
         {/* user gender */}
-        <Row style={{ marginTop: "20px" }}>
+        <Row className={Styles.row}>
           <Col
             xs={{ span: 24 }}
             sm={{ span: 24 }}
             md={{ span: 18, offset: 2 }}
             lg={{ span: 18, offset: 2 }}
           >
-            <label style={{ fontSize: "1.2rem", fontWeight: "bolder" }}>
-              Gender
-            </label>
+            <label className={Styles.label}>Gender</label>
             <br />
             <Radio.Group
               name="gender"
               defaultValue={userInfo.gender}
               onChange={handleChange}
               disabled={readOnly}
-              style={{
-                fontSize: "1.2rem",
-                fontWeight: "700",
-                textTransform: "capitalize"
-              }}
             >
-              <Radio value="male" style={{ fontSize: "1.2rem" }}>
-                <span style={{ verticalAlign: "middle" }}>Male</span>
+              <Radio value="male" className={Styles.radioGroup}>
+                <span className={Styles.radioLabels}>Male</span>
               </Radio>
-              <Radio
-                value="female"
-                style={{
-                  fontSize: "1.2rem",
-                  fontWeight: "700",
-                  textTransform: "capitalize"
-                }}
-              >
-                <span style={{ verticalAlign: "middle" }}>Female</span>
+              <Radio value="female" className={Styles.radioGroup}>
+                <span className={Styles.radioLabels}>Female</span>
               </Radio>
-              <Radio
-                value="other"
-                style={{
-                  fontSize: "1.2rem",
-                  fontWeight: "700",
-                  textTransform: "capitalize"
-                }}
-              >
-                <span style={{ verticalAlign: "middle" }}>Other</span>
+              <Radio value="other" className={Styles.radioGroup}>
+                <span className={Styles.radioLabels}>Other</span>
               </Radio>
             </Radio.Group>
           </Col>
         </Row>
         {/* user location */}
-        <Row style={{ marginTop: "20px" }}>
+        <Row className={Styles.row}>
           <Col
             xs={{ span: 24 }}
             sm={{ span: 24 }}
             md={{ span: 18, offset: 2 }}
             lg={{ span: 18, offset: 2 }}
           >
-            <label style={{ fontSize: "1.2rem", fontWeight: "bolder" }}>
-              Location
-            </label>
+            <label className={Styles.label}>Location</label>
             <br />
             <Select
               disabled={readOnly}
@@ -461,7 +422,7 @@ const UserEditProfileForm = () => {
           </Col>
         </Row>
         {/* edit-btn & save-btn */}
-        <Row style={{ margin: "40px 0px 40px 0px", textAlign: "center" }}>
+        <Row className={Styles.rowBtns}>
           <Col
             xs={{ span: 24 }}
             sm={{ span: 24 }}
@@ -474,6 +435,7 @@ const UserEditProfileForm = () => {
               <SaveUserProfileBtn
                 setreadOnly={setreadOnly}
                 userInfo={userInfo}
+                setuserInfo={setuserInfo}
               />
             )}
           </Col>
