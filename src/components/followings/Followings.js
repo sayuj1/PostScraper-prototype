@@ -59,7 +59,7 @@ const Followings = () => {
               </div>
             </Col>
             <Col
-              xs={{ span: 12, offset: 1 }}
+              xs={{ span: 13, offset: 1 }}
               sm={{ span: 13 }}
               md={{ span: 17 }}
               lg={{ span: 17 }}
@@ -69,6 +69,7 @@ const Followings = () => {
                   btnText="View Profile"
                   btnIcon="faArrowRight"
                   btnIconAlign="right"
+                  btnPadding="10px"
                 />
               </div>
             </Col>

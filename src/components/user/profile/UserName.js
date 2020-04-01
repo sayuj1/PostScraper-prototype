@@ -8,7 +8,7 @@ const UserName = props => {
   return (
     <Fragment>
       <div className="profileName">
-        <Title level={2} style={{ fontWeight: "700" }}>
+        <Title level={3} style={{ fontWeight: "700" }}>
           {firstname} {lastname}
           {/* showing avatar on small extra small screens */}
           <SmallAvatar avatar={avatar} />

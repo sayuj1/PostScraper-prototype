@@ -22,6 +22,7 @@ const UserEditProfile = () => {
                 btnText="Back"
                 btnIcon="faArrowLeft"
                 btnIconAlign="left"
+                btnPadding="0px"
               />
             </Col>
           </Row>

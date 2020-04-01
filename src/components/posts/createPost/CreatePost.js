@@ -2,7 +2,6 @@ import React, { Fragment, useContext, useEffect } from "react";
 
 import { Col, Row, Spin } from "antd";
 import "../../../../node_modules/antd/dist/antd";
-import GoHomeBtn from "../../buttons/global/GoHomeBtn";
 import UploadImg from "../../uploadImage/postImageUpload/UploadImg";
 import CreatePostForm from "./CreatePostForm";
 import UserLargeAvatar from "../../user/profile/UserLargeAvatar";
@@ -10,6 +9,7 @@ import UserContext from "../../../context/userContext/userContext";
 import UserName from "../../user/profile/UserName";
 import PostContext from "../../../context/postContext/postContext";
 import "../../../styles/Global/GlobalAnt.css";
+import Styles from "../../../styles/Global/GlobalResponsiveQueries.module.css";
 import GoUserProfileBtn from "../../buttons/global/GoUserProfileBtn";
 
 const CreatePost = () => {
@@ -22,6 +22,18 @@ const CreatePost = () => {
   return (
     <Fragment>
       <Row style={{ backgroundColor: "white" }}>
+        <div className={Styles.hideOnMdAndAbove} style={{ margin: "10px" }}>
+          <Row>
+            <Col>
+              <GoUserProfileBtn
+                btnText="Back"
+                btnIcon="faArrowLeft"
+                btnIconAlign="left"
+                btnPadding="0px"
+              />
+            </Col>
+          </Row>
+        </div>
         <Col
           xs={{ span: 24 }}
           sm={{ span: 24 }}
@@ -63,13 +75,17 @@ const CreatePost = () => {
                   md={{ span: 12 }}
                   lg={{ span: 12 }}
                 >
-                  <div className="goBackBtn" style={{ margin: "10px" }}>
+                  <div
+                    className={Styles.hideOnSmAndBelow}
+                    style={{ margin: "10px" }}
+                  >
                     <Row>
                       <Col>
                         <GoUserProfileBtn
                           btnText="Back"
                           btnIcon="faArrowLeft"
                           btnIconAlign="left"
+                          btnPadding="0px"
                         />
                       </Col>
                     </Row>
