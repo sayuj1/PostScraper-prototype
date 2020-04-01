@@ -10,6 +10,7 @@ import UserContext from "../../../context/userContext/userContext";
 import UserName from "../../user/profile/UserName";
 import PostContext from "../../../context/postContext/postContext";
 import "../../../styles/Global/GlobalAnt.css";
+import GoUserProfileBtn from "../../buttons/global/GoUserProfileBtn";
 
 const CreatePost = () => {
   const { user } = useContext(UserContext);
@@ -62,9 +63,16 @@ const CreatePost = () => {
                   md={{ span: 12 }}
                   lg={{ span: 12 }}
                 >
-                  <div className="homeBtn">
-                    {/* back button for going back to home page */}
-                    <GoHomeBtn margin="20px" shape="round" />
+                  <div className="goBackBtn" style={{ margin: "10px" }}>
+                    <Row>
+                      <Col>
+                        <GoUserProfileBtn
+                          btnText="Back"
+                          btnIcon="faArrowLeft"
+                          btnIconAlign="left"
+                        />
+                      </Col>
+                    </Row>
                   </div>
 
                   <div

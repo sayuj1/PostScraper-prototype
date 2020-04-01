@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import UploadAvatar from "../../uploadImage/userAvatarUpload/UploadAvatar";
 import UserEditProfileForm from "./UserEditProfileForm";
 import { Typography, Row, Col } from "antd";
+import GoUserProfileBtn from "../../buttons/global/GoUserProfileBtn";
 const { Title } = Typography;
 
 const UserEditProfile = () => {
@@ -15,6 +16,16 @@ const UserEditProfile = () => {
           md={{ span: 22, offset: 1 }}
           lg={{ span: 22, offset: 1 }}
         >
+          <Row>
+            <Col>
+              <GoUserProfileBtn
+                btnText="Back"
+                btnIcon="faArrowLeft"
+                btnIconAlign="left"
+              />
+            </Col>
+          </Row>
+
           <Row style={{ marginTop: "20px" }}>
             <Col
               xs={{ span: 24 }}
