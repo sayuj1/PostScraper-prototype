@@ -15,7 +15,10 @@ import {
   SAVE_NEW_POST,
   CLEAR_CREATE_NEW_POST,
   UPDATE_USER_POST_INFO,
-  UPDATE_USER_HOME_POST_INFO
+  UPDATE_USER_HOME_POST_INFO,
+  EDIT_POST,
+  CLEAR_EDIT_POST,
+  UPDATE_EDIT_POST
 } from "./postTypes";
 
 export const Set_Loading = loading => {
@@ -126,5 +129,25 @@ export const Update_User_Home_Post_Info = user => {
   return {
     type: UPDATE_USER_HOME_POST_INFO,
     payload: user
+  };
+};
+
+export const Edit_Post = post => {
+  return {
+    type: EDIT_POST,
+    payload: post
+  };
+};
+
+export const Clear_Edit_Post = () => {
+  return {
+    type: CLEAR_EDIT_POST
+  };
+};
+
+export const Update_Edit_Post = post => {
+  return {
+    type: UPDATE_EDIT_POST,
+    payload: post
   };
 };

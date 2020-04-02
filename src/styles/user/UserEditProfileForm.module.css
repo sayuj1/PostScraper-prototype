@@ -1,5 +1,5 @@
 .label {
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
     font-weight: bolder;
 }
 
@@ -8,6 +8,7 @@
     font-weight: 500;
     text-transform: capitalize;
     padding: 10px !important;
+    border-radius: 10px !important;
 }
 
 .userDescription {
@@ -16,6 +17,7 @@
     text-align: justify;
     resize: none;
     padding-top: 7px !important;
+    border-radius: 10px !important;
 }
 
 .radioGroup {

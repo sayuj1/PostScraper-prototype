@@ -15,7 +15,10 @@ import {
   SAVE_NEW_POST,
   CLEAR_CREATE_NEW_POST,
   UPDATE_USER_POST_INFO,
-  UPDATE_USER_HOME_POST_INFO
+  UPDATE_USER_HOME_POST_INFO,
+  EDIT_POST,
+  CLEAR_EDIT_POST,
+  UPDATE_EDIT_POST
 } from "./postTypes";
 import { Save_New_Post } from "./postActions";
 
@@ -114,6 +117,40 @@ const postReducer = (state, action) => {
           action.payload.username.toLowerCase()
             ? { ...post, avatar: action.payload.avatar }
             : { ...post }
+        )
+      };
+    case EDIT_POST:
+      return {
+        ...state,
+        editablePost: action.payload
+      };
+    case CLEAR_EDIT_POST:
+      return {
+        ...state,
+        editablePost: null
+      };
+    case UPDATE_EDIT_POST:
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post._id === action.payload._id
+            ? {
+                ...post,
+                postTitle: action.payload.postTitle,
+                postDescription: action.payload.postDescription,
+                tags: action.payload.postTags
+              }
+            : post
+        ),
+        userPosts: state.userPosts.map(userPost =>
+          userPost._id === action.payload._id
+            ? {
+                ...userPost,
+                postTitle: action.payload.postTitle,
+                postDescription: action.payload.postDescription,
+                tags: action.payload.postTags
+              }
+            : userPost
         )
       };
     default:

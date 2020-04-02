@@ -48,7 +48,7 @@ const CreatePost = () => {
               tip="Saving Your New Posts..."
               wrapperClassName="postBox"
             >
-              {/* first div column containing image */}
+              {/* first column containing image */}
               <Row>
                 <Col
                   xs={{ span: 24 }}
@@ -120,10 +120,7 @@ const CreatePost = () => {
                     </Row>
                   </div>
 
-                  <CreatePostForm
-                    username={user.username}
-                    avatar={user.avatar}
-                  />
+                  <CreatePostForm />
                 </Col>
               </Row>
             </Spin>
