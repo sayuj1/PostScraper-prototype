@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext } from "react";
 // components
 import { Card, Col, Button } from "antd";
 import UserContext from "../../../context/userContext/userContext";
@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import PostContext from "../../../context/postContext/postContext";
 
 const { Meta } = Card;
 
@@ -14,6 +15,7 @@ const { Meta } = Card;
 const UserPost = props => {
   // user info
   const { user } = useContext(UserContext);
+  const { editPost } = useContext(PostContext);
   // post information
   const { _id, postImg, postTitle, tags } = props.post;
 
@@ -27,10 +29,7 @@ const UserPost = props => {
   };
 
   const handleEdit = () => {
-    console.log(_id, props.post);
-
-    // eslint-disable-next-line
-
+    editPost(props.post);
     history.push("/settings/edit-post");
   };
 

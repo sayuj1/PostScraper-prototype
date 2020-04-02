@@ -1,16 +1,22 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Form, Input } from "antd";
 import CreatePostFormTags from "./CreatePostFormTags";
 import SaveNewPostBtn from "../../buttons/posts/CreatePostForm/SaveNewPostBtn";
 const { TextArea } = Input;
 
-const CreatePostForm = props => {
-  // states for managing form fields
+const CreatePostForm = () => {
   const [postTitle, setpostTitle] = useState({
     length: 0,
     focus: false,
     value: ""
   });
+
+  const [postDescription, setpostDescription] = useState({
+    length: 0,
+    focus: false,
+    value: ""
+  });
+
   // handle post title field value
   const changePostTitle = e => {
     const title = e.target.value;
@@ -34,11 +40,7 @@ const CreatePostForm = props => {
       focus: false
     });
   };
-  const [postDescription, setpostDescription] = useState({
-    length: 0,
-    focus: false,
-    value: ""
-  });
+
   const changePostDescription = e => {
     const description = e.target.value;
     setpostDescription({
@@ -95,11 +97,11 @@ const CreatePostForm = props => {
             onChange={changePostDescription}
             value={postDescription.value}
             placeholder="Add Post Description...."
-            style={{ resize: "none" }}
             autoSize={{ minRows: 3, maxRows: 6 }}
             onBlur={handleDescriptionBlur}
             maxLength={500}
             style={{
+              resize: "none",
               fontSize: "1.5rem",
               fontWeight: "bold",
               marginTop: "10px"
@@ -123,6 +125,7 @@ const CreatePostForm = props => {
             {/* for post tags */}
             <CreatePostFormTags />
           </div>
+
           <SaveNewPostBtn
             postTitle={postTitle.value}
             postDescription={postDescription.value}

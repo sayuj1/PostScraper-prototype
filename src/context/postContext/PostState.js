@@ -17,7 +17,10 @@ import {
   Save_New_Post,
   Clear_Create_New_Post,
   Update_User_Post_Info,
-  Update_User_Home_Post_Info
+  Update_User_Home_Post_Info,
+  Edit_Post,
+  Clear_Edit_Post,
+  Update_Edit_Post
 } from "./postActions.js";
 import moment from "moment";
 
@@ -193,7 +196,8 @@ const PostState = props => {
     createPost: {
       postImg: "",
       tags: []
-    }
+    },
+    editablePost: null // edit post info store here
   };
   // for mananging state
   const [state, dispatch] = useReducer(postReducer, initialState);
@@ -278,6 +282,23 @@ const PostState = props => {
     dispatch(Update_User_Home_Post_Info(user));
   };
 
+  const editPost = post => {
+    dispatch(Edit_Post(post));
+  };
+
+  const clearEditPost = () => {
+    dispatch(Clear_Edit_Post());
+  };
+
+  const updateEditPost = post => {
+    try {
+      dispatch(Update_Edit_Post(post));
+      return "Post Edited Successfully!";
+    } catch (err) {
+      return "Something Went Wrong, Please Try Again!";
+    }
+  };
+
   return (
     // sharing post state values
     <PostContext.Provider
@@ -289,6 +310,7 @@ const PostState = props => {
         userPosts: state.userPosts,
         createPostTags: state.createPost.tags,
         createPostImg: state.createPost.postImg,
+        editablePost: state.editablePost,
         setLoading: setLoading,
         removeLoading: removeLoading,
         getPosts: getPosts,
@@ -304,7 +326,10 @@ const PostState = props => {
         saveNewPost: saveNewPost,
         clearCreateNewPost: clearCreateNewPost,
         updateUserPostInfo: updateUserPostInfo,
-        updateUserHomePostInfo: updateUserHomePostInfo
+        updateUserHomePostInfo: updateUserHomePostInfo,
+        editPost: editPost,
+        clearEditPost: clearEditPost,
+        updateEditPost: updateEditPost
       }}
     >
       {props.children}
