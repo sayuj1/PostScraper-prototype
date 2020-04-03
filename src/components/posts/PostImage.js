@@ -14,7 +14,7 @@ const PostImage = props => {
   return (
     <Fragment>
       {postImg ? (
-        <span>
+        <span style={{ textAlign: "center" }}>
           {imgStatus !== "Image fail to load!" ? (
             <img
               alt="image not supported by your browser!"
