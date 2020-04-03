@@ -109,14 +109,16 @@ const UserEditPostForm = props => {
               ))}
             </Select>
           </div>
-          {readOnly ? (
-            <EditPostBtn setreadOnly={setreadOnly} />
-          ) : (
-            <SaveEditPostBtn
-              setreadOnly={setreadOnly}
-              postValues={postValues}
-            />
-          )}
+          <div className="editSavePostBtn" style={{ marginBottom: "40px" }}>
+            {readOnly ? (
+              <EditPostBtn setreadOnly={setreadOnly} />
+            ) : (
+              <SaveEditPostBtn
+                setreadOnly={setreadOnly}
+                postValues={postValues}
+              />
+            )}
+          </div>
         </Form>
       </div>
     </Fragment>

@@ -67,6 +67,7 @@ const SaveNewPostBtn = props => {
         block
         style={{
           marginTop: "20px",
+          marginBottom: "20px",
           fontWeight: "bolder",
           fontSize: "1.5rem",
           lineHeight: "1"

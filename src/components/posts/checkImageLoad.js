@@ -39,3 +39,19 @@ export const imgLoadFail = imgStatus => {
     </div>
   );
 };
+
+export const noImgFound = () => {
+  return (
+    <div
+      style={{
+        lineHeight: "20",
+        textAlign: "center",
+        border: "1px solid #91d5ff",
+        backgroundColor: "#e6f7ff",
+        fontWeight: "bold"
+      }}
+    >
+      No Image Found!
+    </div>
+  );
+};
