@@ -1,14 +1,17 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import "antd/dist/antd";
-import { Card, Col } from "antd";
+import { Card, Col, Avatar, Tooltip } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
+import PostImage from "../PostImage";
+
 const { Meta } = Card;
 
 // this component will display each post which is coming from "Posts" component
 const Post = props => {
   // post information
 
-  const { _id, postImg, postTitle, tags } = props.post;
+  const { _id, postImg, postTitle, tags, avatar, postAuthor } = props.post;
 
   //for navigation
   const history = useHistory();
@@ -34,9 +37,25 @@ const Post = props => {
           onClick={handlePostClick}
           bordered={false}
           title={postTitle}
+          extra={
+            avatar ? (
+              <Tooltip title={postAuthor}>
+                <Avatar src={avatar} size="small" alt="avatar not supported" />
+              </Tooltip>
+            ) : (
+              <Tooltip title={postAuthor}>
+                <Avatar
+                  style={{ backgroundColor: "#87d068" }}
+                  icon={<UserOutlined />}
+                  size="small"
+                  alt="avatar not supported"
+                />
+              </Tooltip>
+            )
+          }
           hoverable
           style={{ width: "100%", borderRadius: "10px" }}
-          cover={<img alt="example" src={postImg} height="300px" />}
+          cover={<PostImage postImg={postImg} height="300px" />}
         >
           <Meta
             style={{ fontWeight: "bolder" }}

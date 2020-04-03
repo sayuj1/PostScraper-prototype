@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, Fragment } from "react";
-// import UserProfile from "../user/UserProfile";
-// import UserPosts from "../posts/UserPosts";
+
 const UserProfile = lazy(() => import("../user/profile/UserProfile"));
 const User = () => {
   return (

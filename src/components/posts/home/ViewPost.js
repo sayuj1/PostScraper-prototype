@@ -5,6 +5,7 @@ import Styles from "../../../styles/posts/ViewPost.module.css";
 import GoHomeBtn from "../../buttons/global/GoHomeBtn";
 import moment from "moment";
 import UserContext from "../../../context/userContext/userContext";
+import PostImage from "../PostImage";
 const { Paragraph } = Typography;
 const CommentBox = lazy(() => import("../../comments/CommentBox"));
 const ViewComments = lazy(() => import("../../comments/ViewComments"));
@@ -67,7 +68,7 @@ const ViewPost = props => {
               lg={{ span: 12 }}
             >
               <div className={Styles.postImg}>
-                <img alt="No img found!" src={postImg} width="100%" />
+                <PostImage postImg={postImg} height="auto" />
               </div>
             </Col>
             {/* second div containing information about image */}

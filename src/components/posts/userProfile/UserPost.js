@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import PostContext from "../../../context/postContext/postContext";
+import PostImage from "../PostImage";
 
 const { Meta } = Card;
 
@@ -60,7 +61,7 @@ const UserPost = props => {
           title={postTitle}
           hoverable
           style={{ width: "100%", borderRadius: "10px" }}
-          cover={<img alt="example" src={postImg} height="300px" />}
+          cover={<PostImage postImg={postImg} height="300px" />}
         >
           <Meta
             style={{ fontWeight: "bolder" }}
