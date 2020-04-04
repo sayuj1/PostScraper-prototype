@@ -1,12 +1,30 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useContext } from "react";
 
 import UploadAvatar from "../../uploadImage/userAvatarUpload/UploadAvatar";
 import UserEditProfileForm from "./UserEditProfileForm";
 import { Typography, Row, Col } from "antd";
 import GoUserProfileBtn from "../../buttons/global/GoUserProfileBtn";
+import PostContext from "../../../context/postContext/postContext";
+import CommentContext from "../../../context/commentContext/commentContext";
+
+import UserContext from "../../../context/userContext/userContext";
 const { Title } = Typography;
 
 const UserEditProfile = () => {
+  const { user } = useContext(UserContext);
+
+  const { updateUserPostInfo, updateUserHomePostInfo } = useContext(
+    PostContext
+  );
+  const { updateUserComment } = useContext(CommentContext);
+  useEffect(() => {
+    return () => {
+      // updating values in states on updating user profile
+      updateUserPostInfo(user);
+      updateUserHomePostInfo(user);
+      updateUserComment(user);
+    };
+  }, [user]);
   return (
     <Fragment>
       <Row style={{ backgroundColor: "white" }}>

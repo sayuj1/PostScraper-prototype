@@ -1,9 +1,9 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext } from "react";
 import { Button, message } from "antd";
 import UserContext from "../../../../context/userContext/userContext";
 
 const SaveUserProfileBtn = props => {
-  const { setreadOnly, userInfo, setuserInfo } = props;
+  const { setreadOnly, userInfo } = props;
   const { updateUser } = useContext(UserContext);
 
   const showErrorMsg = (msg, context) => {
@@ -32,6 +32,7 @@ const SaveUserProfileBtn = props => {
         .then(response => {
           message.success(response);
           // disabling editing mode
+
           setreadOnly(true);
         })
         .catch(err => message.error(err));

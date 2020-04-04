@@ -2,7 +2,6 @@ import {
   SET_LOADING,
   TOGGLE_POST_FILTER,
   GET_POSTS,
-  SET_VIEW_POST,
   CLEAR_VIEW_POST,
   GET_VIEW_POST,
   GET_VIEW_USER_POST,
@@ -15,7 +14,6 @@ import {
   CLEAR_EDIT_POST,
   UPDATE_EDIT_POST
 } from "./postTypes";
-import { Save_New_Post } from "./postActions";
 
 const postReducer = (state, action) => {
   switch (action.type) {
@@ -29,8 +27,8 @@ const postReducer = (state, action) => {
       return { ...state, filterPost: !state.filterPost };
     case GET_POSTS:
       return { ...state };
-    case SET_VIEW_POST:
-      return { ...state, viewPostId: action.payload };
+    // case SET_VIEW_POST:
+    //   return { ...state, viewPostId: action.payload };
     case GET_VIEW_POST:
       return {
         ...state,
@@ -44,7 +42,6 @@ const postReducer = (state, action) => {
     case CLEAR_VIEW_POST:
       return {
         ...state,
-        viewPostId: null,
         viewPost: null
       };
     case SET_USER_POSTS:

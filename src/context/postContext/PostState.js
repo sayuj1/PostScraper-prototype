@@ -4,7 +4,6 @@ import postReducer from "./postReducer";
 import {
   Set_Loading,
   Get_Posts,
-  Set_View_Post,
   Clear_View_Post,
   Get_View_Post,
   Get_View_User_Post,
@@ -23,7 +22,7 @@ const PostState = props => {
   const initialState = {
     loading: false, // for loading (using in create-post component)
     filterPost: false, // for showing users post only (on user profile page) [does not include post from saved collections]
-    viewPostId: null, // contains requested post id
+
     viewPost: null, // contains requested post information
     posts: [
       {
@@ -207,11 +206,6 @@ const PostState = props => {
     dispatch(Clear_View_Post());
   };
 
-  // setting up the view post id in the state
-  const setViewPost = postId => {
-    dispatch(Set_View_Post(postId));
-  };
-
   // getting requested post information
   const getViewPost = postId => {
     dispatch(Get_View_Post(postId));
@@ -275,13 +269,13 @@ const PostState = props => {
       value={{
         loading: state.loading,
         posts: state.posts,
-        viewPostId: state.viewPostId,
+
         viewPost: state.viewPost,
         userPosts: state.userPosts,
         editablePost: state.editablePost,
         setLoading: setLoading,
         getPosts: getPosts,
-        setViewPost: setViewPost,
+
         clearViewPost: clearViewPost,
         getViewPost: getViewPost,
         getViewUserPost: getViewUserPost,

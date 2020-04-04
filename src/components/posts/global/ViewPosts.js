@@ -9,7 +9,6 @@ const ViewPosts = () => {
     viewPostId,
     getViewPost,
     viewPost,
-    setViewPost,
     clearViewPost,
     getViewUserPost
   } = useContext(PostContext);
@@ -18,24 +17,16 @@ const ViewPosts = () => {
 
   const { id, userName } = useParams();
   // on mounting the component
-  useEffect(
-    () => {
-      // if there is no viewPostId  such that user trying to visit by entering url directly
-      if (!viewPostId) {
-        // setting post id coming from URL
-        setViewPost(Number(id)); // for posts
-        setPostId(Number(id)); // for comments
-      }
-      // loading user post if username exists other wise simple post load
-      {
-        viewPostId && userName
-          ? getViewUserPost(viewPostId)
-          : getViewPost(viewPostId);
-      }
-    },
-    [viewPostId],
-    [id]
-  );
+  useEffect(() => {
+    if (id && userName) {
+      getViewUserPost(Number(id));
+      setPostId(Number(id));
+    } else {
+      getViewPost(Number(id));
+      setPostId(Number(id));
+    }
+  }, []);
+
   // on unmounting the component
   useEffect(() => {
     return () => {

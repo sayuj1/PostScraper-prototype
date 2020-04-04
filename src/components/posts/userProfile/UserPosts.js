@@ -5,18 +5,11 @@ import UserPost from "../userProfile/UserPost";
 import { Row } from "antd";
 const UserPosts = () => {
   const { user } = useContext(UserContext);
-  const { userPosts, getUserPosts, updateUserPostInfo } = useContext(
-    PostContext
-  );
+  const { userPosts, getUserPosts } = useContext(PostContext);
   useEffect(() => {
     // loading user posts after page load
     getUserPosts(user._id);
   }, []);
-  useEffect(() => {
-    // updating post state values on updating user details
-
-    updateUserPostInfo(user);
-  }, [user]);
 
   return (
     <Fragment>
