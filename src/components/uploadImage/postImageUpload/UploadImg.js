@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useContext } from "react";
-import "antd/dist/antd";
+// import "antd/dist/antd";
 import { Upload, message, Button } from "antd";
 import { UploadOutlined, DeleteFilled } from "@ant-design/icons";
 

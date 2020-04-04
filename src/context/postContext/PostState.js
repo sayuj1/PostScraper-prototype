@@ -13,9 +13,7 @@ import {
   Delete_User_Post,
   Save_Img,
   Remove_img,
-  Save_Post_tag,
   Save_New_Post,
-  Clear_Create_New_Post,
   Update_User_Post_Info,
   Update_User_Home_Post_Info,
   Edit_Post,
@@ -194,8 +192,7 @@ const PostState = props => {
       }
     ], // default null
     createPost: {
-      postImg: "",
-      tags: []
+      postImg: ""
     },
     editablePost: null // edit post info store here
   };
@@ -254,11 +251,6 @@ const PostState = props => {
     dispatch(Delete_User_Post(postId));
   };
 
-  // saving tags for new posts
-  const savePostTag = postTags => {
-    dispatch(Save_Post_tag(postTags));
-  };
-
   const saveNewPost = postData => {
     // saving in the post state
 
@@ -268,10 +260,6 @@ const PostState = props => {
     } catch (err) {
       return "Something Went Wrong, Please Try Again!";
     }
-  };
-
-  const clearCreateNewPost = () => {
-    dispatch(Clear_Create_New_Post());
   };
 
   const updateUserPostInfo = user => {
@@ -308,7 +296,6 @@ const PostState = props => {
         viewPostId: state.viewPostId,
         viewPost: state.viewPost,
         userPosts: state.userPosts,
-        createPostTags: state.createPost.tags,
         createPostImg: state.createPost.postImg,
         editablePost: state.editablePost,
         setLoading: setLoading,
@@ -322,9 +309,7 @@ const PostState = props => {
         deleteUserPost: deleteUserPost,
         saveImg: saveImg,
         removeImg: removeImg,
-        savePostTag: savePostTag,
         saveNewPost: saveNewPost,
-        clearCreateNewPost: clearCreateNewPost,
         updateUserPostInfo: updateUserPostInfo,
         updateUserHomePostInfo: updateUserHomePostInfo,
         editPost: editPost,

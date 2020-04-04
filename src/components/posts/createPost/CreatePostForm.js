@@ -1,66 +1,56 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
-import { Form, Input } from "antd";
-import CreatePostFormTags from "./CreatePostFormTags";
+import { Form } from "antd";
+
 import SaveNewPostBtn from "../../buttons/posts/CreatePostForm/SaveNewPostBtn";
-const { TextArea } = Input;
+import followingContext from "../../../context/followingContext/followingContext";
+import PostForm from "../PostForm";
 
 const CreatePostForm = () => {
-  const [postTitle, setpostTitle] = useState({
-    length: 0,
-    focus: false,
-    value: ""
+  const { tags, getAllTags } = useContext(followingContext);
+
+  useEffect(() => {
+    // loading all tags from the database in the following state
+    getAllTags();
   });
 
-  const [postDescription, setpostDescription] = useState({
-    length: 0,
-    focus: false,
-    value: ""
+  const [postValues, setpostValues] = useState({
+    postTitle: { focus: false, value: "", length: 0 },
+    postDescription: { focus: false, value: "", length: 0 },
+    postTags: []
   });
 
-  // handle post title field value
-  const changePostTitle = e => {
-    const title = e.target.value;
-    setpostTitle({
-      ...postTitle,
-      value: title,
-      length: title.length
-    });
+  const readOnly = false;
 
-    // wordCounter(title);
-  };
-  const handleTitleFocus = () => {
-    setpostTitle({
-      ...postTitle,
-      focus: true
+  const handleChange = e => {
+    const inputField = e.target.name;
+    const inputFieldValue = e.target.value;
+    setpostValues({
+      ...postValues,
+      [inputField]: {
+        ...postValues[inputField],
+        value: inputFieldValue,
+        length: inputFieldValue.length
+      }
     });
   };
-  const handleTitleBlur = () => {
-    setpostTitle({
-      ...postTitle,
-      focus: false
+  const handleFocus = (e, status) => {
+    const inputField = e.target.name;
+    setpostValues({
+      ...postValues,
+      [inputField]: {
+        ...postValues[inputField],
+        focus: status
+      }
     });
+    // console.log("focus", e.target.name);
   };
 
-  const changePostDescription = e => {
-    const description = e.target.value;
-    setpostDescription({
-      ...postDescription,
-      value: description,
-      length: description.length
-    });
-
-    // wordCounter(title);
-  };
-  const handleDescriptionFocus = () => {
-    setpostDescription({
-      ...postDescription,
-      focus: true
-    });
-  };
-  const handleDescriptionBlur = () => {
-    setpostDescription({
-      ...postDescription,
-      focus: false
+  const OPTIONS = tags;
+  const filteredOptions = OPTIONS.filter(o => !postValues.postTags.includes(o));
+  const handleTags = selectedItems => {
+    setpostValues({
+      ...postValues,
+      postTags: selectedItems
     });
   };
 
@@ -68,68 +58,15 @@ const CreatePostForm = () => {
     <Fragment>
       <div className="postFieldsContainer" style={{ margin: "20px" }}>
         <Form>
-          {/* post title */}
-          <Input
-            name="titleFocus"
-            placeholder="Add Post Title..."
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "bold"
-            }}
-            onChange={changePostTitle}
-            value={postTitle.value}
-            onFocus={handleTitleFocus}
-            onBlur={handleTitleBlur}
-            maxLength={100}
-            required
+          <PostForm
+            postValues={postValues}
+            handleChange={handleChange}
+            handleFocus={handleFocus}
+            handleTags={handleTags}
+            filteredOptions={filteredOptions}
+            readOnly={readOnly}
           />
-          {/* display the counter on focus */}
-          {postTitle.focus ? (
-            <div style={{ fontWeight: "bold", float: "right" }}>
-              {`${postTitle.length}/100`}
-            </div>
-          ) : null}
-
-          {/* post description */}
-          <TextArea
-            name="postDescription"
-            onFocus={handleDescriptionFocus}
-            onChange={changePostDescription}
-            value={postDescription.value}
-            placeholder="Add Post Description...."
-            autoSize={{ minRows: 3, maxRows: 6 }}
-            onBlur={handleDescriptionBlur}
-            maxLength={500}
-            style={{
-              resize: "none",
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-              marginTop: "10px"
-            }}
-          />
-          {postDescription.focus ? (
-            <div style={{ fontWeight: "bold", float: "right" }}>
-              {`${postDescription.length}/500`}
-            </div>
-          ) : null}
-
-          {/* tags section  */}
-          <div
-            className="tags"
-            style={{
-              marginTop: "10px",
-              fontSize: "1.5rem",
-              fontWeight: "bold"
-            }}
-          >
-            {/* for post tags */}
-            <CreatePostFormTags />
-          </div>
-
-          <SaveNewPostBtn
-            postTitle={postTitle.value}
-            postDescription={postDescription.value}
-          />
+          <SaveNewPostBtn postValues={postValues} />
         </Form>
       </div>
     </Fragment>

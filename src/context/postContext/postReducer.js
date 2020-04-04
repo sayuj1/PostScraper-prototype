@@ -11,9 +11,7 @@ import {
   DELETE_USER_POSTS,
   SAVE_IMG,
   REMOVE_IMG,
-  SAVE_POST_TAG,
   SAVE_NEW_POST,
-  CLEAR_CREATE_NEW_POST,
   UPDATE_USER_POST_INFO,
   UPDATE_USER_HOME_POST_INFO,
   EDIT_POST,
@@ -76,30 +74,16 @@ const postReducer = (state, action) => {
     case REMOVE_IMG:
       return {
         ...state,
-        createPost: { ...state.createPost, postImg: "" }
+        createPost: { postImg: "" }
       };
-    case SAVE_POST_TAG:
-      return {
-        ...state,
-        createPost: {
-          ...state.createPost,
-          tags: action.payload
-        }
-      };
+
     case SAVE_NEW_POST:
       return {
         ...state,
         posts: [action.payload, ...state.posts],
         userPosts: [action.payload, ...state.userPosts]
       };
-    case CLEAR_CREATE_NEW_POST:
-      return {
-        ...state,
-        createPost: {
-          postImg: "",
-          tags: []
-        }
-      };
+
     case UPDATE_USER_POST_INFO:
       return {
         ...state,

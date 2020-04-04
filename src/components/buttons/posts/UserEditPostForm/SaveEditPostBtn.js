@@ -9,7 +9,7 @@ const SaveEditPostBtn = props => {
   const { setreadOnly } = props;
 
   const handleFinish = () => {
-    if (!postTitle) {
+    if (!postTitle.value) {
       message.error("Enter Post Title");
     } else {
       // saving the post data
@@ -17,8 +17,8 @@ const SaveEditPostBtn = props => {
         resolve(
           updateEditPost({
             _id: editablePost._id,
-            postTitle: postTitle,
-            postDescription: postDescription,
+            postTitle: postTitle.value,
+            postDescription: postDescription.value,
             postTags: postTags
           })
         );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "../../../node_modules/antd/dist/antd.css";
+// import "../../../node_modules/antd/dist/antd.css";
 import PostSearch from "../posts/home/PostsSearch";
 import UserContext from "../../context/userContext/userContext";
 import { Menu, Avatar, Affix } from "antd";

@@ -1,6 +1,6 @@
 import React from "react";
 import { Input, AutoComplete } from "antd";
-import "../../../../node_modules/antd/dist/antd.css";
+// import "../../../../node_modules/antd/dist/antd.css";
 const { Search } = Input;
 
 const PostSearch = () => {

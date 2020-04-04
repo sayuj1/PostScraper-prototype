@@ -3,12 +3,13 @@ import PostContext from "../../../context/postContext/postContext";
 import { Row, Col } from "antd";
 import GoUserProfileBtn from "../../buttons/global/GoUserProfileBtn";
 import Styles from "../../../styles/Global/GlobalResponsiveQueries.module.css";
-import UserEditPostImage from "./UserEditPostImage";
+
 import UserName from "../../user/profile/UserName";
 import UserContext from "../../../context/userContext/userContext";
 import UserLargeAvatar from "../../user/profile/UserLargeAvatar";
 import UserEditPostForm from "./UserEditPostForm";
 import { useHistory } from "react-router-dom";
+import PostImage from "../PostImage";
 
 const UserEditPost = () => {
   const { editablePost, clearEditPost } = useContext(PostContext);
@@ -46,11 +47,25 @@ const UserEditPost = () => {
           <Col
             xs={{ span: 24 }}
             sm={{ span: 24 }}
-            md={{ span: 22, offset: 1 }}
-            lg={{ span: 22, offset: 1 }}
+            md={{ span: 22 }}
+            lg={{ span: 22 }}
           >
             <Row>
-              <UserEditPostImage postImg={editablePost.postImg} />
+              <Col
+                xs={{ span: 24 }}
+                sm={{ span: 24 }}
+                md={{ span: 12 }}
+                lg={{ span: 12 }}
+              >
+                <div
+                  className="imageContainer"
+                  style={{
+                    padding: "10px"
+                  }}
+                >
+                  <PostImage postImg={editablePost.postImg} height="auto" />
+                </div>
+              </Col>
 
               <Col
                 xs={{ span: 24 }}

@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 
 import { Col, Row, Spin } from "antd";
-import "../../../../node_modules/antd/dist/antd";
+// import "../../../../node_modules/antd/dist/antd";
 import UploadImg from "../../uploadImage/postImageUpload/UploadImg";
 import CreatePostForm from "./CreatePostForm";
 import UserLargeAvatar from "../../user/profile/UserLargeAvatar";
@@ -45,7 +45,7 @@ const CreatePost = () => {
             <Spin
               size="large"
               spinning={loading}
-              tip="Saving Your New Posts..."
+              tip="Loading Your New Posts..."
               wrapperClassName="postBox"
             >
               {/* first column containing image */}

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import "antd/dist/antd";
+// import "antd/dist/antd";
 import { Card, Col, Avatar, Tooltip } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";

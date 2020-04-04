@@ -1,3 +1,11 @@
+input:read-only {
+    background-color: #f5f5f5;
+}
+
+textarea:read-only {
+    background-color: #f5f5f5;
+}
+
 .label {
     font-size: 1rem !important;
     font-weight: bolder;

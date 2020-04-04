@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
-import "antd/dist/antd";
+// import "antd/dist/antd";
 import { Upload, message, Button, Col, Alert } from "antd";
 import UserContext from "../../../context/userContext/userContext";
 import AvatarPreview from "./AvatarPreview";
