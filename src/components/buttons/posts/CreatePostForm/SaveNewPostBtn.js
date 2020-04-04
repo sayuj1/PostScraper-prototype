@@ -7,13 +7,12 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../../../../context/userContext/userContext";
 
 const SaveNewPostBtn = props => {
+  const { postImg } = props;
   const { user } = useContext(UserContext);
   const { postTitle, postDescription, postTags } = props.postValues;
   //for navigation
   const history = useHistory();
-  const { createPostImg, saveNewPost, removeImg, setLoading } = useContext(
-    PostContext
-  );
+  const { saveNewPost, setLoading } = useContext(PostContext);
   const handleFinish = () => {
     if (!postTitle.value) {
       message.error("Enter Post Title");
@@ -23,7 +22,7 @@ const SaveNewPostBtn = props => {
       postData._id = Date.now();
       postData.postTitle = postTitle.value;
       postData.postDescription = postDescription.value;
-      postData.postImg = createPostImg;
+      postData.postImg = postImg;
       postData.postAuthor = user.username;
       postData.tags = postTags;
       postData.date = moment().format("ll");
@@ -41,15 +40,13 @@ const SaveNewPostBtn = props => {
           // showing status of the save post
 
           message.success(response);
-          // // clearing the form data from the post state
-          // clearCreateNewPost();
-          removeImg();
+
           // set loader
           setLoading(true);
           // redirecting user to view this new post
           setTimeout(() => {
             // since post ID will be generate from the server so, in response i have to send post id also when the new post created
-            history.push(`/post/${postData._id}`);
+            history.push(`${user.username}/post/${postData._id}`);
           }, 5000);
         })
         .catch(err => message.error(err));

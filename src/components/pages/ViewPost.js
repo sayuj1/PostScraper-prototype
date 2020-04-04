@@ -1,5 +1,5 @@
 import React, { Fragment, lazy, Suspense } from "react";
-const ViewPosts = lazy(() => import("../posts/home/ViewPosts"));
+const ViewPosts = lazy(() => import("../posts/global/ViewPosts"));
 const ViewPost = () => {
   return (
     <Fragment>

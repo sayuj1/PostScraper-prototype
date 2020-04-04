@@ -1,6 +1,5 @@
 import {
   SET_LOADING,
-  REMOVE_LOADING,
   TOGGLE_POST_FILTER,
   GET_POSTS,
   SET_VIEW_POST,
@@ -9,8 +8,6 @@ import {
   GET_VIEW_USER_POST,
   SET_USER_POSTS,
   DELETE_USER_POSTS,
-  SAVE_IMG,
-  REMOVE_IMG,
   SAVE_NEW_POST,
   UPDATE_USER_POST_INFO,
   UPDATE_USER_HOME_POST_INFO,
@@ -22,13 +19,6 @@ import {
 export const Set_Loading = loading => {
   return {
     type: SET_LOADING,
-    payload: loading
-  };
-};
-
-export const Remove_Loading = loading => {
-  return {
-    type: REMOVE_LOADING,
     payload: loading
   };
 };
@@ -80,19 +70,6 @@ export const Delete_User_Post = postId => {
   return {
     type: DELETE_USER_POSTS,
     payload: postId
-  };
-};
-
-export const Save_Img = imgLocation => {
-  return {
-    type: SAVE_IMG,
-    payload: imgLocation
-  };
-};
-
-export const Remove_img = () => {
-  return {
-    type: REMOVE_IMG
   };
 };
 

@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import PostContext from "../../../context/postContext/postContext";
-import PostImage from "../PostImage";
+import PostImage from "../global/PostImage";
 
 const { Meta } = Card;
 

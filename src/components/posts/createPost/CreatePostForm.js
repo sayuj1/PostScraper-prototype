@@ -3,10 +3,11 @@ import { Form } from "antd";
 
 import SaveNewPostBtn from "../../buttons/posts/CreatePostForm/SaveNewPostBtn";
 import followingContext from "../../../context/followingContext/followingContext";
-import PostForm from "../PostForm";
+import PostForm from "../global/PostForm";
 
-const CreatePostForm = () => {
+const CreatePostForm = props => {
   const { tags, getAllTags } = useContext(followingContext);
+  const { postImg } = props;
 
   useEffect(() => {
     // loading all tags from the database in the following state
@@ -66,7 +67,7 @@ const CreatePostForm = () => {
             filteredOptions={filteredOptions}
             readOnly={readOnly}
           />
-          <SaveNewPostBtn postValues={postValues} />
+          <SaveNewPostBtn postValues={postValues} postImg={postImg} />
         </Form>
       </div>
     </Fragment>

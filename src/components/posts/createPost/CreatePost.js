@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 
 import { Col, Row, Spin } from "antd";
 // import "../../../../node_modules/antd/dist/antd";
@@ -14,10 +14,12 @@ import GoUserProfileBtn from "../../buttons/global/GoUserProfileBtn";
 
 const CreatePost = () => {
   const { user } = useContext(UserContext);
-  const { loading, removeLoading } = useContext(PostContext);
+  const { loading, setLoading } = useContext(PostContext);
+
+  const [postImg, setpostImg] = useState("");
 
   useEffect(() => {
-    return () => removeLoading(false);
+    return () => setLoading(false);
   }, []);
   return (
     <Fragment>
@@ -63,7 +65,7 @@ const CreatePost = () => {
                     }}
                   >
                     {/* for image upload */}
-                    <UploadImg />
+                    <UploadImg setpostImg={setpostImg} />
                   </div>
                 </Col>
 
@@ -120,7 +122,7 @@ const CreatePost = () => {
                     </Row>
                   </div>
 
-                  <CreatePostForm />
+                  <CreatePostForm postImg={postImg} />
                 </Col>
               </Row>
             </Spin>

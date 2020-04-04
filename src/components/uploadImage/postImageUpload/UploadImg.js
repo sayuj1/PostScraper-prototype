@@ -11,9 +11,9 @@ import InvalidFileWarning from "../InvalidFileWarning";
 // image validation rules
 import { validateImageType, validateImageSize } from "../imageValidation";
 
-const UploadImg = () => {
-  const { saveImg, removeImg } = useContext(PostContext);
-
+const UploadImg = props => {
+  // const { saveImg, removeImg } = useContext(PostContext);
+  const { setpostImg } = props;
   // image upload states
   const [fileState, setfileState] = useState({
     imgFile: null,
@@ -68,7 +68,8 @@ const UploadImg = () => {
         previewImgShow: false
       });
       //removing img from the post state
-      removeImg();
+      // removeImg();
+      setpostImg("");
     } else {
       // if (file.status === "uploading") {
       //   console.log("uploading");
@@ -97,7 +98,8 @@ const UploadImg = () => {
         });
 
         // console.log("Done", file.response.url);
-        saveImg(file.response.url);
+        // saveImg(file.response.url);
+        setpostImg(file.response.url);
         // save this response to create post state (in future)
       }
       if (file.status === "error") {

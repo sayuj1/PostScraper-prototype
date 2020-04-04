@@ -3,7 +3,6 @@ import PostContext from "./postContext";
 import postReducer from "./postReducer";
 import {
   Set_Loading,
-  Remove_Loading,
   Get_Posts,
   Set_View_Post,
   Clear_View_Post,
@@ -11,8 +10,6 @@ import {
   Get_View_User_Post,
   Set_User_Posts,
   Delete_User_Post,
-  Save_Img,
-  Remove_img,
   Save_New_Post,
   Update_User_Post_Info,
   Update_User_Home_Post_Info,
@@ -191,9 +188,6 @@ const PostState = props => {
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
       }
     ], // default null
-    createPost: {
-      postImg: ""
-    },
     editablePost: null // edit post info store here
   };
   // for mananging state
@@ -201,18 +195,6 @@ const PostState = props => {
 
   const setLoading = loading => {
     dispatch(Set_Loading(loading));
-  };
-  const removeLoading = loading => {
-    dispatch(Remove_Loading(loading));
-  };
-
-  // for saving img in post state
-  const saveImg = imgLocation => {
-    dispatch(Save_Img(imgLocation));
-  };
-
-  const removeImg = () => {
-    dispatch(Remove_img());
   };
 
   // getting posts
@@ -296,10 +278,8 @@ const PostState = props => {
         viewPostId: state.viewPostId,
         viewPost: state.viewPost,
         userPosts: state.userPosts,
-        createPostImg: state.createPost.postImg,
         editablePost: state.editablePost,
         setLoading: setLoading,
-        removeLoading: removeLoading,
         getPosts: getPosts,
         setViewPost: setViewPost,
         clearViewPost: clearViewPost,
@@ -307,8 +287,6 @@ const PostState = props => {
         getViewUserPost: getViewUserPost,
         getUserPosts: getUserPosts,
         deleteUserPost: deleteUserPost,
-        saveImg: saveImg,
-        removeImg: removeImg,
         saveNewPost: saveNewPost,
         updateUserPostInfo: updateUserPostInfo,
         updateUserHomePostInfo: updateUserHomePostInfo,

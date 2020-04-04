@@ -1,6 +1,5 @@
 import {
   SET_LOADING,
-  REMOVE_LOADING,
   TOGGLE_POST_FILTER,
   GET_POSTS,
   SET_VIEW_POST,
@@ -9,8 +8,6 @@ import {
   GET_VIEW_USER_POST,
   SET_USER_POSTS,
   DELETE_USER_POSTS,
-  SAVE_IMG,
-  REMOVE_IMG,
   SAVE_NEW_POST,
   UPDATE_USER_POST_INFO,
   UPDATE_USER_HOME_POST_INFO,
@@ -27,11 +24,7 @@ const postReducer = (state, action) => {
         ...state,
         loading: action.payload
       };
-    case REMOVE_LOADING:
-      return {
-        ...state,
-        loading: action.payload
-      };
+
     case TOGGLE_POST_FILTER:
       return { ...state, filterPost: !state.filterPost };
     case GET_POSTS:
@@ -65,16 +58,6 @@ const postReducer = (state, action) => {
           userPost => userPost._id !== action.payload
         ),
         posts: state.posts.filter(userPost => userPost._id !== action.payload)
-      };
-    case SAVE_IMG:
-      return {
-        ...state,
-        createPost: { ...state.createPost, postImg: action.payload }
-      };
-    case REMOVE_IMG:
-      return {
-        ...state,
-        createPost: { postImg: "" }
       };
 
     case SAVE_NEW_POST:

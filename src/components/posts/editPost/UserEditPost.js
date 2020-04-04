@@ -9,7 +9,7 @@ import UserContext from "../../../context/userContext/userContext";
 import UserLargeAvatar from "../../user/profile/UserLargeAvatar";
 import UserEditPostForm from "./UserEditPostForm";
 import { useHistory } from "react-router-dom";
-import PostImage from "../PostImage";
+import PostImage from "../global/PostImage";
 
 const UserEditPost = () => {
   const { editablePost, clearEditPost } = useContext(PostContext);

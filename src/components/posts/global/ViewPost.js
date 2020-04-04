@@ -5,13 +5,28 @@ import Styles from "../../../styles/posts/ViewPost.module.css";
 import GoHomeBtn from "../../buttons/global/GoHomeBtn";
 import moment from "moment";
 import UserContext from "../../../context/userContext/userContext";
-import PostImage from "../PostImage";
+import PostImage from "./PostImage";
+import { useParams } from "react-router-dom";
+import GoUserProfileBtn from "../../buttons/global/GoUserProfileBtn";
+import Styles1 from "../../../styles/Global/GlobalResponsiveQueries.module.css";
 const { Paragraph } = Typography;
 const CommentBox = lazy(() => import("../../comments/CommentBox"));
 const ViewComments = lazy(() => import("../../comments/ViewComments"));
 
 const ViewPost = props => {
+  const { userName } = useParams();
+
   const { user } = useContext(UserContext);
+  // post information destructuring
+  const {
+    _id,
+    postImg,
+    postTitle,
+    postDescription,
+    tags,
+    postAuthor,
+    avatar
+  } = props.post;
   //for toggling expand & close in post description
   const [toggleExpand, settoggleExpand] = useState({
     expand: false,
@@ -38,16 +53,20 @@ const ViewPost = props => {
     });
   };
 
-  // post information destructuring
-  const {
-    _id,
-    postImg,
-    postTitle,
-    postDescription,
-    tags,
-    postAuthor,
-    avatar
-  } = props.post;
+  //  back button for going back to home page / user profile
+  const goBackButton =
+    userName && postAuthor.toLowerCase() === userName.toLowerCase() ? (
+      <div style={{ marginLeft: "20px" }}>
+        <GoUserProfileBtn
+          btnText="Back"
+          btnIcon="faArrowLeft"
+          btnIconAlign="left"
+          btnPadding="0px"
+        />
+      </div>
+    ) : (
+      <GoHomeBtn margin="20px" shape="round" />
+    );
 
   return (
     <Fragment>
@@ -60,6 +79,14 @@ const ViewPost = props => {
         {/* post box containing both image and information about image */}
         <div className={Styles.postBox}>
           <Row>
+            <div className={Styles1.hideOnMdAndAbove}>
+              <Row>
+                <Col>
+                  {/* back button for going back to home page / user profile */}
+                  {goBackButton}
+                </Col>
+              </Row>
+            </div>
             {/* first div column containing image */}
             <Col
               xs={{ span: 24 }}
@@ -79,9 +106,10 @@ const ViewPost = props => {
               lg={{ span: 12 }}
             >
               <div className="postContent">
-                {/* back button for going back to home page */}
-
-                <GoHomeBtn margin="20px" shape="round" />
+                <div className={Styles1.hideOnSmAndBelow}>
+                  {/* back button for going back to home page / user profile */}
+                  {goBackButton}
+                </div>
                 {/* header containing download button and save button */}
                 <div className={Styles.postHeader}>
                   {/* // download button for downloading an image */}

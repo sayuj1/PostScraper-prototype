@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { Card, Col, Avatar, Tooltip } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
-import PostImage from "../PostImage";
+import PostImage from "../global/PostImage";
 
 const { Meta } = Card;
 

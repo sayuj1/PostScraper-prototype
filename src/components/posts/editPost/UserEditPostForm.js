@@ -1,10 +1,10 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
-import { Form, Input, Select } from "antd";
+import { Form } from "antd";
 import followingContext from "../../../context/followingContext/followingContext";
 import EditPostBtn from "../../buttons/posts/UserEditPostForm/EditPostBtn";
 import SaveEditPostBtn from "../../buttons/posts/UserEditPostForm/SaveEditPostBtn";
-import PostForm from "../PostForm";
-const { TextArea } = Input;
+import PostForm from "../global/PostForm";
+
 const UserEditPostForm = props => {
   const { tags, getAllTags } = useContext(followingContext);
 

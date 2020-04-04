@@ -3,19 +3,20 @@ import PostContext from "../../../context/postContext/postContext";
 import CommentContext from "../../../context/commentContext/commentContext";
 import { useParams } from "react-router-dom";
 
-import ViewPost from "../home/ViewPost";
+import ViewPost from "./ViewPost";
 const ViewPosts = () => {
   const {
     viewPostId,
-    getViewUserPost,
+    getViewPost,
     viewPost,
     setViewPost,
-    clearViewPost
+    clearViewPost,
+    getViewUserPost
   } = useContext(PostContext);
   const { setPostId } = useContext(CommentContext); // setting post id on mounting the component for comments
   const { clearPostId } = useContext(CommentContext); // removing post id on un mounting the component for comments
 
-  const { id } = useParams();
+  const { id, userName } = useParams();
   // on mounting the component
   useEffect(
     () => {
@@ -24,13 +25,12 @@ const ViewPosts = () => {
         // setting post id coming from URL
         setViewPost(Number(id)); // for posts
         setPostId(Number(id)); // for comments
-      } else {
-        // if post id not found and post state contain error
-        // history.push("/page-not-found");
       }
-      if (viewPostId) {
-        // loading post data
-        getViewUserPost(viewPostId);
+      // loading user post if username exists other wise simple post load
+      {
+        viewPostId && userName
+          ? getViewUserPost(viewPostId)
+          : getViewPost(viewPostId);
       }
     },
     [viewPostId],
@@ -47,9 +47,11 @@ const ViewPosts = () => {
     // passing requested post
 
     <div className={`postContainer_${viewPostId}`}>
-      {viewPost !== null
-        ? viewPost.map(post => <ViewPost key={post._id} post={post} />)
-        : "Nothing Found!"}
+      {viewPost !== null && viewPost.length !== 0 ? (
+        viewPost.map(post => <ViewPost key={post._id} post={post} />)
+      ) : (
+        <h1>"Nothing Found!"</h1>
+      )}
     </div>
   );
 };
