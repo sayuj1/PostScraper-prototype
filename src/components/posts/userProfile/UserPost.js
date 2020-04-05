@@ -13,7 +13,7 @@ import PostImage from "../global/PostImage";
 const { Meta } = Card;
 
 // this component will display each post which is coming from "Posts" component
-const UserPost = props => {
+const UserPost = (props) => {
   // user info
   const { user } = useContext(UserContext);
   const { editPost } = useContext(PostContext);
@@ -55,7 +55,7 @@ const UserPost = props => {
               <FontAwesomeIcon icon={faEdit} size="lg" />
             </Button>,
             // delete btn component
-            <DeletePostBtn _id={_id} />
+            <DeletePostBtn _id={_id} />,
           ]}
           bordered={false}
           title={postTitle}

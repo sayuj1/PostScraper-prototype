@@ -6,7 +6,7 @@ import moment from "moment";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../../../context/userContext/userContext";
 
-const SaveNewPostBtn = props => {
+const SaveNewPostBtn = (props) => {
   const { postImg } = props;
   const { user } = useContext(UserContext);
   const { postTitle, postDescription, postTags } = props.postValues;
@@ -25,18 +25,18 @@ const SaveNewPostBtn = props => {
       postData.postImg = postImg;
       postData.postAuthor = user.username;
       postData.tags = postTags;
-      postData.date = moment().format("ll");
+      postData.date = moment().format("MMM D YYYY, h:mm:ss A");
       postData.avatar = user.avatar;
       postData.thumbnail = "";
 
       // saving the post data
       const savePost = new Promise((resolve, reject) => {
         resolve(saveNewPost(postData));
-        reject(err => err);
+        reject((err) => err);
       });
 
       savePost
-        .then(response => {
+        .then((response) => {
           // showing status of the save post
 
           message.success(response);
@@ -49,7 +49,7 @@ const SaveNewPostBtn = props => {
             history.push(`${user.username}/post/${postData._id}`);
           }, 5000);
         })
-        .catch(err => message.error(err));
+        .catch((err) => message.error(err));
     }
   };
   return (
@@ -64,7 +64,7 @@ const SaveNewPostBtn = props => {
           marginBottom: "20px",
           fontWeight: "bolder",
           fontSize: "1.5rem",
-          lineHeight: "1"
+          lineHeight: "1",
         }}
         onClick={handleFinish}
       >

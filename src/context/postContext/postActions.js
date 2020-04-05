@@ -12,97 +12,105 @@ import {
   UPDATE_USER_HOME_POST_INFO,
   EDIT_POST,
   CLEAR_EDIT_POST,
-  UPDATE_EDIT_POST
+  UPDATE_EDIT_POST,
+  FILTER_POSTS,
 } from "./postTypes";
 
-export const Set_Loading = loading => {
+export const Set_Loading = (loading) => {
   return {
     type: SET_LOADING,
-    payload: loading
+    payload: loading,
   };
 };
 
 export const Filter_Post = () => {
   return {
-    type: TOGGLE_POST_FILTER
+    type: TOGGLE_POST_FILTER,
   };
 };
 
 export const Get_Posts = () => {
   return {
-    type: GET_POSTS
+    type: GET_POSTS,
   };
 };
 
 export const Clear_View_Post = () => {
   return {
-    type: CLEAR_VIEW_POST
+    type: CLEAR_VIEW_POST,
   };
 };
 
-export const Get_View_Post = postId => {
+export const Get_View_Post = (postId) => {
   return {
     type: GET_VIEW_POST,
-    payload: postId
+    payload: postId,
   };
 };
-export const Get_View_User_Post = postId => {
+export const Get_View_User_Post = (postId) => {
   return {
     type: GET_VIEW_USER_POST,
-    payload: postId
+    payload: postId,
   };
 };
-export const Set_User_Posts = userPosts => {
+export const Set_User_Posts = (userPosts) => {
   return {
     type: SET_USER_POSTS,
-    payload: userPosts
+    payload: userPosts,
   };
 };
 
-export const Delete_User_Post = postId => {
+export const Delete_User_Post = (postId) => {
   return {
     type: DELETE_USER_POSTS,
-    payload: postId
+    payload: postId,
   };
 };
 
-export const Save_New_Post = postData => {
+export const Save_New_Post = (postData) => {
   return {
     type: SAVE_NEW_POST,
-    payload: postData
+    payload: postData,
   };
 };
 
-export const Update_User_Post_Info = user => {
+export const Update_User_Post_Info = (user) => {
   return {
     type: UPDATE_USER_POST_INFO,
-    payload: user
+    payload: user,
   };
 };
 
-export const Update_User_Home_Post_Info = user => {
+export const Update_User_Home_Post_Info = (user) => {
   return {
     type: UPDATE_USER_HOME_POST_INFO,
-    payload: user
+    payload: user,
   };
 };
 
-export const Edit_Post = post => {
+export const Edit_Post = (post) => {
   return {
     type: EDIT_POST,
-    payload: post
+    payload: post,
   };
 };
 
 export const Clear_Edit_Post = () => {
   return {
-    type: CLEAR_EDIT_POST
+    type: CLEAR_EDIT_POST,
   };
 };
 
-export const Update_Edit_Post = post => {
+export const Update_Edit_Post = (post) => {
   return {
     type: UPDATE_EDIT_POST,
-    payload: post
+    payload: post,
+  };
+};
+
+export const Filter_Posts = (filter) => {
+  return {
+    type: FILTER_POSTS,
+    payload: filter,
   };
 };

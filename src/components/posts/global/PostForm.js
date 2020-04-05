@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import { Input, Select } from "antd";
 const { TextArea } = Input;
-const PostForm = props => {
+const PostForm = (props) => {
   const {
     postValues,
     handleChange,
     handleFocus,
     handleTags,
     filteredOptions,
-    readOnly
+    readOnly,
   } = props;
   return (
     <Fragment>
@@ -18,14 +18,14 @@ const PostForm = props => {
         placeholder="Write your post title..."
         value={postValues.postTitle.value}
         onChange={handleChange}
-        onFocus={e => handleFocus(e, true)}
-        onBlur={e => handleFocus(e, false)}
+        onFocus={(e) => handleFocus(e, true)}
+        onBlur={(e) => handleFocus(e, false)}
         maxLength={100}
         required
         readOnly={readOnly}
         style={{
           fontSize: "1.5rem",
-          fontWeight: "bold"
+          fontWeight: "bold",
         }}
       />
       {/* display the counter on focus */}
@@ -38,18 +38,18 @@ const PostForm = props => {
       {/* post description */}
       <TextArea
         name="postDescription"
-        onFocus={e => handleFocus(e, true)}
+        onFocus={(e) => handleFocus(e, true)}
         onChange={handleChange}
         value={postValues.postDescription.value}
         placeholder="Add Post Description...."
         autoSize={{ minRows: 3, maxRows: 6 }}
-        onBlur={e => handleFocus(e, false)}
+        onBlur={(e) => handleFocus(e, false)}
         maxLength={500}
         style={{
           resize: "none",
           fontSize: "1.5rem",
           fontWeight: "bold",
-          marginTop: "10px"
+          marginTop: "10px",
         }}
         readOnly={readOnly}
       />
@@ -65,18 +65,18 @@ const PostForm = props => {
         style={{
           marginTop: "10px",
           fontSize: "1.5rem",
-          fontWeight: "bold"
+          fontWeight: "bold",
         }}
       >
         <Select
+          disabled={readOnly}
           mode="multiple"
-          placeholder="Inserted are removed"
+          placeholder="Select tags related to your post..."
           value={postValues.postTags}
           onChange={handleTags}
           style={{ width: "100%" }}
-          disabled={readOnly}
         >
-          {filteredOptions.map(item => (
+          {filteredOptions.map((item) => (
             <Select.Option key={item} value={item}>
               {item}
             </Select.Option>

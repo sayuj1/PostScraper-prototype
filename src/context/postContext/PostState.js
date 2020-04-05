@@ -14,14 +14,15 @@ import {
   Update_User_Home_Post_Info,
   Edit_Post,
   Clear_Edit_Post,
-  Update_Edit_Post
+  Update_Edit_Post,
+  Filter_Posts,
 } from "./postActions.js";
 import moment from "moment";
 
-const PostState = props => {
+const PostState = (props) => {
   const initialState = {
     loading: false, // for loading (using in create-post component)
-    filterPost: false, // for showing users post only (on user profile page) [does not include post from saved collections]
+    filter: "latest", // for showing users post only (on user profile page) [does not include post from saved collections]
 
     viewPost: null, // contains requested post information
     posts: [
@@ -36,7 +37,7 @@ const PostState = props => {
         thumbnail: "",
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png", //optional
-        date: moment().format("ll")
+        date: moment().format("ll"),
       },
       {
         _id: 2,
@@ -48,7 +49,7 @@ const PostState = props => {
         postAuthor: "Sayuj",
         thumbnail: "",
         avatar: "",
-        date: moment().format("ll")
+        date: moment().format("ll"),
       },
       {
         _id: 3,
@@ -59,7 +60,7 @@ const PostState = props => {
         postAuthor: "Ram",
         thumbnail: "",
         avatar: "",
-        date: moment().format("ll")
+        date: moment().format("ll"),
       },
       {
         _id: 4,
@@ -70,7 +71,7 @@ const PostState = props => {
         postAuthor: "Rohan",
         thumbnail: "",
         avatar: "",
-        date: moment().format("ll")
+        date: moment().format("ll"),
       },
       {
         _id: 5,
@@ -81,7 +82,7 @@ const PostState = props => {
         postAuthor: "Shakir",
         thumbnail: "",
         avatar: "",
-        date: moment().format("ll")
+        date: moment().format("ll"),
       },
       {
         _id: 6,
@@ -92,7 +93,7 @@ const PostState = props => {
         postAuthor: "Sayuj1",
         thumbnail: "",
         avatar: "",
-        date: moment().format("ll")
+        date: moment().format("ll"),
       },
       {
         _id: 7,
@@ -103,8 +104,8 @@ const PostState = props => {
         postAuthor: "Varun",
         thumbnail: "",
         avatar: "",
-        date: moment().format("ll")
-      }
+        date: moment().format("ll"),
+      },
     ],
     userPosts: [
       {
@@ -117,7 +118,8 @@ const PostState = props => {
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" //optional
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png", //optional
+        date: moment().format("MMM D YYYY, h:mm:ss A"),
       },
       {
         _id: 2,
@@ -129,7 +131,8 @@ const PostState = props => {
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+        date: moment().subtract(1, "days").format("MMM D YYYY, h:mm:ss A"),
       },
       {
         _id: 3,
@@ -140,7 +143,8 @@ const PostState = props => {
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+        date: moment().subtract(2, "days").format("MMM D YYYY, h:mm:ss A"),
       },
       {
         _id: 4,
@@ -151,7 +155,8 @@ const PostState = props => {
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+        date: moment().subtract(3, "days").format("MMM D YYYY, h:mm:ss A"),
       },
       {
         _id: 5,
@@ -162,7 +167,8 @@ const PostState = props => {
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+        date: moment().subtract(4, "days").format("MMM D YYYY, h:mm:ss A"),
       },
       {
         _id: 6,
@@ -173,7 +179,8 @@ const PostState = props => {
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+        date: moment().subtract(5, "days").format("MMM D YYYY, h:mm:ss A"),
       },
       {
         _id: 7,
@@ -184,15 +191,16 @@ const PostState = props => {
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-      }
+          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+        date: moment().subtract(6, "days").format("MMM D YYYY, h:mm:ss A"),
+      },
     ], // default null
-    editablePost: null // edit post info store here
+    editablePost: null, // edit post info store here
   };
   // for mananging state
   const [state, dispatch] = useReducer(postReducer, initialState);
 
-  const setLoading = loading => {
+  const setLoading = (loading) => {
     dispatch(Set_Loading(loading));
   };
 
@@ -207,27 +215,27 @@ const PostState = props => {
   };
 
   // getting requested post information
-  const getViewPost = postId => {
+  const getViewPost = (postId) => {
     dispatch(Get_View_Post(postId));
   };
 
   // getting requested view user posts
-  const getViewUserPost = postId => {
+  const getViewUserPost = (postId) => {
     dispatch(Get_View_User_Post(postId));
   };
 
   // getting user posts and setting user posts to the state
-  const getUserPosts = userId => {
+  const getUserPosts = (userId) => {
     // get the user posts and then set the user posts in the
     // dispatch(Set_User_Posts(userPosts));
   };
 
   // deleting user posts
-  const deleteUserPost = postId => {
+  const deleteUserPost = (postId) => {
     dispatch(Delete_User_Post(postId));
   };
 
-  const saveNewPost = postData => {
+  const saveNewPost = (postData) => {
     // saving in the post state
 
     try {
@@ -238,15 +246,15 @@ const PostState = props => {
     }
   };
 
-  const updateUserPostInfo = user => {
+  const updateUserPostInfo = (user) => {
     dispatch(Update_User_Post_Info(user));
   };
 
-  const updateUserHomePostInfo = user => {
+  const updateUserHomePostInfo = (user) => {
     dispatch(Update_User_Home_Post_Info(user));
   };
 
-  const editPost = post => {
+  const editPost = (post) => {
     dispatch(Edit_Post(post));
   };
 
@@ -254,7 +262,7 @@ const PostState = props => {
     dispatch(Clear_Edit_Post());
   };
 
-  const updateEditPost = post => {
+  const updateEditPost = (post) => {
     try {
       dispatch(Update_Edit_Post(post));
       return "Post Edited Successfully!";
@@ -263,19 +271,22 @@ const PostState = props => {
     }
   };
 
+  const filterPosts = (filter) => {
+    dispatch(Filter_Posts(filter));
+  };
+
   return (
     // sharing post state values
     <PostContext.Provider
       value={{
         loading: state.loading,
+        filter: state.filter,
         posts: state.posts,
-
         viewPost: state.viewPost,
         userPosts: state.userPosts,
         editablePost: state.editablePost,
         setLoading: setLoading,
         getPosts: getPosts,
-
         clearViewPost: clearViewPost,
         getViewPost: getViewPost,
         getViewUserPost: getViewUserPost,
@@ -286,7 +297,8 @@ const PostState = props => {
         updateUserHomePostInfo: updateUserHomePostInfo,
         editPost: editPost,
         clearEditPost: clearEditPost,
-        updateEditPost: updateEditPost
+        updateEditPost: updateEditPost,
+        filterPosts: filterPosts,
       }}
     >
       {props.children}

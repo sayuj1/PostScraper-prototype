@@ -3,13 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 // import "../../../node_modules/antd/dist/antd.css";
 import PostSearch from "../posts/home/PostsSearch";
 import UserContext from "../../context/userContext/userContext";
-import { Menu, Avatar, Affix } from "antd";
+import { Menu, Avatar, Affix, Space } from "antd";
 import {
   HomeOutlined,
   SettingOutlined,
   UsergroupAddOutlined,
   WeiboOutlined,
-  UserOutlined
+  UserOutlined,
 } from "@ant-design/icons";
 const { SubMenu, Item, Divider } = Menu;
 const Navbar = () => {
@@ -22,7 +22,8 @@ const Navbar = () => {
   // setting menu keys
   const menuKeys = {
     "/": "home",
-    "/following": "following"
+    "/following": "following",
+    "/settings/edit-profile": "edit-profile",
   };
   menuKeys[username] = "user-profile";
 
@@ -49,7 +50,7 @@ const Navbar = () => {
             style={{
               fontSize: "30px",
               verticalAlign: "middle",
-              color: "dodgerblue"
+              color: "dodgerblue",
             }}
           />
         </Item>
@@ -66,33 +67,44 @@ const Navbar = () => {
           }
           key="settings"
         >
-          <Item key="edit-profile">Edit-Profile</Item>
+          <Item key="edit-profile">
+            <Link to="/settings/edit-profile">Edit-Profile</Link>
+          </Item>
+
           <Divider />
           <Item key="logout">Logout</Item>
         </SubMenu>
         <Item style={{ float: "right" }} key="user-profile">
           <Link to={user && `/user/${user.username}`}>
-            {user && [
-              user.avatar ? (
-                <Avatar
-                  key="user-avatar"
-                  src={user.avatar}
-                  size={24}
-                  style={{ verticalAlign: "text-bottom" }}
-                />
-              ) : (
-                <Avatar
-                  key="user-avatar"
-                  icon={<UserOutlined />}
-                  size={24}
-                  style={{
-                    backgroundColor: "#87d068",
-                    verticalAlign: "text-bottom"
-                  }}
-                />
-              ),
-              user.firstname
-            ]}
+            {user && (
+              <span style={{ textTransform: "capitalize" }}>
+                {[
+                  user.avatar ? (
+                    <Avatar
+                      key="user-avatar"
+                      src={user.avatar}
+                      size={24}
+                      style={{
+                        verticalAlign: "text-bottom",
+                        marginRight: "5px",
+                      }}
+                    />
+                  ) : (
+                    <Avatar
+                      key="user-avatar"
+                      icon={<UserOutlined />}
+                      size={24}
+                      style={{
+                        backgroundColor: "#87d068",
+                        verticalAlign: "text-bottom",
+                        marginRight: "5px",
+                      }}
+                    />
+                  ),
+                  user.firstname,
+                ]}
+              </span>
+            )}
           </Link>
         </Item>
         <Item key="following" style={{ float: "right" }}>

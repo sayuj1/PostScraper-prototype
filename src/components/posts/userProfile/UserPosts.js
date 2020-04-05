@@ -3,6 +3,7 @@ import UserContext from "../../../context/userContext/userContext";
 import PostContext from "../../../context/postContext/postContext";
 import UserPost from "../userProfile/UserPost";
 import { Row } from "antd";
+
 const UserPosts = () => {
   const { user } = useContext(UserContext);
   const { userPosts, getUserPosts } = useContext(PostContext);
@@ -16,11 +17,11 @@ const UserPosts = () => {
       <Row
         gutter={[
           { xs: 8, sm: 16, md: 24, lg: 48 },
-          { xs: 8, sm: 16, md: 24, lg: 48 }
+          { xs: 8, sm: 16, md: 24, lg: 48 },
         ]}
       >
         {userPosts.length !== 0 ? (
-          userPosts.map(userPost => (
+          userPosts.map((userPost) => (
             <UserPost key={userPost._id} post={userPost} />
           ))
         ) : (
