@@ -15,15 +15,17 @@ import {
   Edit_Post,
   Clear_Edit_Post,
   Update_Edit_Post,
-  Filter_Posts,
+  Filter_User_Posts,
+  Search_User_Posts_Filter,
+  Clear_Search_User_Posts_Filter,
 } from "./postActions.js";
 import moment from "moment";
 
 const PostState = (props) => {
   const initialState = {
     loading: false, // for loading (using in create-post component)
-    filter: "latest", // for showing users post only (on user profile page) [does not include post from saved collections]
-
+    userPostfilter: "latest", // for showing users post only (on user profile page) [does not include post from saved collections]
+    searchUserPosts: null,
     viewPost: null, // contains requested post information
     posts: [
       {
@@ -106,15 +108,16 @@ const PostState = (props) => {
         avatar: "",
         date: moment().format("ll"),
       },
-    ],
+    ], // default empty array
     userPosts: [
       {
         _id: 1,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/cat.png",
-        postTitle: "Here we Go!",
+        postTitle: "Sayuj",
         postDescription:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi turpis diam, pulvinar at ex at, mollis dictum justo. Aenean at aliquam ipsum. Duis tristique, lectus sodales pulvinar finibus, justo libero convallis ligula, ac bibendum magna mauris eget arcu. Sed suscipit augue at turpis rutrum rutrum. Nulla nec diam ut massa congue mollis finibus at tortor. Nunc suscipit elit ut elit lobortis maximus. Nulla facilisis euismod orci sed vulputate. Nulla posuere neque eu tellus pharetra, vitae tincidunt libero pellentesque. Vestibulum elit est, commodo id sapien sed, sodales vestibulum ante. Quisque eleifend, libero a hendrerit dictum, risus eros sagittis magna, ut mattis odio quam at odio. Curabitur vestibulum tincidunt erat sed ullamcorper. Aenean erat magna, lobortis sit amet risus non, hendrerit dapibus ex Duis sed leo in enim ultrices volutpat vel vel arcu. Pellentesque faucibus blandit condimentum. Aenean augue tellus, maximus vitae libero quis, tincidunt faucibus tellus. Fusce viverra ultrices feugiat. Nam non justo vel eros lobortis interdum eu maximus justo. Morbi et semper lectus, et dignissim quam. Pellentesque venenatis nisl nec blandit finibus. Donec laoreet, mauris eget commodo gravida, ipsum ipsum semper quam, in consectetur urna sapien id massa. Aenean condimentum viverra augue, ut interdum purus lobortis ac. Praesent at neque id massa consectetur congue quis in nibh. Nunc commodo at nisi non gravida. Morbi congue tincidunt nunc, vel mollis massa ultrices posuere. Integer feugiat urna ac orci auctor, nec consequat lectus consectetur. In cursus nisi commodo convallis sagittis.Ut nisi leo, pharetra quis laoreet a, hendrerit tempus enim. In at laoreet nisl. Maecenas vehicula, leo non condimentum tempus, libero ante suscipit dolor, sed venenatis purus tellus nec urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent hendrerit, mauris sed volutpat scelerisque, libero purus finibus massa, et facilisis eros ex consequat risus. Curabitur nulla augue, interdum vel urna sit amet, ultrices interdum libero. Donec a risus commodo, porttitor ante et, finibus sem. Morbi sagittis quam vel massa venenatis posuere. Vivamus ullamcorper, est at venenatis fermentum, ante nisl vehicula mi, nec tristique diam sem at mauris. Vivamus odio ligula, tristique eget magna ut, ultricies rhoncus magna. Aliquam quis lectus fringilla, sollicitudin tellus vitae, dignissim diam.",
-        tags: "", //optional
+        tags: [], //optional
+        category: "", // optional default null
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
@@ -124,10 +127,11 @@ const PostState = (props) => {
       {
         _id: 2,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/monarch.png",
-        postTitle: "Here we Go!",
+        postTitle: "by the way",
         postDescription:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         tags: ["WEB", "CSS", "JavaScript"],
+        category: "WEB DEVELOPMENT",
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
@@ -137,9 +141,10 @@ const PostState = (props) => {
       {
         _id: 3,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/mountain.png",
-        postTitle: "Here we Go!",
+        postTitle: "just testing it",
         postDescription: "www.google.com",
-        tags: ["HTML", "CSS", "JavaScript"],
+        tags: ["PYTHON", "SCIKIT", "PANDA"],
+        category: "MACHINE LEARNING",
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
@@ -149,9 +154,10 @@ const PostState = (props) => {
       {
         _id: 4,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png",
-        postTitle: "Here we Go!",
+        postTitle: "no big deal right",
         postDescription: "www.gmail.com",
         tags: ["HTML", "CSS", "JavaScript"],
+        category: "DUMMY",
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
@@ -161,9 +167,10 @@ const PostState = (props) => {
       {
         _id: 5,
         postImg: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
-        postTitle: "Here we Go!",
+        postTitle: "you are damn right",
         postDescription: "www.lava.com",
         tags: ["HTML", "CSS", "JavaScript"],
+        category: "",
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
@@ -173,9 +180,10 @@ const PostState = (props) => {
       {
         _id: 6,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/monarch.png",
-        postTitle: "Here we Go!",
+        postTitle: "ok then see you",
         postDescription: "www.wherever.com",
         tags: ["HTML", "CSS", "JavaScript"],
+        category: "WEB DEVELOPMENT",
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
@@ -185,16 +193,17 @@ const PostState = (props) => {
       {
         _id: 7,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/mountain.png",
-        postTitle: "Here we Go!",
+        postTitle: "see you soon",
         postDescription: "www.wohoo.com",
         tags: ["HTML", "CSS", "JavaScript"],
+        category: "MACHINE LEARNING",
         postAuthor: "sayuj1",
         thumbnail: "",
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
         date: moment().subtract(6, "days").format("MMM D YYYY, h:mm:ss A"),
       },
-    ], // default null
+    ], // default empty array
     editablePost: null, // edit post info store here
   };
   // for mananging state
@@ -271,8 +280,16 @@ const PostState = (props) => {
     }
   };
 
-  const filterPosts = (filter) => {
-    dispatch(Filter_Posts(filter));
+  const filterUserPosts = (filter) => {
+    dispatch(Filter_User_Posts(filter));
+  };
+
+  const searchUserPostsFilter = (searchValue, filterType) => {
+    dispatch(Search_User_Posts_Filter(searchValue, filterType));
+  };
+
+  const clearSearchUserPostsFilter = () => {
+    dispatch(Clear_Search_User_Posts_Filter());
   };
 
   return (
@@ -280,11 +297,12 @@ const PostState = (props) => {
     <PostContext.Provider
       value={{
         loading: state.loading,
-        filter: state.filter,
+        userPostfilter: state.userPostfilter,
         posts: state.posts,
         viewPost: state.viewPost,
         userPosts: state.userPosts,
         editablePost: state.editablePost,
+        searchUserPosts: state.searchUserPosts,
         setLoading: setLoading,
         getPosts: getPosts,
         clearViewPost: clearViewPost,
@@ -298,7 +316,9 @@ const PostState = (props) => {
         editPost: editPost,
         clearEditPost: clearEditPost,
         updateEditPost: updateEditPost,
-        filterPosts: filterPosts,
+        filterUserPosts: filterUserPosts,
+        searchUserPostsFilter: searchUserPostsFilter,
+        clearSearchUserPostsFilter: clearSearchUserPostsFilter,
       }}
     >
       {props.children}

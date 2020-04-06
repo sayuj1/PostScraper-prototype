@@ -13,7 +13,9 @@ import {
   EDIT_POST,
   CLEAR_EDIT_POST,
   UPDATE_EDIT_POST,
-  FILTER_POSTS,
+  FILTER_USER_POSTS,
+  SEARCH_USER_POSTS_FILTER,
+  CLEAR_SEARCH_USER_POSTS_FILTER,
 } from "./postTypes";
 
 export const Set_Loading = (loading) => {
@@ -108,9 +110,22 @@ export const Update_Edit_Post = (post) => {
   };
 };
 
-export const Filter_Posts = (filter) => {
+export const Filter_User_Posts = (filter) => {
   return {
-    type: FILTER_POSTS,
+    type: FILTER_USER_POSTS,
     payload: filter,
+  };
+};
+
+export const Search_User_Posts_Filter = (searchValue, filterType) => {
+  return {
+    type: SEARCH_USER_POSTS_FILTER,
+    payload: { value: searchValue, filter: filterType },
+  };
+};
+
+export const Clear_Search_User_Posts_Filter = () => {
+  return {
+    type: CLEAR_SEARCH_USER_POSTS_FILTER,
   };
 };

@@ -7,35 +7,111 @@ import React, {
   useEffect,
 } from "react";
 
-import { Row, Col, Menu } from "antd";
+import { Row, Col, Menu, Select, Input, Badge } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import PostContext from "../../../context/postContext/postContext";
 
 const UserPosts = lazy(() => import("../userProfile/UserPosts"));
 const UserSavePosts = lazy(() => import("./UserSavePosts"));
 const { SubMenu, Item } = Menu;
+const { Option } = Select;
 const PostsTabs = () => {
   const [currentSelected, setCurrentSelected] = useState("user-posts");
-  const { filter, filterPosts } = useContext(PostContext);
+  const {
+    userPostfilter,
+    filterUserPosts,
+    searchUserPostsFilter,
+    clearSearchUserPostsFilter,
+    userPosts,
+    searchUserPosts,
+  } = useContext(PostContext);
 
   useEffect(() => {
     // console.log(filter);
-    filterPosts(filter);
+    filterUserPosts(userPostfilter);
+    return () => {
+      // clearing search user post filter array on leaving the page (in case if user did not clear the search field before leaving the page)
+      clearSearchUserPostsFilter();
+    };
   }, []);
   const handleClick = (e) => {
-    // console.log(e.key);
-
     if (
       e.key !== "item_2-menu-item_0" &&
       e.key !== "item_2-menu-item_1" &&
       e.key !== "filter" &&
+      e.key !== "filter-search" &&
       e.key
     ) {
       setCurrentSelected(e.key);
     }
   };
+
+  const [filterType, setfilterType] = useState("postTitle");
+
+  const handleSelect = (value) => {
+    // console.log("Selected Value", value);
+    setfilterType(value);
+  };
+
+  const selectFilter = (
+    <Select
+      defaultValue="postTitle"
+      className="select-filter"
+      size="large"
+      onChange={handleSelect}
+    >
+      <Option value="postTitle">Title</Option>
+      <Option value="postAuthor">Author</Option>
+      <Option value="tags">Tags</Option>
+      <Option value="category">Category</Option>
+    </Select>
+  );
+
+  const handleSearchFilter = (e) => {
+    {
+      e.target.value
+        ? searchUserPostsFilter(e.target.value, filterType)
+        : clearSearchUserPostsFilter();
+    }
+
+    // console.log("Search value", e.target.value, filterType);
+  };
+
   return (
     <Fragment>
+      <Row style={{ backgroundColor: "white" }}>
+        <Col
+          xs={{ span: 24 }}
+          sm={{ span: 24 }}
+          md={{ span: 20, offset: 2 }}
+          lg={{ span: 20, offset: 2 }}
+        >
+          <div
+            style={{
+              margin: "20px 20px 0px 20px",
+              fontSize: "1.2rem",
+              fontWeight: "600",
+            }}
+          >
+            Total Posts Found:
+            <Badge
+              count={
+                searchUserPosts !== null
+                  ? searchUserPosts.length
+                  : userPosts.length
+              }
+              showZero={true}
+              style={{
+                marginLeft: "10px",
+                backgroundColor: "#faad14",
+                fontSize: "1.2rem",
+                fontWeight: "600",
+                padding: "0px 10px",
+              }}
+            />
+          </div>
+        </Col>
+      </Row>
       <Row style={{ backgroundColor: "white" }}>
         {/* tabs */}
         <Col
@@ -60,13 +136,16 @@ const PostsTabs = () => {
                   <span className="submenu-title-wrapper">
                     Filter
                     <DownOutlined
-                      style={{ verticalAlign: "middle", marginLeft: "10px" }}
+                      style={{
+                        verticalAlign: "middle",
+                        marginLeft: "10px",
+                      }}
                     />
                   </span>
                 }
               >
-                <Item onClick={() => filterPosts("latest")}>Latest</Item>
-                <Item onClick={() => filterPosts("oldest")}>Oldest</Item>
+                <Item onClick={() => filterUserPosts("latest")}>Latest</Item>
+                <Item onClick={() => filterUserPosts("oldest")}>Oldest</Item>
               </SubMenu>
               <Item key="filter" disabled>
                 <span
@@ -80,7 +159,18 @@ const PostsTabs = () => {
                     textTransform: "capitalize",
                   }}
                 >
-                  {filter}
+                  {userPostfilter}
+                </span>
+              </Item>
+              <Item key="filter-search">
+                {/* search post filter */}
+                <span>
+                  <Input
+                    addonAfter={selectFilter}
+                    placeholder="Search your posts by...."
+                    size="large"
+                    onChange={handleSearchFilter}
+                  />
                 </span>
               </Item>
             </Menu>

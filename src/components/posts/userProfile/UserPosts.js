@@ -6,7 +6,7 @@ import { Row } from "antd";
 
 const UserPosts = () => {
   const { user } = useContext(UserContext);
-  const { userPosts, getUserPosts } = useContext(PostContext);
+  const { userPosts, getUserPosts, searchUserPosts } = useContext(PostContext);
   useEffect(() => {
     // loading user posts after page load
     getUserPosts(user._id);
@@ -20,7 +20,15 @@ const UserPosts = () => {
           { xs: 8, sm: 16, md: 24, lg: 48 },
         ]}
       >
-        {userPosts.length !== 0 ? (
+        {searchUserPosts !== null ? (
+          searchUserPosts.length !== 0 ? (
+            searchUserPosts.map((searchUserPosts) => (
+              <UserPost key={searchUserPosts._id} post={searchUserPosts} />
+            ))
+          ) : (
+            <h2 style={{ padding: "30px" }}>No Posts Found!</h2>
+          )
+        ) : userPosts.length !== 0 ? (
           userPosts.map((userPost) => (
             <UserPost key={userPost._id} post={userPost} />
           ))
