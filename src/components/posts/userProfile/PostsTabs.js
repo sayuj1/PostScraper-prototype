@@ -139,9 +139,9 @@ const PostsTabs = () => {
               <Item key="info-icon">
                 <Popover
                   trigger="click"
-                  title="Tags should be separated by ','"
+                  title="Tags should be separated by comma ','"
                 >
-                  <InfoCircleOutlined />
+                  <InfoCircleOutlined style={{ fontSize: "32px" }} />
                 </Popover>
               </Item>
 

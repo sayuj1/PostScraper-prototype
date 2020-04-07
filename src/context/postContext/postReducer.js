@@ -166,14 +166,14 @@ const postReducer = (state, action) => {
         userPostfilter: action.payload,
       };
     case SEARCH_USER_POSTS_FILTER:
-      let searchValue = action.payload.value.trim();
-      searchValue = searchValue.replace(/[^a-zA-Z0-9 ]/g, "");
+      let searchValue = action.payload.value.replace(/[^a-zA-Z0-9 ]/g, "");
+      searchValue = searchValue.trim();
       // console.log("search value ", `${searchValue}`, typeof `${searchValue}`);
       const reg = new RegExp(`${searchValue}`, "gi");
       let searchTag = action.payload.value.split(",");
-      searchTag = searchTag.map((s) => s.trim());
       searchTag = searchTag.map((s) => s.replace(/[^a-zA-Z ]/g, ""));
-      console.log("Search Tag ", searchTag);
+      searchTag = searchTag.map((s) => s.trim());
+      // console.log("Search Tag ", searchTag);
       // let i = 0;
       // let postFound = [];
       // for (; i < state.userPosts.length; i++) {
