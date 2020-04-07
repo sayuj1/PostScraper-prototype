@@ -7,8 +7,8 @@ import React, {
   useEffect,
 } from "react";
 
-import { Row, Col, Menu, Select, Input, Badge } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Row, Col, Menu, Select, Input, Badge, Popover } from "antd";
+import { DownOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import PostContext from "../../../context/postContext/postContext";
 
 const UserPosts = lazy(() => import("../userProfile/UserPosts"));
@@ -35,13 +35,7 @@ const PostsTabs = () => {
     };
   }, []);
   const handleClick = (e) => {
-    if (
-      e.key !== "item_2-menu-item_0" &&
-      e.key !== "item_2-menu-item_1" &&
-      e.key !== "filter" &&
-      e.key !== "filter-search" &&
-      e.key
-    ) {
+    if (e.key === "user-posts" || e.key === "user-saved-posts") {
       setCurrentSelected(e.key);
     }
   };
@@ -131,6 +125,26 @@ const PostsTabs = () => {
               <Item key="user-posts"> Posts</Item>
               <Item key="user-saved-posts">Saved Posts</Item>
 
+              <Item key="filter-search">
+                {/* search post filter */}
+                <span>
+                  <Input
+                    addonAfter={selectFilter}
+                    placeholder="Search your posts by...."
+                    size="large"
+                    onChange={handleSearchFilter}
+                  />
+                </span>
+              </Item>
+              <Item key="info-icon">
+                <Popover
+                  trigger="click"
+                  title="Tags should be separated by ','"
+                >
+                  <InfoCircleOutlined />
+                </Popover>
+              </Item>
+
               <SubMenu
                 title={
                   <span className="submenu-title-wrapper">
@@ -160,17 +174,6 @@ const PostsTabs = () => {
                   }}
                 >
                   {userPostfilter}
-                </span>
-              </Item>
-              <Item key="filter-search">
-                {/* search post filter */}
-                <span>
-                  <Input
-                    addonAfter={selectFilter}
-                    placeholder="Search your posts by...."
-                    size="large"
-                    onChange={handleSearchFilter}
-                  />
                 </span>
               </Item>
             </Menu>

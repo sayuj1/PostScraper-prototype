@@ -54,6 +54,11 @@ const postReducer = (state, action) => {
     case DELETE_USER_POSTS:
       return {
         ...state,
+        searchUserPosts: state.searchUserPosts
+          ? state.searchUserPosts.filter(
+              (searchUserPost) => searchUserPost._id !== action.payload
+            )
+          : null,
         userPosts: state.userPosts.filter(
           (userPost) => userPost._id !== action.payload
         ),
@@ -162,9 +167,13 @@ const postReducer = (state, action) => {
       };
     case SEARCH_USER_POSTS_FILTER:
       let searchValue = action.payload.value.trim();
+      searchValue = searchValue.replace(/[^a-zA-Z0-9 ]/g, "");
+      // console.log("search value ", `${searchValue}`, typeof `${searchValue}`);
       const reg = new RegExp(`${searchValue}`, "gi");
       let searchTag = action.payload.value.split(",");
       searchTag = searchTag.map((s) => s.trim());
+      searchTag = searchTag.map((s) => s.replace(/[^a-zA-Z ]/g, ""));
+      // console.log("Search Tag ", searchTag);
       // let i = 0;
       // let postFound = [];
       // for (; i < state.userPosts.length; i++) {
