@@ -173,7 +173,7 @@ const postReducer = (state, action) => {
       let searchTag = action.payload.value.split(",");
       searchTag = searchTag.map((s) => s.trim());
       searchTag = searchTag.map((s) => s.replace(/[^a-zA-Z ]/g, ""));
-      // console.log("Search Tag ", searchTag);
+      console.log("Search Tag ", searchTag);
       // let i = 0;
       // let postFound = [];
       // for (; i < state.userPosts.length; i++) {
@@ -202,9 +202,13 @@ const postReducer = (state, action) => {
                 let j = 0;
 
                 for (; j < searchTag.length; j++) {
-                  if (searchTag[j].toLowerCase() == tag.toLowerCase()) {
+                  let reg1 = new RegExp(`${searchTag[j]}`, "gi");
+                  if (searchTag[j] !== "" && tag.match(reg1)) {
                     return true;
                   }
+                  // if (searchTag[j].toLowerCase() == tag.toLowerCase()) {
+                  //   return true;
+                  // }
                 }
                 return false;
               }).length !== 0
