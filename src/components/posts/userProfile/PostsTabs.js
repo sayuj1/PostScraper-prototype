@@ -56,7 +56,7 @@ const PostsTabs = () => {
       onChange={handleSelect}
     >
       <Option value="postTitle">Title</Option>
-      <Option value="postAuthor">Author</Option>
+      {/* <Option value="postAuthor">Author</Option> */}
       <Option value="tags">Tags</Option>
       <Option value="category">Category</Option>
     </Select>
