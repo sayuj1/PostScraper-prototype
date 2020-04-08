@@ -64,21 +64,21 @@ const UserPost = (props) => {
                 />
               </Tooltip>
             ),
-            <span style={{ marginLeft: "10px" }} key={user.username + _id}>
+            <span style={{ marginLeft: "10px" }} key={user.username}>
               {postAuthor}
             </span>,
           ]}
           extra={
             postAuthor.toLowerCase() === user.username.toLowerCase() ? (
               <Popover
-                key={_id + user.username}
+                key={_id}
                 trigger="click"
                 placement="right"
                 content={[
-                  <EditPostBtn post={props.post} key={_id + user.username} />,
+                  <EditPostBtn post={props.post} key={_id} />,
                   ,
                   // delete btn component
-                  <DeletePostBtn _id={_id} key={_id + user.username} />,
+                  <DeletePostBtn _id={_id} key={_id} />,
                 ]}
               >
                 <MoreOutlined style={{ fontSize: "20px" }} title="Settings" />
