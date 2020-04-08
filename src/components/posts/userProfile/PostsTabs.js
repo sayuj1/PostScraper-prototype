@@ -24,6 +24,7 @@ const PostsTabs = () => {
     clearSearchUserPostsFilter,
     userPosts,
     searchUserPosts,
+    userSavedPosts,
   } = useContext(PostContext);
 
   useEffect(() => {
@@ -88,21 +89,35 @@ const PostsTabs = () => {
             }}
           >
             Total Posts Found:
-            <Badge
-              count={
-                searchUserPosts !== null
-                  ? searchUserPosts.length
-                  : userPosts.length
-              }
-              showZero={true}
-              style={{
-                marginLeft: "10px",
-                backgroundColor: "#faad14",
-                fontSize: "1.2rem",
-                fontWeight: "600",
-                padding: "0px 10px",
-              }}
-            />
+            {currentSelected === "user-posts" ? (
+              <Badge
+                count={
+                  searchUserPosts !== null
+                    ? searchUserPosts.length
+                    : userPosts.length
+                }
+                showZero={true}
+                style={{
+                  marginLeft: "10px",
+                  backgroundColor: "#faad14",
+                  fontSize: "1.2rem",
+                  fontWeight: "600",
+                  padding: "0px 10px",
+                }}
+              />
+            ) : (
+              <Badge
+                count={userSavedPosts.length}
+                showZero={true}
+                style={{
+                  marginLeft: "10px",
+                  backgroundColor: "#faad14",
+                  fontSize: "1.2rem",
+                  fontWeight: "600",
+                  padding: "0px 10px",
+                }}
+              />
+            )}
           </div>
         </Col>
       </Row>
@@ -125,60 +140,68 @@ const PostsTabs = () => {
               <Item key="user-posts"> Posts</Item>
               <Item key="user-saved-posts">Saved Posts</Item>
 
-              <Item key="filter-search">
-                {/* search post filter */}
-                <span>
-                  <Input
-                    addonAfter={selectFilter}
-                    placeholder="Search your posts by...."
-                    size="large"
-                    onChange={handleSearchFilter}
-                  />
-                </span>
-              </Item>
-              {/* showing tag info icon */}
-              {filterType === "tags" ? (
-                <Item key="info-icon">
-                  <Popover
-                    trigger="click"
-                    content="Tags should be separated by comma ','"
-                  >
-                    <InfoCircleOutlined style={{ fontSize: "32px" }} />
-                  </Popover>
-                </Item>
-              ) : null}
-
-              <SubMenu
-                title={
-                  <span className="submenu-title-wrapper">
-                    Filter
-                    <DownOutlined
-                      style={{
-                        verticalAlign: "middle",
-                        marginLeft: "10px",
-                      }}
+              {currentSelected === "user-posts" ? (
+                <Item key="filter-search">
+                  {/* search post filter */}
+                  <span>
+                    <Input
+                      addonAfter={selectFilter}
+                      placeholder="Search your posts by...."
+                      size="large"
+                      onChange={handleSearchFilter}
                     />
                   </span>
-                }
-              >
-                <Item onClick={() => filterUserPosts("latest")}>Latest</Item>
-                <Item onClick={() => filterUserPosts("oldest")}>Oldest</Item>
-              </SubMenu>
-              <Item key="filter" disabled>
-                <span
-                  style={{
-                    borderRadius: "10px",
-                    backgroundColor: "#2db7f5",
-                    color: "white",
-                    padding: "5px",
-                    fontWeight: "bold",
-                    fontSize: "1rem",
-                    textTransform: "capitalize",
-                  }}
+                </Item>
+              ) : null}
+              {currentSelected === "user-posts" ? (
+                filterType === "tags" ? (
+                  //* showing tag info icon
+                  <Item key="info-icon">
+                    <Popover
+                      trigger="click"
+                      content="Tags should be separated by comma ','"
+                    >
+                      <InfoCircleOutlined style={{ fontSize: "32px" }} />
+                    </Popover>
+                  </Item>
+                ) : null
+              ) : null}
+              {currentSelected === "user-posts" ? (
+                <SubMenu
+                  title={
+                    <span className="submenu-title-wrapper">
+                      Filter
+                      <DownOutlined
+                        style={{
+                          verticalAlign: "middle",
+                          marginLeft: "10px",
+                        }}
+                      />
+                    </span>
+                  }
                 >
-                  {userPostfilter}
-                </span>
-              </Item>
+                  <Item onClick={() => filterUserPosts("latest")}>Latest</Item>
+                  <Item onClick={() => filterUserPosts("oldest")}>Oldest</Item>
+                </SubMenu>
+              ) : null}
+
+              {currentSelected === "user-posts" ? (
+                <Item key="filter" disabled>
+                  <span
+                    style={{
+                      borderRadius: "10px",
+                      backgroundColor: "#2db7f5",
+                      color: "white",
+                      padding: "5px",
+                      fontWeight: "bold",
+                      fontSize: "1rem",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {userPostfilter}
+                  </span>
+                </Item>
+              ) : null}
             </Menu>
 
             <Row

@@ -18,6 +18,9 @@ import {
   Filter_User_Posts,
   Search_User_Posts_Filter,
   Clear_Search_User_Posts_Filter,
+  Save_Post,
+  Remove_Save_Post,
+  Set_User_Saved_Posts,
 } from "./postActions.js";
 import moment from "moment";
 
@@ -40,6 +43,7 @@ const PostState = (props) => {
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png", //optional
         date: moment().format("ll"),
+        postSavedBy: ["mohan"], // default: empty array, contains username of users who saved it
       },
       {
         _id: 2,
@@ -52,6 +56,7 @@ const PostState = (props) => {
         thumbnail: "",
         avatar: "",
         date: moment().format("ll"),
+        postSavedBy: ["varun"],
       },
       {
         _id: 3,
@@ -63,6 +68,7 @@ const PostState = (props) => {
         thumbnail: "",
         avatar: "",
         date: moment().format("ll"),
+        postSavedBy: [],
       },
       {
         _id: 4,
@@ -74,6 +80,7 @@ const PostState = (props) => {
         thumbnail: "",
         avatar: "",
         date: moment().format("ll"),
+        postSavedBy: [],
       },
       {
         _id: 5,
@@ -85,6 +92,7 @@ const PostState = (props) => {
         thumbnail: "",
         avatar: "",
         date: moment().format("ll"),
+        postSavedBy: [],
       },
       {
         _id: 6,
@@ -92,10 +100,11 @@ const PostState = (props) => {
         postTitle: "Here we Go!",
         postDescription: "www.wherever.com",
         tags: ["HTML", "CSS", "JavaScript"],
-        postAuthor: "Sayuj1",
+        postAuthor: "Mohan",
         thumbnail: "",
         avatar: "",
         date: moment().format("ll"),
+        postSavedBy: [],
       },
       {
         _id: 7,
@@ -107,11 +116,12 @@ const PostState = (props) => {
         thumbnail: "",
         avatar: "",
         date: moment().format("ll"),
+        postSavedBy: [],
       },
     ], // default empty array
     userPosts: [
       {
-        _id: 1,
+        _id: 21,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/cat.png",
         postTitle: "Sayuj",
         postDescription:
@@ -123,9 +133,10 @@ const PostState = (props) => {
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png", //optional
         date: moment().format("MMM D YYYY, h:mm:ss A"),
+        postSavedBy: [],
       },
       {
-        _id: 2,
+        _id: 22,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/monarch.png",
         postTitle: "by the way",
         postDescription:
@@ -137,9 +148,10 @@ const PostState = (props) => {
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
         date: moment().subtract(1, "days").format("MMM D YYYY, h:mm:ss A"),
+        postSavedBy: [],
       },
       {
-        _id: 3,
+        _id: 23,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/mountain.png",
         postTitle: "just testing it",
         postDescription: "www.google.com",
@@ -150,9 +162,10 @@ const PostState = (props) => {
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
         date: moment().subtract(2, "days").format("MMM D YYYY, h:mm:ss A"),
+        postSavedBy: [],
       },
       {
-        _id: 4,
+        _id: 24,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png",
         postTitle: "no big deal right",
         postDescription: "www.gmail.com",
@@ -163,9 +176,10 @@ const PostState = (props) => {
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
         date: moment().subtract(3, "days").format("MMM D YYYY, h:mm:ss A"),
+        postSavedBy: [],
       },
       {
-        _id: 5,
+        _id: 25,
         postImg: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
         postTitle: "you are damn right",
         postDescription: "www.lava.com",
@@ -176,9 +190,10 @@ const PostState = (props) => {
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
         date: moment().subtract(4, "days").format("MMM D YYYY, h:mm:ss A"),
+        postSavedBy: [],
       },
       {
-        _id: 6,
+        _id: 26,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/monarch.png",
         postTitle: "ok then see you",
         postDescription: "www.wherever.com",
@@ -189,9 +204,10 @@ const PostState = (props) => {
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
         date: moment().subtract(5, "days").format("MMM D YYYY, h:mm:ss A"),
+        postSavedBy: [],
       },
       {
-        _id: 7,
+        _id: 27,
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/mountain.png",
         postTitle: "see you soon",
         postDescription: "www.wohoo.com",
@@ -202,9 +218,11 @@ const PostState = (props) => {
         avatar:
           "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
         date: moment().subtract(6, "days").format("MMM D YYYY, h:mm:ss A"),
+        postSavedBy: [],
       },
     ], // default empty array
     editablePost: null, // edit post info store here
+    userSavedPosts: [], //* contains saved posts id (on server-side), on client-side it contains user posts
   };
   // for mananging state
   const [state, dispatch] = useReducer(postReducer, initialState);
@@ -213,7 +231,7 @@ const PostState = (props) => {
     dispatch(Set_Loading(loading));
   };
 
-  // getting posts
+  // getting posts (at home page)
   const getPosts = () => {
     dispatch(Get_Posts());
   };
@@ -292,6 +310,22 @@ const PostState = (props) => {
     dispatch(Clear_Search_User_Posts_Filter());
   };
 
+  //* saving post as a collection
+  const savePost = (post, user) => {
+    //TODO: send post _id to the server for saving in the users collection
+    dispatch(Save_Post(post, user));
+  };
+
+  const removeSavePost = (postId, user) => {
+    dispatch(Remove_Save_Post(postId, user));
+  };
+
+  //* getting user saved posts
+  const getUserSavedPosts = (userId) => {
+    //TODO: send this user id to the server to fetch user save posts
+    // dispatch(Set_User_Saved_Posts(userSavedPosts));
+  };
+
   return (
     // sharing post state values
     <PostContext.Provider
@@ -303,6 +337,7 @@ const PostState = (props) => {
         userPosts: state.userPosts,
         editablePost: state.editablePost,
         searchUserPosts: state.searchUserPosts,
+        userSavedPosts: state.userSavedPosts,
         setLoading: setLoading,
         getPosts: getPosts,
         clearViewPost: clearViewPost,
@@ -319,6 +354,9 @@ const PostState = (props) => {
         filterUserPosts: filterUserPosts,
         searchUserPostsFilter: searchUserPostsFilter,
         clearSearchUserPostsFilter: clearSearchUserPostsFilter,
+        savePost: savePost,
+        removeSavePost: removeSavePost,
+        getUserSavedPosts: getUserSavedPosts,
       }}
     >
       {props.children}

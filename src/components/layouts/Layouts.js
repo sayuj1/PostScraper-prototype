@@ -56,6 +56,7 @@ const Layouts = () => {
                         path="/:userName/post/:id"
                         component={ViewPost}
                       />
+
                       <Route
                         exact
                         path="/create-post/"

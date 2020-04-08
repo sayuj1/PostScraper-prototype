@@ -16,6 +16,9 @@ import {
   FILTER_USER_POSTS,
   SEARCH_USER_POSTS_FILTER,
   CLEAR_SEARCH_USER_POSTS_FILTER,
+  SAVE_POST,
+  REMOVE_SAVE_POST,
+  SET_USER_SAVED_POSTS,
 } from "./postTypes";
 
 const postReducer = (state, action) => {
@@ -65,6 +68,9 @@ const postReducer = (state, action) => {
         posts: state.posts.filter(
           (userPost) => userPost._id !== action.payload
         ),
+        userSavedPosts: state.userSavedPosts.filter(
+          (userSavedPost) => userSavedPost._id !== action.payload
+        ),
       };
 
     case SAVE_NEW_POST:
@@ -81,6 +87,14 @@ const postReducer = (state, action) => {
           action.payload.avatar
             ? { ...post, avatar: action.payload.avatar }
             : { ...post, avatar: action.payload.avatar }
+        ),
+        userSavedPosts: state.userSavedPosts.map((savedPost) =>
+          savedPost.postAuthor.toLowerCase() ===
+          action.payload.username.toLowerCase()
+            ? action.payload.avatar
+              ? { ...savedPost, avatar: action.payload.avatar }
+              : { ...savedPost, avatar: action.payload.avatar }
+            : savedPost
         ),
       };
     case UPDATE_USER_HOME_POST_INFO:
@@ -125,6 +139,16 @@ const postReducer = (state, action) => {
                 tags: action.payload.postTags,
               }
             : userPost
+        ),
+        userSavedPosts: state.userSavedPosts.map((userSavedPost) =>
+          userSavedPost._id === action.payload._id
+            ? {
+                ...userSavedPost,
+                postTitle: action.payload.postTitle,
+                postDescription: action.payload.postDescription,
+                tags: action.payload.postTags,
+              }
+            : userSavedPost
         ),
       };
     case FILTER_USER_POSTS:
@@ -200,7 +224,6 @@ const postReducer = (state, action) => {
             ? userPost[action.payload.filter].match(reg)
             : userPost.tags.filter((tag) => {
                 let j = 0;
-
                 for (; j < searchTag.length; j++) {
                   let reg1 = new RegExp(`${searchTag[j]}`, "gi");
                   if (searchTag[j] !== "" && tag.match(reg1)) {
@@ -219,6 +242,59 @@ const postReducer = (state, action) => {
       return {
         ...state,
         searchUserPosts: null,
+      };
+    case SAVE_POST:
+      return {
+        ...state,
+        userSavedPosts: [action.payload.post, ...state.userSavedPosts],
+        posts: state.posts.map((post) =>
+          post._id === action.payload.post._id
+            ? {
+                ...post,
+                postSavedBy: [action.payload.user, ...post.postSavedBy],
+              }
+            : post
+        ),
+        userPosts: state.userPosts.map((userPost) =>
+          userPost._id === action.payload.post._id
+            ? {
+                ...userPost,
+                postSavedBy: [action.payload.user, ...userPost.postSavedBy],
+              }
+            : userPost
+        ),
+      };
+    case REMOVE_SAVE_POST:
+      return {
+        ...state,
+        userSavedPosts: state.userSavedPosts.filter(
+          (savedPost) => savedPost._id !== action.payload.postId
+        ),
+        posts: state.posts.map((post) =>
+          post._id === action.payload.postId
+            ? {
+                ...post,
+                postSavedBy: post.postSavedBy.filter(
+                  (postSavedBy) => postSavedBy !== action.payload.user
+                ),
+              }
+            : post
+        ),
+        userPosts: state.userPosts.map((userPost) =>
+          userPost._id === action.payload.postId
+            ? {
+                ...userPost,
+                postSavedBy: userPost.postSavedBy.filter(
+                  (postSavedBy) => postSavedBy !== action.payload.user
+                ),
+              }
+            : userPost
+        ),
+      };
+    case SET_USER_SAVED_POSTS:
+      return {
+        ...state,
+        userSavedPosts: [action.payload],
       };
     default:
       return state;
