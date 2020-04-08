@@ -10,7 +10,7 @@ const SavePostBtn = (props) => {
 
   const handleSave = () => {
     savePost(post, user.username);
-    message.success("Posts Saved Posts!");
+    message.success("Posts Saved!");
   };
 
   return (

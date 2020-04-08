@@ -23,8 +23,6 @@ const PostsTabs = () => {
     }
   };
 
-  const [filterType, setfilterType] = useState("postTitle");
-
   return (
     <Fragment>
       <Row style={{ backgroundColor: "white" }}>
@@ -59,10 +57,7 @@ const PostsTabs = () => {
               {currentSelected === "user-posts" ? (
                 <Item key="filter-search">
                   {/* search post filter */}
-                  <UserPostsSearchFilter
-                    setfilterType={setfilterType}
-                    filterType={filterType}
-                  />
+                  <UserPostsSearchFilter />
                 </Item>
               ) : null}
 

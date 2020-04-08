@@ -1,14 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PostContext from "../../../context/postContext/postContext";
 import { Select, Input, Popover } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 const { Option } = Select;
-const UserPostsSearchFilter = (props) => {
-  const { setfilterType, filterType } = props;
+const UserPostsSearchFilter = () => {
   const { searchUserPostsFilter, clearSearchUserPostsFilter } = useContext(
     PostContext
   );
-
+  const [filterType, setfilterType] = useState("postTitle");
   useEffect(() => {
     return () => {
       // clearing search user post filter array on leaving the page (in case if user did not clear the search field before leaving the page)
