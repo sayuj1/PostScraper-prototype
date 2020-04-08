@@ -20,7 +20,12 @@ const EditPostBtn = (props) => {
   return (
     <Fragment>
       <Button type="default" block onClick={handleEdit}>
-        <FontAwesomeIcon icon={faEdit} size="lg" />
+        Edit
+        <FontAwesomeIcon
+          icon={faEdit}
+          size="sm"
+          style={{ marginLeft: "10px" }}
+        />
       </Button>
     </Fragment>
   );

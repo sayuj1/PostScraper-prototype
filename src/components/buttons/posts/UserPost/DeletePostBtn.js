@@ -24,7 +24,13 @@ const DeletePostBtn = (props) => {
         onConfirm={handleDelete}
       >
         <Button type="danger" block>
-          <FontAwesomeIcon icon={faTrash} size="lg" />
+          {/* <FontAwesomeIcon icon={faTrash} size="lg" /> */}
+          Delete
+          <FontAwesomeIcon
+            icon={faTrash}
+            size="sm"
+            style={{ marginLeft: "10px" }}
+          />
         </Button>
       </Popconfirm>
     </Fragment>

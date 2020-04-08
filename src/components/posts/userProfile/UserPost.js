@@ -1,6 +1,7 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 // components
-import { Card, Col } from "antd";
+import { Card, Col, Popover, Avatar, Tooltip } from "antd";
+import { UserOutlined, MoreOutlined } from "@ant-design/icons";
 import DeletePostBtn from "../../buttons/posts/UserPost/DeletePostBtn";
 
 import PostImage from "../global/PostImage";
@@ -8,15 +9,18 @@ import ViewPostBtn from "../../buttons/posts/UserPost/ViewPostBtn";
 import EditPostBtn from "../../buttons/posts/UserPost/EditPostBtn";
 import UserContext from "../../../context/userContext/userContext";
 import RemoveSavePostBtn from "../../buttons/posts/ViewPost/RemoveSavePostBtn";
+import SavePostBtn from "../../buttons/posts/ViewPost/SavePostBtn";
+import PostContext from "../../../context/postContext/postContext";
 
 const { Meta } = Card;
 
 // this component will display each post which is coming from "Posts" component
 const UserPost = (props) => {
   // post information
-  const { _id, postImg, postTitle, tags, postAuthor } = props.post;
-  const { saved } = props;
+  const { _id, postImg, postTitle, tags, postAuthor, avatar } = props.post;
+  const { userSavedPosts } = useContext(PostContext);
   const { user } = useContext(UserContext);
+
   return (
     <Fragment>
       {/* defining how much space should each post take */}
@@ -28,26 +32,70 @@ const UserPost = (props) => {
       >
         {/* post information is shown */}
         <Card
-          extra={<ViewPostBtn _id={_id} postAuthor={postAuthor} />}
-          actions={
-            postAuthor.toLowerCase() === user.username.toLowerCase()
-              ? [
+          title={[
+            avatar ? (
+              <Tooltip title={postAuthor}>
+                <Avatar src={avatar} size="small" alt="avatar not supported" />
+              </Tooltip>
+            ) : (
+              <Tooltip title={postAuthor}>
+                <Avatar
+                  style={{ backgroundColor: "#87d068" }}
+                  icon={<UserOutlined />}
+                  size="small"
+                  alt="avatar not supported"
+                />
+              </Tooltip>
+            ),
+            <span style={{ marginLeft: "10px" }}>{postAuthor}</span>,
+          ]}
+          bordered={true}
+          hoverable
+          extra={
+            postAuthor.toLowerCase() === user.username.toLowerCase() ? (
+              <Popover
+                trigger="click"
+                placement="right"
+                content={[
                   <EditPostBtn post={props.post} />,
+                  ,
                   // delete btn component
                   <DeletePostBtn _id={_id} />,
-                ]
-              : [<RemoveSavePostBtn _id={_id} block="block" />]
+                ]}
+              >
+                <MoreOutlined style={{ fontSize: "20px" }} title="Settings" />
+              </Popover>
+            ) : null
           }
-          bordered={false}
-          title={postTitle}
-          hoverable
-          style={{ width: "100%", borderRadius: "10px" }}
-          cover={<PostImage postImg={postImg} height="300px" />}
+          actions={[
+            userSavedPosts.length !== 0 ? (
+              userSavedPosts.find((userSaved) =>
+                userSaved._id === _id
+                  ? true // break here
+                  : null
+              ) ? (
+                <RemoveSavePostBtn _id={_id} block="block" />
+              ) : (
+                <SavePostBtn post={props.post} block="block" />
+              )
+            ) : (
+              <SavePostBtn post={props.post} block="block" />
+            ),
+          ]}
         >
-          <Meta
-            style={{ fontWeight: "bolder" }}
-            description={tags.length !== 0 ? "Related To: " + tags : null}
-          />
+          <Card
+            type="inner"
+            extra={<ViewPostBtn _id={_id} postAuthor={postAuthor} />}
+            bordered={false}
+            title={postTitle}
+            style={{ width: "100%", borderRadius: "10px" }}
+            cover={<PostImage postImg={postImg} height="300px" />}
+          >
+            <Meta
+              style={{ fontWeight: "bolder" }}
+              description={tags.length !== 0 ? "Related To: " + tags : null}
+            />
+          </Card>
         </Card>
       </Col>
     </Fragment>
