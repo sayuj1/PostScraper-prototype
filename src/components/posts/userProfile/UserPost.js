@@ -32,41 +32,8 @@ const UserPost = (props) => {
       >
         {/* post information is shown */}
         <Card
-          title={[
-            avatar ? (
-              <Tooltip title={postAuthor}>
-                <Avatar src={avatar} size="small" alt="avatar not supported" />
-              </Tooltip>
-            ) : (
-              <Tooltip title={postAuthor}>
-                <Avatar
-                  style={{ backgroundColor: "#87d068" }}
-                  icon={<UserOutlined />}
-                  size="small"
-                  alt="avatar not supported"
-                />
-              </Tooltip>
-            ),
-            <span style={{ marginLeft: "10px" }}>{postAuthor}</span>,
-          ]}
           bordered={true}
           hoverable
-          extra={
-            postAuthor.toLowerCase() === user.username.toLowerCase() ? (
-              <Popover
-                trigger="click"
-                placement="right"
-                content={[
-                  <EditPostBtn post={props.post} />,
-                  ,
-                  // delete btn component
-                  <DeletePostBtn _id={_id} />,
-                ]}
-              >
-                <MoreOutlined style={{ fontSize: "20px" }} title="Settings" />
-              </Popover>
-            ) : null
-          }
           actions={[
             userSavedPosts.length !== 0 ? (
               userSavedPosts.find((userSaved) =>
@@ -82,6 +49,42 @@ const UserPost = (props) => {
               <SavePostBtn post={props.post} block="block" />
             ),
           ]}
+          title={[
+            avatar ? (
+              <Tooltip title={postAuthor} key={_id}>
+                <Avatar src={avatar} size="small" alt="avatar not supported" />
+              </Tooltip>
+            ) : (
+              <Tooltip title={postAuthor} key={_id}>
+                <Avatar
+                  style={{ backgroundColor: "#87d068" }}
+                  icon={<UserOutlined />}
+                  size="small"
+                  alt="avatar not supported"
+                />
+              </Tooltip>
+            ),
+            <span style={{ marginLeft: "10px" }} key={user.username + _id}>
+              {postAuthor}
+            </span>,
+          ]}
+          extra={
+            postAuthor.toLowerCase() === user.username.toLowerCase() ? (
+              <Popover
+                key={_id + user.username}
+                trigger="click"
+                placement="right"
+                content={[
+                  <EditPostBtn post={props.post} key={_id + user.username} />,
+                  ,
+                  // delete btn component
+                  <DeletePostBtn _id={_id} key={_id + user.username} />,
+                ]}
+              >
+                <MoreOutlined style={{ fontSize: "20px" }} title="Settings" />
+              </Popover>
+            ) : null
+          }
         >
           <Card
             type="inner"
