@@ -1,22 +1,24 @@
-import React, { Fragment, useState, useContext } from "react";
-import { InfoCircleOutlined } from "@ant-design/icons";
-import { Select, Popover, Input, Menu } from "antd";
-
+import React, { useContext, useEffect } from "react";
 import PostContext from "../../../context/postContext/postContext";
+import { Select, Input, Popover } from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
 const { Option } = Select;
-const { Item } = Menu;
-
-const UserPostSearchFilter = () => {
+const UserPostsSearchFilter = (props) => {
+  const { setfilterType, filterType } = props;
   const { searchUserPostsFilter, clearSearchUserPostsFilter } = useContext(
     PostContext
   );
-  const [filterType, setfilterType] = useState("postTitle");
 
+  useEffect(() => {
+    return () => {
+      // clearing search user post filter array on leaving the page (in case if user did not clear the search field before leaving the page)
+      clearSearchUserPostsFilter();
+    };
+  }, []);
   const handleSelect = (value) => {
     // console.log("Selected Value", value);
     setfilterType(value);
   };
-
   const selectFilter = (
     <Select
       defaultValue="postTitle"
@@ -37,35 +39,30 @@ const UserPostSearchFilter = () => {
         ? searchUserPostsFilter(e.target.value, filterType)
         : clearSearchUserPostsFilter();
     }
-
-    // console.log("Search value", e.target.value, filterType);
   };
   return (
-    <Fragment>
-      <Item key="filter-search">
-        {/* search post filter */}
-        <span>
-          <Input
-            addonAfter={selectFilter}
-            placeholder="Search your posts by...."
-            size="large"
-            onChange={handleSearchFilter}
-          />
-        </span>
-      </Item>
+    <span>
+      <Input
+        addonAfter={selectFilter}
+        placeholder="Search your posts by...."
+        size="large"
+        onChange={handleSearchFilter}
+      />
 
-      {filterType === "tags" ? ( //* showing tag info icon
-        <Item key="info-icon">
+      <span style={{ marginLeft: "5px", marginRight: "25px" }}>
+        {filterType === "tags" ? (
+          //* showing tag info icon
+
           <Popover
             trigger="click"
             content="Tags should be separated by comma ','"
           >
-            <InfoCircleOutlined style={{ fontSize: "32px" }} />
+            <InfoCircleOutlined style={{ fontSize: "25px" }} />
           </Popover>
-        </Item>
-      ) : null}
-    </Fragment>
+        ) : null}
+      </span>
+    </span>
   );
 };
 
-export default UserPostSearchFilter;
+export default UserPostsSearchFilter;
