@@ -78,7 +78,7 @@ const UserPost = (props) => {
                   <EditPostBtn post={props.post} key={_id} />,
                   ,
                   // delete btn component
-                  <DeletePostBtn _id={_id} key={_id} />,
+                  <DeletePostBtn _id={_id} key={user.username} />,
                 ]}
               >
                 <MoreOutlined style={{ fontSize: "20px" }} title="Settings" />
