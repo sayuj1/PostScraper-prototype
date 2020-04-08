@@ -1,38 +1,18 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 // components
-import { Card, Col, Button } from "antd";
-import UserContext from "../../../context/userContext/userContext";
+import { Card, Col } from "antd";
 import DeletePostBtn from "../../buttons/posts/UserPost/DeletePostBtn";
-import { useHistory } from "react-router-dom";
-// icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import PostContext from "../../../context/postContext/postContext";
+
 import PostImage from "../global/PostImage";
+import ViewPostBtn from "../../buttons/posts/UserPost/ViewPostBtn";
+import EditPostBtn from "../../buttons/posts/UserPost/EditPostBtn";
 
 const { Meta } = Card;
 
 // this component will display each post which is coming from "Posts" component
 const UserPost = (props) => {
-  // user info
-  const { user } = useContext(UserContext);
-  const { editPost } = useContext(PostContext);
   // post information
   const { _id, postImg, postTitle, tags } = props.post;
-
-  //for navigation
-  const history = useHistory();
-
-  // handle which post is clicked and get the information
-  const handlePostClick = () => {
-    //loading view post component
-    history.push(`/${user.username}/post/${_id}`); // /user/post/:id
-  };
-
-  const handleEdit = () => {
-    editPost(props.post);
-    history.push("/settings/edit-post");
-  };
 
   return (
     <Fragment>
@@ -45,15 +25,9 @@ const UserPost = (props) => {
       >
         {/* post information is shown */}
         <Card
-          extra={
-            <Button type="primary" shape="round" onClick={handlePostClick}>
-              View
-            </Button>
-          }
+          extra={<ViewPostBtn _id={_id} />}
           actions={[
-            <Button type="default" block onClick={handleEdit}>
-              <FontAwesomeIcon icon={faEdit} size="lg" />
-            </Button>,
+            <EditPostBtn post={props.post} />,
             // delete btn component
             <DeletePostBtn _id={_id} />,
           ]}

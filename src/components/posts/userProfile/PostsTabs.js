@@ -136,14 +136,17 @@ const PostsTabs = () => {
                   />
                 </span>
               </Item>
-              <Item key="info-icon">
-                <Popover
-                  trigger="click"
-                  title="Tags should be separated by comma ','"
-                >
-                  <InfoCircleOutlined style={{ fontSize: "32px" }} />
-                </Popover>
-              </Item>
+              {/* showing tag info icon */}
+              {filterType === "tags" ? (
+                <Item key="info-icon">
+                  <Popover
+                    trigger="click"
+                    content="Tags should be separated by comma ','"
+                  >
+                    <InfoCircleOutlined style={{ fontSize: "32px" }} />
+                  </Popover>
+                </Item>
+              ) : null}
 
               <SubMenu
                 title={
