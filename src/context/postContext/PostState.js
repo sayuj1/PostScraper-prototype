@@ -21,6 +21,8 @@ import {
   Save_Post,
   Remove_Save_Post,
   Set_User_Saved_Posts,
+  Search_User_Saved_Posts_Filter,
+  Clear_Search_User_Saved_Posts_Filter,
 } from "./postActions.js";
 import moment from "moment";
 
@@ -29,6 +31,7 @@ const PostState = (props) => {
     loading: false, // for loading (using in create-post component)
     userPostfilter: "latest", // for showing users post only (on user profile page) [does not include post from saved collections]
     searchUserPosts: null,
+    searchUserSavedPosts: null,
     viewPost: null, // contains requested post information
     posts: [
       {
@@ -38,6 +41,7 @@ const PostState = (props) => {
         postDescription:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi turpis diam, pulvinar at ex at, mollis dictum justo. Aenean at aliquam ipsum. Duis tristique, lectus sodales pulvinar finibus, justo libero convallis ligula, ac bibendum magna mauris eget arcu. Sed suscipit augue at turpis rutrum rutrum. Nulla nec diam ut massa congue mollis finibus at tortor. Nunc suscipit elit ut elit lobortis maximus. Nulla facilisis euismod orci sed vulputate. Nulla posuere neque eu tellus pharetra, vitae tincidunt libero pellentesque. Vestibulum elit est, commodo id sapien sed, sodales vestibulum ante. Quisque eleifend, libero a hendrerit dictum, risus eros sagittis magna, ut mattis odio quam at odio. Curabitur vestibulum tincidunt erat sed ullamcorper. Aenean erat magna, lobortis sit amet risus non, hendrerit dapibus ex Duis sed leo in enim ultrices volutpat vel vel arcu. Pellentesque faucibus blandit condimentum. Aenean augue tellus, maximus vitae libero quis, tincidunt faucibus tellus. Fusce viverra ultrices feugiat. Nam non justo vel eros lobortis interdum eu maximus justo. Morbi et semper lectus, et dignissim quam. Pellentesque venenatis nisl nec blandit finibus. Donec laoreet, mauris eget commodo gravida, ipsum ipsum semper quam, in consectetur urna sapien id massa. Aenean condimentum viverra augue, ut interdum purus lobortis ac. Praesent at neque id massa consectetur congue quis in nibh. Nunc commodo at nisi non gravida. Morbi congue tincidunt nunc, vel mollis massa ultrices posuere. Integer feugiat urna ac orci auctor, nec consequat lectus consectetur. In cursus nisi commodo convallis sagittis.Ut nisi leo, pharetra quis laoreet a, hendrerit tempus enim. In at laoreet nisl. Maecenas vehicula, leo non condimentum tempus, libero ante suscipit dolor, sed venenatis purus tellus nec urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent hendrerit, mauris sed volutpat scelerisque, libero purus finibus massa, et facilisis eros ex consequat risus. Curabitur nulla augue, interdum vel urna sit amet, ultrices interdum libero. Donec a risus commodo, porttitor ante et, finibus sem. Morbi sagittis quam vel massa venenatis posuere. Vivamus ullamcorper, est at venenatis fermentum, ante nisl vehicula mi, nec tristique diam sem at mauris. Vivamus odio ligula, tristique eget magna ut, ultricies rhoncus magna. Aliquam quis lectus fringilla, sollicitudin tellus vitae, dignissim diam.",
         tags: [], //optional
+        category: "",
         postAuthor: "Varun",
         thumbnail: "",
         avatar:
@@ -52,6 +56,7 @@ const PostState = (props) => {
         postDescription:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         tags: ["WEB", "CSS", "JavaScript"],
+        category: "WEB DEVELOPMENT",
         postAuthor: "Sayuj",
         thumbnail: "",
         avatar: "",
@@ -63,7 +68,8 @@ const PostState = (props) => {
         postImg: "https://homepages.cae.wisc.edu/~ece533/images/mountain.png",
         postTitle: "Here we Go!",
         postDescription: "www.google.com",
-        tags: ["HTML", "CSS", "JavaScript"],
+        tags: ["PYTHON", "DJANGO", "JavaScript"],
+        category: "MACHINE LEARNING",
         postAuthor: "Ram",
         thumbnail: "",
         avatar: "",
@@ -76,6 +82,7 @@ const PostState = (props) => {
         postTitle: "Here we Go!",
         postDescription: "www.gmail.com",
         tags: ["HTML", "CSS", "JavaScript"],
+        category: "WEB DEVELOPMENT",
         postAuthor: "Rohan",
         thumbnail: "",
         avatar: "",
@@ -88,6 +95,7 @@ const PostState = (props) => {
         postTitle: "Here we Go!",
         postDescription: "www.lava.com",
         tags: ["HTML", "CSS", "JavaScript"],
+        category: "WEB DEVELOPMENT",
         postAuthor: "Shakir",
         thumbnail: "",
         avatar: "",
@@ -100,6 +108,7 @@ const PostState = (props) => {
         postTitle: "Here we Go!",
         postDescription: "www.wherever.com",
         tags: ["HTML", "CSS", "JavaScript"],
+        category: "WEB DEVELOPMENT",
         postAuthor: "Mohan",
         thumbnail: "",
         avatar: "",
@@ -112,6 +121,7 @@ const PostState = (props) => {
         postTitle: "Here we Go!",
         postDescription: "www.wohoo.com",
         tags: ["HTML", "CSS", "JavaScript"],
+        category: "INTERNET OF THINGS",
         postAuthor: "Varun",
         thumbnail: "",
         avatar: "",
@@ -325,6 +335,13 @@ const PostState = (props) => {
     //TODO: send this user id to the server to fetch user save posts
     // dispatch(Set_User_Saved_Posts(userSavedPosts));
   };
+  const searchUserSavedPostsFilter = (searchValue, filterType) => {
+    dispatch(Search_User_Saved_Posts_Filter(searchValue, filterType));
+  };
+
+  const clearSearchUserSavedPostsFilter = () => {
+    dispatch(Clear_Search_User_Saved_Posts_Filter());
+  };
 
   return (
     // sharing post state values
@@ -338,6 +355,7 @@ const PostState = (props) => {
         editablePost: state.editablePost,
         searchUserPosts: state.searchUserPosts,
         userSavedPosts: state.userSavedPosts,
+        searchUserSavedPosts: state.searchUserSavedPosts,
         setLoading: setLoading,
         getPosts: getPosts,
         clearViewPost: clearViewPost,
@@ -357,6 +375,8 @@ const PostState = (props) => {
         savePost: savePost,
         removeSavePost: removeSavePost,
         getUserSavedPosts: getUserSavedPosts,
+        searchUserSavedPostsFilter: searchUserSavedPostsFilter,
+        clearSearchUserSavedPostsFilter: clearSearchUserSavedPostsFilter,
       }}
     >
       {props.children}

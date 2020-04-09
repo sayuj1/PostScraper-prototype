@@ -6,7 +6,11 @@ import UserPost from "./UserPost";
 
 const UserSavePosts = () => {
   const { user } = useContext(UserContext);
-  const { userSavedPosts, getUserSavedPosts } = useContext(PostContext);
+  const {
+    userSavedPosts,
+    getUserSavedPosts,
+    searchUserSavedPosts,
+  } = useContext(PostContext);
   useEffect(() => {
     // loading user posts after page load
     getUserSavedPosts(user._id);
@@ -19,12 +23,23 @@ const UserSavePosts = () => {
           { xs: 8, sm: 16, md: 24, lg: 48 },
         ]}
       >
-        {userSavedPosts.length !== 0 ? (
+        {searchUserSavedPosts !== null ? (
+          searchUserSavedPosts.length !== 0 ? (
+            searchUserSavedPosts.map((searchUserSavedPosts) => (
+              <UserPost
+                key={searchUserSavedPosts._id}
+                post={searchUserSavedPosts}
+              />
+            ))
+          ) : (
+            <h2 style={{ padding: "30px" }}>No Posts Found!</h2>
+          )
+        ) : userSavedPosts.length !== 0 ? (
           userSavedPosts.map((userSavedPost) => (
             <UserPost key={userSavedPost._id} post={userSavedPost} />
           ))
         ) : (
-          <h2 style={{ padding: "30px" }}>No Saved Posts Found!</h2>
+          <h2 style={{ padding: "30px" }}>You have not posted yet!</h2>
         )}
       </Row>
     </Fragment>

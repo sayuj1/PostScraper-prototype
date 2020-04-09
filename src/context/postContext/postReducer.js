@@ -19,6 +19,8 @@ import {
   SAVE_POST,
   REMOVE_SAVE_POST,
   SET_USER_SAVED_POSTS,
+  SEARCH_USER_SAVED_POSTS_FILTER,
+  CLEAR_SEARCH_USER_SAVED_POSTS_FILTER,
 } from "./postTypes";
 
 const postReducer = (state, action) => {
@@ -295,6 +297,45 @@ const postReducer = (state, action) => {
       return {
         ...state,
         userSavedPosts: [action.payload],
+      };
+    case SEARCH_USER_SAVED_POSTS_FILTER:
+      let searchSavePostValue = action.payload.value.replace(
+        /[^a-zA-Z0-9 ]/g,
+        ""
+      );
+      searchSavePostValue = searchSavePostValue.trim();
+      // console.log("search value ", `${searchSavePostValue}`, typeof `${searchSavePostValue}`);
+      const regg = new RegExp(`${searchSavePostValue}`, "gi");
+      let searchSavePostTag = action.payload.value.split(",");
+      searchSavePostTag = searchSavePostTag.map((s) =>
+        s.replace(/[^a-zA-Z ]/g, "")
+      );
+      searchSavePostTag = searchSavePostTag.map((s) => s.trim());
+      return {
+        ...state,
+        searchUserSavedPosts: state.userSavedPosts.filter((userSavedPost) =>
+          action.payload.filter !== "tags"
+            ? userSavedPost[action.payload.filter].match(regg)
+            : userSavedPost.tags.filter((tag) => {
+                let j = 0;
+                for (; j < searchSavePostTag.length; j++) {
+                  let reg1 = new RegExp(`${searchSavePostTag[j]}`, "gi");
+                  if (searchSavePostTag[j] !== "" && tag.match(reg1)) {
+                    return true;
+                  }
+                  // if (searchTag[j].toLowerCase() == tag.toLowerCase()) {
+                  //   return true;
+                  // }
+                }
+                return false;
+              }).length !== 0
+        ),
+      };
+
+    case CLEAR_SEARCH_USER_SAVED_POSTS_FILTER:
+      return {
+        ...state,
+        searchUserSavedPosts: null,
       };
     default:
       return state;

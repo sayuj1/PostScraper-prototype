@@ -19,6 +19,8 @@ import {
   SAVE_POST,
   REMOVE_SAVE_POST,
   SET_USER_SAVED_POSTS,
+  SEARCH_USER_SAVED_POSTS_FILTER,
+  CLEAR_SEARCH_USER_SAVED_POSTS_FILTER,
 } from "./postTypes";
 
 export const Set_Loading = (loading) => {
@@ -151,5 +153,18 @@ export const Set_User_Saved_Posts = (userSavedPosts) => {
   return {
     type: SET_USER_SAVED_POSTS,
     payload: userSavedPosts,
+  };
+};
+
+export const Search_User_Saved_Posts_Filter = (searchValue, filterType) => {
+  return {
+    type: SEARCH_USER_SAVED_POSTS_FILTER,
+    payload: { value: searchValue, filter: filterType },
+  };
+};
+
+export const Clear_Search_User_Saved_Posts_Filter = () => {
+  return {
+    type: CLEAR_SEARCH_USER_SAVED_POSTS_FILTER,
   };
 };

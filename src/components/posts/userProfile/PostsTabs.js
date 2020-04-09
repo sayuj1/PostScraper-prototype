@@ -6,6 +6,7 @@ import PostContext from "../../../context/postContext/postContext";
 import UserPostsSearchFilter from "./UserPostsSearchFilter";
 import UserPostsCounter from "./UserPostsCounter";
 import SelectedPostsTab from "./SelectedPostsTab";
+import UserSavedPostsSearchFilter from "./UserSavedPostsSearchFilter";
 
 const { SubMenu, Item } = Menu;
 
@@ -53,13 +54,13 @@ const PostsTabs = () => {
             >
               <Item key="user-posts"> Posts</Item>
               <Item key="user-saved-posts">Saved Posts</Item>
-
-              {currentSelected === "user-posts" ? (
-                <Item key="filter-search">
-                  {/* search post filter */}
+              <Item key="filter-search">
+                {currentSelected === "user-posts" ? (
                   <UserPostsSearchFilter />
-                </Item>
-              ) : null}
+                ) : (
+                  <UserSavedPostsSearchFilter />
+                )}
+              </Item>
 
               {currentSelected === "user-posts" ? (
                 <SubMenu

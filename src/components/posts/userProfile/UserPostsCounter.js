@@ -4,9 +4,12 @@ import PostContext from "../../../context/postContext/postContext";
 
 const UserPostsCounter = (props) => {
   const { currentSelected } = props;
-  const { userPosts, searchUserPosts, userSavedPosts } = useContext(
-    PostContext
-  );
+  const {
+    userPosts,
+    searchUserPosts,
+    userSavedPosts,
+    searchUserSavedPosts,
+  } = useContext(PostContext);
   return (
     <Fragment>
       <div
@@ -35,7 +38,11 @@ const UserPostsCounter = (props) => {
           />
         ) : (
           <Badge
-            count={userSavedPosts.length}
+            count={
+              searchUserSavedPosts !== null
+                ? searchUserSavedPosts.length
+                : userSavedPosts.length
+            }
             showZero={true}
             style={{
               marginLeft: "10px",
