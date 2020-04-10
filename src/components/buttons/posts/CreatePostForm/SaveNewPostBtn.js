@@ -28,6 +28,7 @@ const SaveNewPostBtn = (props) => {
       postData.date = moment().format("MMM D YYYY, h:mm:ss A");
       postData.avatar = user.avatar;
       postData.thumbnail = "";
+      postData.postSavedBy = [];
 
       // saving the post data
       const savePost = new Promise((resolve, reject) => {

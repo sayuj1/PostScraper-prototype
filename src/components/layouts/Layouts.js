@@ -12,8 +12,9 @@ import UserState from "../../context/userContext/UserState";
 // for Going to top from bottom
 import BackToTop from "./BackToTop";
 import Settings from "../pages/Settings";
+
 // Navbar
-const Header = lazy(() => import("../layouts/Header"));
+const Navbar = lazy(() => import("../layouts/Navbar"));
 // pages
 const Home = lazy(() => import("../pages/Home"));
 const ViewPost = lazy(() => import("../pages/ViewPost"));
@@ -33,13 +34,12 @@ const Layouts = () => {
             }
           >
             <div className="header">
-              <Header />
+              <Navbar />
             </div>
           </Suspense>
           <div className={Styles.content}>
             <BackToTop />
             {/* for sharing post values across the components */}
-
             <FollowingState>
               <PostState>
                 <CommentState>
@@ -56,6 +56,7 @@ const Layouts = () => {
                         path="/:userName/post/:id"
                         component={ViewPost}
                       />
+
                       <Route
                         exact
                         path="/create-post/"

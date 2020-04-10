@@ -16,6 +16,12 @@ import {
   FILTER_USER_POSTS,
   SEARCH_USER_POSTS_FILTER,
   CLEAR_SEARCH_USER_POSTS_FILTER,
+  SAVE_POST,
+  REMOVE_SAVE_POST,
+  SET_USER_SAVED_POSTS,
+  SEARCH_USER_SAVED_POSTS_FILTER,
+  CLEAR_SEARCH_USER_SAVED_POSTS_FILTER,
+  // FILTER_USER_SAVED_POSTS,
 } from "./postTypes";
 
 export const Set_Loading = (loading) => {
@@ -129,3 +135,43 @@ export const Clear_Search_User_Posts_Filter = () => {
     type: CLEAR_SEARCH_USER_POSTS_FILTER,
   };
 };
+
+export const Save_Post = (post, user) => {
+  return {
+    type: SAVE_POST,
+    payload: { post: post, user: user },
+  };
+};
+
+export const Remove_Save_Post = (postId, user) => {
+  return {
+    type: REMOVE_SAVE_POST,
+    payload: { postId: postId, user: user },
+  };
+};
+
+export const Set_User_Saved_Posts = (userSavedPosts) => {
+  return {
+    type: SET_USER_SAVED_POSTS,
+    payload: userSavedPosts,
+  };
+};
+
+export const Search_User_Saved_Posts_Filter = (searchValue, filterType) => {
+  return {
+    type: SEARCH_USER_SAVED_POSTS_FILTER,
+    payload: { value: searchValue, filter: filterType },
+  };
+};
+
+export const Clear_Search_User_Saved_Posts_Filter = () => {
+  return {
+    type: CLEAR_SEARCH_USER_SAVED_POSTS_FILTER,
+  };
+};
+// export const Filter_User_Saved_Posts = (filter) => {
+//   return {
+//     type: FILTER_USER_SAVED_POSTS,
+//     payload: filter,
+//   };
+// };

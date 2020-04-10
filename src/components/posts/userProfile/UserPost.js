@@ -1,38 +1,25 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 // components
-import { Card, Col, Button } from "antd";
-import UserContext from "../../../context/userContext/userContext";
+import { Card, Col, Popover, Avatar, Tooltip } from "antd";
+import { UserOutlined, MoreOutlined } from "@ant-design/icons";
 import DeletePostBtn from "../../buttons/posts/UserPost/DeletePostBtn";
-import { useHistory } from "react-router-dom";
-// icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import PostContext from "../../../context/postContext/postContext";
+
 import PostImage from "../global/PostImage";
+import ViewPostBtn from "../../buttons/posts/UserPost/ViewPostBtn";
+import EditPostBtn from "../../buttons/posts/UserPost/EditPostBtn";
+import UserContext from "../../../context/userContext/userContext";
+import RemoveSavePostBtn from "../../buttons/posts/ViewPost/RemoveSavePostBtn";
+import SavePostBtn from "../../buttons/posts/ViewPost/SavePostBtn";
+import PostContext from "../../../context/postContext/postContext";
 
 const { Meta } = Card;
 
 // this component will display each post which is coming from "Posts" component
 const UserPost = (props) => {
-  // user info
-  const { user } = useContext(UserContext);
-  const { editPost } = useContext(PostContext);
   // post information
-  const { _id, postImg, postTitle, tags } = props.post;
-
-  //for navigation
-  const history = useHistory();
-
-  // handle which post is clicked and get the information
-  const handlePostClick = () => {
-    //loading view post component
-    history.push(`/${user.username}/post/${_id}`); // /user/post/:id
-  };
-
-  const handleEdit = () => {
-    editPost(props.post);
-    history.push("/settings/edit-post");
-  };
+  const { _id, postImg, postTitle, tags, postAuthor, avatar } = props.post;
+  const { userSavedPosts } = useContext(PostContext);
+  const { user } = useContext(UserContext);
 
   return (
     <Fragment>
@@ -45,28 +32,73 @@ const UserPost = (props) => {
       >
         {/* post information is shown */}
         <Card
-          extra={
-            <Button type="primary" shape="round" onClick={handlePostClick}>
-              View
-            </Button>
-          }
-          actions={[
-            <Button type="default" block onClick={handleEdit}>
-              <FontAwesomeIcon icon={faEdit} size="lg" />
-            </Button>,
-            // delete btn component
-            <DeletePostBtn _id={_id} />,
-          ]}
-          bordered={false}
-          title={postTitle}
+          bordered={true}
           hoverable
-          style={{ width: "100%", borderRadius: "10px" }}
-          cover={<PostImage postImg={postImg} height="300px" />}
+          actions={[
+            userSavedPosts.length !== 0 ? (
+              userSavedPosts.find((userSaved) =>
+                userSaved._id === _id
+                  ? true // break here
+                  : null
+              ) ? (
+                <RemoveSavePostBtn _id={_id} block="block" />
+              ) : (
+                <SavePostBtn post={props.post} block="block" />
+              )
+            ) : (
+              <SavePostBtn post={props.post} block="block" />
+            ),
+          ]}
+          title={[
+            avatar ? (
+              <Tooltip title={postAuthor} key={_id}>
+                <Avatar src={avatar} size="small" alt="avatar not supported" />
+              </Tooltip>
+            ) : (
+              <Tooltip title={postAuthor} key={_id}>
+                <Avatar
+                  style={{ backgroundColor: "#87d068" }}
+                  icon={<UserOutlined />}
+                  size="small"
+                  alt="avatar not supported"
+                />
+              </Tooltip>
+            ),
+            <span style={{ marginLeft: "10px" }} key={user.username}>
+              {postAuthor}
+            </span>,
+          ]}
+          extra={
+            postAuthor.toLowerCase() === user.username.toLowerCase() ? (
+              <Popover
+                key={_id}
+                trigger="click"
+                placement="right"
+                content={[
+                  <EditPostBtn post={props.post} key={_id} />,
+                  ,
+                  // delete btn component
+                  <DeletePostBtn _id={_id} key={user.username} />,
+                ]}
+              >
+                <MoreOutlined style={{ fontSize: "20px" }} title="Settings" />
+              </Popover>
+            ) : null
+          }
         >
-          <Meta
-            style={{ fontWeight: "bolder" }}
-            description={tags.length !== 0 ? "Related To: " + tags : null}
-          />
+          <Card
+            type="inner"
+            extra={<ViewPostBtn _id={_id} postAuthor={postAuthor} />}
+            bordered={false}
+            title={postTitle}
+            style={{ width: "100%", borderRadius: "10px" }}
+            cover={<PostImage postImg={postImg} height="300px" />}
+          >
+            <Meta
+              style={{ fontWeight: "bolder" }}
+              description={tags.length !== 0 ? "Related To: " + tags : null}
+            />
+          </Card>
         </Card>
       </Col>
     </Fragment>

@@ -1,4 +1,11 @@
-import React, { Fragment, useState, lazy, Suspense, useContext } from "react";
+import React, {
+  Fragment,
+  useState,
+  lazy,
+  Suspense,
+  useContext,
+  useEffect,
+} from "react";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
 import { DownloadOutlined, UserOutlined } from "@ant-design/icons";
 import Styles from "../../../styles/posts/ViewPost.module.css";
@@ -9,11 +16,13 @@ import PostImage from "./PostImage";
 import { useParams } from "react-router-dom";
 import GoUserProfileBtn from "../../buttons/global/GoUserProfileBtn";
 import Styles1 from "../../../styles/Global/GlobalResponsiveQueries.module.css";
+import SavePostBtn from "../../buttons/posts/ViewPost/SavePostBtn";
+import RemoveSavePostBtn from "../../buttons/posts/ViewPost/RemoveSavePostBtn";
 const { Paragraph } = Typography;
 const CommentBox = lazy(() => import("../../comments/CommentBox"));
 const ViewComments = lazy(() => import("../../comments/ViewComments"));
 
-const ViewPost = props => {
+const ViewPost = (props) => {
   const { userName } = useParams();
 
   const { user } = useContext(UserContext);
@@ -25,12 +34,14 @@ const ViewPost = props => {
     postDescription,
     tags,
     postAuthor,
-    avatar
+    avatar,
+    postSavedBy,
   } = props.post;
+
   //for toggling expand & close in post description
   const [toggleExpand, settoggleExpand] = useState({
     expand: false,
-    counter: 0
+    counter: 0,
   });
 
   // on expanding post description
@@ -39,7 +50,7 @@ const ViewPost = props => {
       expand: true,
       counter: !toggleExpand.expand
         ? toggleExpand.counter + 0
-        : toggleExpand.counter + 1
+        : toggleExpand.counter + 1,
     });
   };
 
@@ -49,7 +60,7 @@ const ViewPost = props => {
       expand: false,
       counter: !toggleExpand.expand
         ? toggleExpand.counter + 0
-        : toggleExpand.counter + 1
+        : toggleExpand.counter + 1,
     });
   };
 
@@ -64,6 +75,42 @@ const ViewPost = props => {
           btnPadding="0px"
         />
       </div>
+    ) : postSavedBy.length !== 0 ? (
+      postSavedBy.find((userSaved) =>
+        userSaved.toLowerCase() === user.username.toLowerCase()
+          ? true // break here
+          : null
+      ) ? (
+        <Fragment>
+          <Row>
+            <Col
+              xs={{ span: 10 }}
+              sm={{ span: 10 }}
+              md={{ span: 6 }}
+              lg={{ span: 6 }}
+            >
+              <GoHomeBtn margin="20px" shape="round" />
+            </Col>
+            <Col
+              xs={{ span: 13, offset: 1 }}
+              sm={{ span: 13 }}
+              md={{ span: 17 }}
+              lg={{ span: 17 }}
+            >
+              <div style={{ float: "right", marginRight: "20px" }}>
+                <GoUserProfileBtn
+                  btnText="View Profile"
+                  btnIcon="faArrowRight"
+                  btnIconAlign="right"
+                  btnPadding="10px"
+                />
+              </div>
+            </Col>
+          </Row>
+        </Fragment>
+      ) : (
+        <GoHomeBtn margin="20px" shape="round" />
+      )
     ) : (
       <GoHomeBtn margin="20px" shape="round" />
     );
@@ -79,9 +126,14 @@ const ViewPost = props => {
         {/* post box containing both image and information about image */}
         <div className={Styles.postBox}>
           <Row>
-            <div className={Styles1.hideOnMdAndAbove}>
+            <div className={Styles1.hideOnMdAndAbove} style={{ width: "100%" }}>
               <Row>
-                <Col>
+                <Col
+                  xs={{ span: 24 }}
+                  sm={{ span: 24 }}
+                  md={{ span: 24 }}
+                  lg={{ span: 24 }}
+                >
                   {/* back button for going back to home page / user profile */}
                   {goBackButton}
                 </Col>
@@ -124,16 +176,19 @@ const ViewPost = props => {
                     </Button>
                   </a>
                   {/* save button for saving into users collection */}
-                  {postAuthor.toLowerCase() !== user.username.toLowerCase() ? (
-                    <Button
-                      type="primary"
-                      shape="round"
-                      size="large"
-                      style={{ float: "right" }}
-                    >
-                      Save
-                    </Button>
-                  ) : null}
+                  {postSavedBy.length !== 0 ? (
+                    postSavedBy.find((userSaved) =>
+                      userSaved.toLowerCase() === user.username.toLowerCase()
+                        ? true // break here
+                        : null
+                    ) ? (
+                      <RemoveSavePostBtn _id={_id} />
+                    ) : (
+                      <SavePostBtn post={props.post} />
+                    )
+                  ) : (
+                    <SavePostBtn post={props.post} />
+                  )}
                 </div>
 
                 {/* // post title */}
@@ -148,7 +203,7 @@ const ViewPost = props => {
                     ellipsis={{
                       rows: 3,
                       expandable: true,
-                      onExpand: handlingExpand
+                      onExpand: handlingExpand,
                     }}
                     style={{ padding: "20px" }}
                   >
@@ -191,7 +246,7 @@ const ViewPost = props => {
                     style={{
                       fontWeight: "bold",
                       fontSize: "14px",
-                      marginLeft: "10px"
+                      marginLeft: "10px",
                     }}
                   >
                     {/* displaying post author */}

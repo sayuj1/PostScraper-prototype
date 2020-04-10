@@ -20,7 +20,7 @@ const UserEditProfile = () => {
   useEffect(() => {
     return () => {
       // updating values in states on updating user profile
-      updateUserPostInfo(user);
+      updateUserPostInfo(user); //* updating both user posts & user saved posts
       updateUserHomePostInfo(user);
       updateUserComment(user);
     };
