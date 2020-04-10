@@ -39,7 +39,7 @@ const UserSavePosts = () => {
             <UserPost key={userSavedPost._id} post={userSavedPost} />
           ))
         ) : (
-          <h2 style={{ padding: "30px" }}>You have not posted yet!</h2>
+          <h2 style={{ padding: "30px" }}>You have not saved any post yet!</h2>
         )}
       </Row>
     </Fragment>

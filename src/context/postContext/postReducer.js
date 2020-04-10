@@ -21,6 +21,7 @@ import {
   SET_USER_SAVED_POSTS,
   SEARCH_USER_SAVED_POSTS_FILTER,
   CLEAR_SEARCH_USER_SAVED_POSTS_FILTER,
+  // FILTER_USER_SAVED_POSTS,
 } from "./postTypes";
 
 const postReducer = (state, action) => {
@@ -337,6 +338,45 @@ const postReducer = (state, action) => {
         ...state,
         searchUserSavedPosts: null,
       };
+    // case FILTER_USER_SAVED_POSTS:
+    //   switch (action.payload) {
+    //     case "latest":
+    //       state.userSavedPosts.sort(
+    //         (a, b) => new Date(b.date) - new Date(a.date)
+    //       );
+    //       const searchLatestUserPosts = state.searchUserSavedPosts
+    //         ? state.searchUserSavedPosts.sort(
+    //             (a, b) => new Date(b.date) - new Date(a.date)
+    //           )
+    //         : null;
+
+    //       break;
+    //     case "oldest":
+    //       state.userSavedPosts.sort(
+    //         (a, b) => new Date(a.date) - new Date(b.date)
+    //       );
+    //       const searchOldestUserPosts = state.searchUserSavedPosts
+    //         ? state.searchUserSavedPosts.sort(
+    //             (a, b) => new Date(a.date) - new Date(b.date)
+    //           )
+    //         : null;
+    //       break;
+    //     default:
+    //       state.userSavedPosts.sort(
+    //         (a, b) => new Date(b.date) - new Date(a.date)
+    //       );
+    //       const searchDefaultUserPosts = state.searchUserSavedPosts
+    //         ? state.searchUserSavedPosts.sort(
+    //             (a, b) => new Date(b.date) - new Date(a.date)
+    //           )
+    //         : null;
+    //       break;
+    //   }
+
+    //   return {
+    //     ...state,
+    //     userSavedPostFilter: action.payload,
+    //   };
     default:
       return state;
   }

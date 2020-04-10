@@ -12,11 +12,17 @@ const { SubMenu, Item } = Menu;
 
 const PostsTabs = () => {
   const [currentSelected, setCurrentSelected] = useState("user-posts");
-  const { userPostfilter, filterUserPosts } = useContext(PostContext);
+  const {
+    userPostfilter,
+    filterUserPosts,
+    // userSavedPostFilter,
+    // filterUserSavedPosts,
+  } = useContext(PostContext);
 
   useEffect(() => {
-    // console.log(filter);
+    // console.log(userSavedPostFilter);
     filterUserPosts(userPostfilter);
+    // filterUserSavedPosts(userSavedPostFilter);
   }, []);
   const handleClick = (e) => {
     if (e.key === "user-posts" || e.key === "user-saved-posts") {
@@ -81,8 +87,8 @@ const PostsTabs = () => {
                 </SubMenu>
               ) : null}
 
-              {currentSelected === "user-posts" ? (
-                <Item key="filter" disabled>
+              <Item key="filter" disabled>
+                {currentSelected === "user-posts" ? (
                   <span
                     style={{
                       borderRadius: "10px",
@@ -96,8 +102,8 @@ const PostsTabs = () => {
                   >
                     {userPostfilter}
                   </span>
-                </Item>
-              ) : null}
+                ) : null}
+              </Item>
             </Menu>
             {/* //* displaying user-posts based on selected tab */}
             <SelectedPostsTab currentSelected={currentSelected} />

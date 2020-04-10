@@ -23,6 +23,7 @@ import {
   Set_User_Saved_Posts,
   Search_User_Saved_Posts_Filter,
   Clear_Search_User_Saved_Posts_Filter,
+  // Filter_User_Saved_Posts,
 } from "./postActions.js";
 import moment from "moment";
 
@@ -30,6 +31,7 @@ const PostState = (props) => {
   const initialState = {
     loading: false, // for loading (using in create-post component)
     userPostfilter: "latest", // for showing users post only (on user profile page) [does not include post from saved collections]
+    userSavedPostFilter: "latest",
     searchUserPosts: null,
     searchUserSavedPosts: null,
     viewPost: null, // contains requested post information
@@ -343,6 +345,10 @@ const PostState = (props) => {
     dispatch(Clear_Search_User_Saved_Posts_Filter());
   };
 
+  // const filterUserSavedPosts = (filter) => {
+  //   dispatch(Filter_User_Saved_Posts(filter));
+  // };
+
   return (
     // sharing post state values
     <PostContext.Provider
@@ -356,6 +362,7 @@ const PostState = (props) => {
         searchUserPosts: state.searchUserPosts,
         userSavedPosts: state.userSavedPosts,
         searchUserSavedPosts: state.searchUserSavedPosts,
+        // userSavedPostFilter: state.userSavedPostFilter,
         setLoading: setLoading,
         getPosts: getPosts,
         clearViewPost: clearViewPost,
@@ -377,6 +384,7 @@ const PostState = (props) => {
         getUserSavedPosts: getUserSavedPosts,
         searchUserSavedPostsFilter: searchUserSavedPostsFilter,
         clearSearchUserSavedPostsFilter: clearSearchUserSavedPostsFilter,
+        // filterUserSavedPosts: filterUserSavedPosts,
       }}
     >
       {props.children}
