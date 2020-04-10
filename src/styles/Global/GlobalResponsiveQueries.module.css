@@ -113,3 +113,12 @@
         display: none
     }
 }
+
+
+/* custom screens */
+
+@media only screen and (max-width: 660px) {
+    .cutomHideOn660AndBelow {
+        display: none
+    }
+}

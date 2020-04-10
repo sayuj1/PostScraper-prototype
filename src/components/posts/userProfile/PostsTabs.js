@@ -7,7 +7,7 @@ import UserPostsSearchFilter from "./UserPostsSearchFilter";
 import UserPostsCounter from "./UserPostsCounter";
 import SelectedPostsTab from "./SelectedPostsTab";
 import UserSavedPostsSearchFilter from "./UserSavedPostsSearchFilter";
-
+import Styles from "../../../styles/Global/GlobalResponsiveQueries.module.css";
 const { SubMenu, Item } = Menu;
 
 const PostsTabs = () => {
@@ -60,12 +60,15 @@ const PostsTabs = () => {
             >
               <Item key="user-posts"> Posts</Item>
               <Item key="user-saved-posts">Saved Posts</Item>
+
               <Item key="filter-search">
-                {currentSelected === "user-posts" ? (
-                  <UserPostsSearchFilter />
-                ) : (
-                  <UserSavedPostsSearchFilter />
-                )}
+                <span className={Styles.cutomHideOn660AndBelow}>
+                  {currentSelected === "user-posts" ? (
+                    <UserPostsSearchFilter />
+                  ) : (
+                    <UserSavedPostsSearchFilter />
+                  )}
+                </span>
               </Item>
 
               {currentSelected === "user-posts" ? (
