@@ -20,13 +20,13 @@ const Posts = () => {
         <Row
           gutter={[
             { xs: 8, sm: 16, md: 24, lg: 32 },
-            { xs: 8, sm: 16, md: 24, lg: 32 }
+            { xs: 8, sm: 16, md: 24, lg: 32 },
           ]}
         >
           {/* passing each post to "Post" component for displaying */}
 
           {posts.length !== 0 ? (
-            posts.map(post => <Post key={post._id} post={post} />)
+            posts.map((post) => <Post key={post._id} post={post} />)
           ) : (
             <h1>No Posts Found!</h1>
           )}
