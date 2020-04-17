@@ -11,7 +11,7 @@ import InvalidFileWarning from "../InvalidFileWarning";
 // image validation rules
 import { validateImageType, validateImageSize } from "../imageValidation";
 
-const UploadImg = props => {
+const UploadImg = (props) => {
   // const { saveImg, removeImg } = useContext(PostContext);
   const { setpostImg } = props;
   // image upload states
@@ -20,11 +20,11 @@ const UploadImg = props => {
     previewImg: null,
     previewImgShow: false,
     previewImgShowModal: false,
-    invalidFile: false
+    invalidFile: false,
   });
 
   //checking image file if its valid or not before uploading to the server, if it return false then image will not be uploaded to the server
-  const handleBeforeUpload = file => {
+  const handleBeforeUpload = (file) => {
     // console.log(file.size);
     // supported img --> jpeg, png
     const isJpgOrPng = validateImageType(file, setfileState, fileState);
@@ -36,17 +36,17 @@ const UploadImg = props => {
   };
 
   // for live previewing on the client page
-  const getBase64 = file => {
+  const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
+      reader.onload = () => resolve(reader.result); // when reading image file completed
+      reader.onerror = (error) => reject(error);
     });
   };
 
   // for handling changes on the image upload
-  const handleChange = async info => {
+  const handleChange = async (info) => {
     // console.log("response", info.file.error);
     // console.log("file", info.file);
     const file = info.file;
@@ -55,7 +55,7 @@ const UploadImg = props => {
       message.error("Server Error! We are Sorry :( Please try again!");
       setfileState({
         ...fileState,
-        invalidFile: true
+        invalidFile: true,
       });
     }
     // checking file status (if user deleting the file)
@@ -65,7 +65,7 @@ const UploadImg = props => {
         ...fileState,
         imgFile: null,
         previewImg: null,
-        previewImgShow: false
+        previewImgShow: false,
       });
       //removing img from the post state
       // removeImg();
@@ -77,14 +77,14 @@ const UploadImg = props => {
       if (file.status === "done") {
         setfileState({
           ...fileState,
-          invalidFile: false
+          invalidFile: false,
         });
         message.success("Image uploaded successfully.");
         // for previewing image on the client side
         if (!file.url && !file.preview) {
           await getBase64(file.originFileObj)
-            .then(response => (file.preview = response))
-            .catch(err => {
+            .then((response) => (file.preview = response))
+            .catch((err) => {
               // console.error("error");
               message.error("Can't Preview this image!");
             });
@@ -94,7 +94,7 @@ const UploadImg = props => {
           ...fileState,
           imgFile: file,
           previewImg: file.url || file.preview,
-          previewImgShow: true
+          previewImgShow: true,
         });
 
         // console.log("Done", file.response.url);
@@ -106,7 +106,7 @@ const UploadImg = props => {
         message.error("upload failed.");
         setfileState({
           ...fileState,
-          invalidFile: true
+          invalidFile: true,
         });
       }
     }
@@ -116,12 +116,12 @@ const UploadImg = props => {
   const handlePreview = () => {
     setfileState({
       ...fileState,
-      previewImgShowModal: true
+      previewImgShowModal: true,
     });
   };
 
   // deleting image file from the server
-  const handleRemove = file => {
+  const handleRemove = (file) => {
     // store the uploaded image path & then pass that path here to remove the image from the server
     return new Promise((resolve, reject) => {
       resolve(console.log("removing from server"));
@@ -129,7 +129,7 @@ const UploadImg = props => {
       message.success("File removed successfully!");
       setfileState({
         ...fileState,
-        invalidFile: false
+        invalidFile: false,
       });
       reject("File not removed");
     });
@@ -154,7 +154,7 @@ const UploadImg = props => {
           onRemove={handleRemove}
           showUploadList={{
             showRemoveIcon: true,
-            removeIcon: <DeleteFilled style={{ color: "red" }} />
+            removeIcon: <DeleteFilled style={{ color: "red" }} />,
           }}
         >
           <div style={{ width: "100% !important" }}>

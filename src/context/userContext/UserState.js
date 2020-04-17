@@ -2,16 +2,18 @@ import React, { useReducer } from "react";
 import UserContext from "./userContext";
 import { userReducer } from "./userReducer";
 import {
+  Get_User_Theme,
   Get_User,
   Save_Topics,
   Save_Avatar,
   Remove_Avatar,
-  Update_User
+  Update_User,
 } from "./userActions";
 
-const UserState = props => {
+const UserState = (props) => {
   const initialState = {
     loading: false,
+    userTheme: false, // false --> light, true --> dark
     user: {
       _id: 1,
       firstname: "sayuj",
@@ -23,11 +25,16 @@ const UserState = props => {
       userDescription:
         "Lorem ipsum tempore Quod molestiae odio, eveniet reiciendis assumenda quaerat vitae eaque, perferendis nulla",
       gender: null,
-      location: null
-    } // by default it will be null
+      location: null,
+    }, // by default it will be null
   };
 
   const [state, dispatch] = useReducer(userReducer, initialState);
+
+  // setting user theme
+  const getUserTheme = (theme) => {
+    dispatch(Get_User_Theme(theme));
+  };
 
   // for loading the user detail from the backend
   const getUser = () => {
@@ -35,12 +42,12 @@ const UserState = props => {
   };
 
   // saving user following topics
-  const saveTopics = topics => {
+  const saveTopics = (topics) => {
     dispatch(Save_Topics(topics));
   };
 
   // saving avatar in user state
-  const saveAvatar = userAvatar => {
+  const saveAvatar = (userAvatar) => {
     dispatch(Save_Avatar(userAvatar));
   };
 
@@ -50,7 +57,7 @@ const UserState = props => {
   };
 
   // updating user avatar
-  const updateUser = user => {
+  const updateUser = (user) => {
     try {
       dispatch(Update_User(user));
       return "User Profile Updated Successfully!";
@@ -61,12 +68,14 @@ const UserState = props => {
   return (
     <UserContext.Provider
       value={{
+        userTheme: state.userTheme,
         user: state.user,
         getUser: getUser,
         saveTopics: saveTopics,
         saveAvatar: saveAvatar,
         removeAvatar: removeAvatar,
-        updateUser: updateUser
+        updateUser: updateUser,
+        getUserTheme: getUserTheme,
       }}
     >
       {props.children}

@@ -1,4 +1,5 @@
 import React, { Suspense, lazy, Fragment } from "react";
+
 // For Routing
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // For Styling
@@ -8,7 +9,7 @@ import Styles from "../../styles/Layouts.module.css";
 import PostState from "../../context/postContext/PostState";
 import CommentState from "../../context/commentContext/CommentState";
 import FollowingState from "../../context/followingContext/FollowingState";
-import UserState from "../../context/userContext/UserState";
+// import UserState from "../../context/userContext/UserState";
 // for Going to top from bottom
 import BackToTop from "./BackToTop";
 import Settings from "../pages/Settings";
@@ -26,8 +27,9 @@ const Page404 = lazy(() => import("../pages/Page404"));
 const Layouts = () => {
   return (
     <Fragment>
-      <Router>
-        <UserState>
+      <div>
+        <Router>
+          {/* <UserState> */}
           <Suspense
             fallback={
               <div style={{ fontSize: "50px" }}>Loading Navbar....</div>
@@ -79,8 +81,9 @@ const Layouts = () => {
           <div className={Styles.footer}>
             Get Learn ©2020 Created By App-Devs
           </div>
-        </UserState>
-      </Router>
+          {/* </UserState> */}
+        </Router>
+      </div>
     </Fragment>
   );
 };
