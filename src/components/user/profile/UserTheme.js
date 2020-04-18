@@ -17,25 +17,15 @@ const UserTheme = () => {
 
     getUserTheme(userTheme);
 
+    let b = document.querySelector("#testing");
+    if (localStorage.getItem("theme") == "light") {
+      b.href = "/styles/antd.dark.css";
+    } else if (localStorage.getItem("theme") == "dark") {
+      b.href = "/styles/antd.css";
+    }
     console.log(`switch to ${checked}`);
   };
 
-  const themeChange = () => {
-    // alert("clicked me");
-    let b = document.querySelector("#testing");
-    if (localStorage.getItem("theme") == "light") {
-      b.href = "/antd.dark.css";
-    } else if (localStorage.getItem("theme") == "dark") {
-      b.href = "/antd.css";
-    }
-  };
-  useEffect(() => {
-    let a = document.querySelector(".themeSwitch");
-    a.addEventListener("click", themeChange);
-    return () => {
-      a.removeEventListener("click", themeChange);
-    };
-  }, []);
   return (
     <Fragment>
       <Switch
