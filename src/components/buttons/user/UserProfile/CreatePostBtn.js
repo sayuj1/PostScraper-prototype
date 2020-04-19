@@ -21,7 +21,7 @@ const CreatePostBtn = () => {
             />
           }
         >
-          Create Post
+          <span style={{ textDecoration: "underline" }}>Create Post</span>
         </Button>
       </Link>
     </Fragment>

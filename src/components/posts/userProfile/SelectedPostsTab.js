@@ -7,8 +7,8 @@ const SelectedPostsTab = (props) => {
   return (
     <Fragment>
       <Row
+        className="background"
         style={{
-          backgroundColor: "whitesmoke",
           padding: "10px",
         }}
       >

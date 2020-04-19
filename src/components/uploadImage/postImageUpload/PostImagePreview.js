@@ -1,17 +1,16 @@
 import React, { Fragment } from "react";
 
-const PostImagePreview = props => {
+const PostImagePreview = (props) => {
   const { previewImgShow, previewImg } = props;
   return (
     <Fragment>
       <div
-        className="imgPreviewContainer"
+        className="imgPreviewContainer background"
         style={{
-          backgroundColor: "whitesmoke",
           border: "4px dashed gray",
           maxHeight: "auto",
           lineHeight: "350px",
-          borderRadius: "2%"
+          borderRadius: "2%",
         }}
       >
         <h3>
@@ -22,7 +21,7 @@ const PostImagePreview = props => {
               style={{
                 width: "100%",
                 padding: "10px",
-                borderRadius: "3%"
+                borderRadius: "3%",
               }}
             />
           ) : (

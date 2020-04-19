@@ -87,11 +87,12 @@ const UserPost = (props) => {
           }
         >
           <Card
+            className="innerCardBase"
             type="inner"
             extra={<ViewPostBtn _id={_id} postAuthor={postAuthor} />}
-            bordered={false}
+            bordered={true}
             title={postTitle}
-            style={{ width: "100%", borderRadius: "10px" }}
+            style={{ width: "100%" }}
             cover={<PostImage postImg={postImg} height="300px" />}
           >
             <Meta

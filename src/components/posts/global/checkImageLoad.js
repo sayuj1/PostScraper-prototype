@@ -7,7 +7,7 @@ export const handleLoad = (setimgStatus, setimgHeight, height) => {
 
   setimgHeight(height);
 };
-export const handleError = setimgStatus => {
+export const handleError = (setimgStatus) => {
   setimgStatus("Image fail to load!");
 };
 
@@ -17,22 +17,21 @@ export const imgLoader = (
     indicator=<LoadingOutlined
       style={{
         lineHeight: "8",
-        textAlign: "center"
+        textAlign: "center",
       }}
       spin
     />
   />
 );
 
-export const imgLoadFail = imgStatus => {
+export const imgLoadFail = (imgStatus) => {
   return (
     <div
+      className="imgLoadFail"
       style={{
         lineHeight: "20",
         textAlign: "center",
-        border: "1px solid #ffccc7",
-        backgroundColor: "#fff2f0",
-        fontWeight: "bold"
+        fontWeight: "bold",
       }}
     >
       {imgStatus}
@@ -43,12 +42,11 @@ export const imgLoadFail = imgStatus => {
 export const noImgFound = () => {
   return (
     <div
+      className="noImgFound"
       style={{
         lineHeight: "20",
         textAlign: "center",
-        border: "1px solid #91d5ff",
-        backgroundColor: "#e6f7ff",
-        fontWeight: "bold"
+        fontWeight: "bold",
       }}
     >
       No Image Found!

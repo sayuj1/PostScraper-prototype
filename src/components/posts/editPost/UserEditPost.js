@@ -29,7 +29,7 @@ const UserEditPost = () => {
       {!editablePost ? (
         history.push(`/page-not-found`)
       ) : (
-        <Row style={{ backgroundColor: "white" }}>
+        <Row className="backgroundContent">
           {/* go to profile btn */}
           <div className={Styles.hideOnMdAndAbove} style={{ margin: "10px" }}>
             <Row>
@@ -60,7 +60,7 @@ const UserEditPost = () => {
                 <div
                   className="imageContainer"
                   style={{
-                    padding: "10px"
+                    padding: "10px",
                   }}
                 >
                   <PostImage postImg={editablePost.postImg} height="auto" />

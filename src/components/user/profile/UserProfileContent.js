@@ -8,7 +8,7 @@ const UserProfileContent = () => {
   const { user } = useContext(UserContext);
   return (
     <Fragment>
-      <Row style={{ backgroundColor: "white" }}>
+      <Row className="backgroundContent">
         {/* user basic information */}
         <Col
           xs={{ span: 24 }}
@@ -20,7 +20,7 @@ const UserProfileContent = () => {
           <div
             style={{
               textTransform: "capitalize",
-              padding: "10px 10px 10px 14px"
+              padding: "10px 10px 10px 14px",
             }}
           >
             <UserName

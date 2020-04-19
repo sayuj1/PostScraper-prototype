@@ -17,17 +17,17 @@ const UserEditProfileForm = () => {
     setuserInfo({ ...user });
   }, [user]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     if (e.target.name == "firstname" || e.target.name == "lastname") {
       // removing whitespaces
       setuserInfo({
         ...userInfo,
-        [e.target.name]: e.target.value.trim()
+        [e.target.name]: e.target.value.trim(),
       });
     } else {
       setuserInfo({
         ...userInfo,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
       });
     }
   };
@@ -280,7 +280,7 @@ const UserEditProfileForm = () => {
     "Yemen",
     "Zambia",
     "Zimbabwe",
-    "Åland Islands"
+    "Åland Islands",
   ];
 
   return (
@@ -298,7 +298,7 @@ const UserEditProfileForm = () => {
             <Input
               name="username"
               value={userInfo.username}
-              className={Styles.formInputs}
+              className={`${Styles.formInputs}`}
               disabled
               required
             />
@@ -409,12 +409,14 @@ const UserEditProfileForm = () => {
               showSearch
               style={{ width: "100%" }}
               optionFilterProp="children"
-              onChange={value => setuserInfo({ ...userInfo, location: value })}
+              onChange={(value) =>
+                setuserInfo({ ...userInfo, location: value })
+              }
               filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-              {countryLists.map(countryList => (
+              {countryLists.map((countryList) => (
                 <Option key={countryList} value={countryList}>
                   {countryList}
                 </Option>

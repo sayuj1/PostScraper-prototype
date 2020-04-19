@@ -1,6 +1,6 @@
-.tagBox {
+/* .tagBox {
     background-color: white;
-}
+} */
 
 .goBackProfileBtn {
     float: right;
@@ -15,9 +15,17 @@
     padding: 20px;
 }
 
+.tagsAvailable {
+    padding: 10px;
+}
+
 .selectedAvailableHeader {
     padding: 20px;
     text-transform: capitalize
+}
+
+.selectedTags {
+    padding: 10px;
 }
 
 .selectedTagsBox {

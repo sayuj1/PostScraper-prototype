@@ -15,14 +15,14 @@ const Followings = () => {
   const {
     selectedTagsSaveWarning,
     removeSelectedTagsSaveWarning,
-    selectedTags
+    selectedTags,
   } = useContext(FollowingContext);
   const { saveTopics } = useContext(UserContext);
 
-  const openNotificationWithIcon = type => {
+  const openNotificationWithIcon = (type) => {
     notification[type]({
       message: "Changes Saved Successfully!",
-      duration: 1
+      duration: 1,
     });
   };
 
@@ -45,7 +45,7 @@ const Followings = () => {
         lg={{ span: 20, offset: 2 }}
       >
         {/* tag box containing both image and information about image */}
-        <div className={Styles.tagBox}>
+        <div className={`backgroundContent ${Styles.tagBox}`}>
           {/* back button for going back to home page */}
           <Row>
             <Col
@@ -88,7 +88,7 @@ const Followings = () => {
               </div>
               {/* all tags available in the database */}
               <div className={Styles.tagsAvailableBox}>
-                <div className="tagsAvailable">
+                <div className={`tagsAvailable ${Styles.tagsAvailable}`}>
                   <Suspense
                     fallback={
                       <div style={{ fontSize: "50px" }}>
@@ -113,7 +113,7 @@ const Followings = () => {
                 <Title level={2}>Your favorite topics </Title>
               </div>
               <div className={Styles.selectedTagsBox}>
-                <div className="selectedTags">
+                <div className={`selectedTags ${Styles.selectedTags}`}>
                   <Suspense
                     fallback={
                       <div style={{ fontSize: "50px" }}>

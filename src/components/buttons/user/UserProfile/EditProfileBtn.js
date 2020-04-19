@@ -21,7 +21,7 @@ const EditProfileBtn = () => {
             />
           }
         >
-          Edit Profile
+          <span style={{ textDecoration: "underline" }}>Edit Profile</span>
         </Button>
       </Link>
     </Fragment>

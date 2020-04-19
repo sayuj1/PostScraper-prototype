@@ -65,9 +65,10 @@ const Post = (props) => {
           ]}
         >
           <Card
+            className="innerCardBase"
             onClick={handlePostClick}
             type="inner"
-            bordered={false}
+            bordered={true}
             title={postTitle}
             extra={
               avatar ? (
@@ -89,7 +90,7 @@ const Post = (props) => {
                 </Tooltip>
               )
             }
-            style={{ width: "100%", borderRadius: "10px" }}
+            style={{ width: "100%" }}
             cover={<PostImage postImg={postImg} height="300px" />}
           >
             <Meta

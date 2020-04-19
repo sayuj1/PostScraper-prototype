@@ -1,0 +1,50 @@
+.background {
+    background-color: #20232A;
+}
+
+.backgroundContent {
+    background-color: #141414;
+}
+
+input:read-only {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: white;
+    filter: opacity(0.5);
+}
+
+.ant-input {
+    background-color: #20232A;
+    color: white;
+}
+
+textarea:read-only {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: white;
+    filter: opacity(0.5);
+}
+
+textarea {
+    background-color: #20232A;
+}
+
+.imgLoadFail {
+    border: none;
+    background-color: #e84749;
+}
+
+.noImgFound {
+    border: none;
+    background-color: #20232a;
+}
+
+.innerCardBase {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.tagsAvailable {
+    background-color: #20232A;
+}
+
+.selectedTags {
+    background-color: #20232A;
+}

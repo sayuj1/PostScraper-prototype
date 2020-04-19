@@ -1,0 +1,37 @@
+.background {
+    background-color: whitesmoke;
+}
+
+.backgroundContent {
+    background-color: white;
+}
+
+input:read-only {
+    background-color: #f5f5f5;
+}
+
+textarea:read-only {
+    background-color: #f5f5f5;
+}
+
+.imgLoadFail {
+    border: 1px solid #ffccc7;
+    background-color: #fff2f0;
+}
+
+.noImgFound {
+    border: 1px solid #91d5ff;
+    background-color: #e6f7ff;
+}
+
+.innerCardBase {
+    background-color: #fafafa;
+}
+
+.tagsAvailable {
+    background-color: #fafafa;
+}
+
+.selectedTags {
+    background-color: #fafafa;
+}

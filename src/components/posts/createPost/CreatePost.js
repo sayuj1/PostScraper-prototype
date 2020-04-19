@@ -23,7 +23,7 @@ const CreatePost = () => {
   }, []);
   return (
     <Fragment>
-      <Row style={{ backgroundColor: "white" }}>
+      <Row className="backgroundContent">
         <div className={Styles.hideOnMdAndAbove} style={{ margin: "10px" }}>
           <Row>
             <Col>
@@ -61,7 +61,7 @@ const CreatePost = () => {
                   <div
                     className="imageUploadContainer"
                     style={{
-                      padding: "20px"
+                      padding: "20px",
                     }}
                   >
                     {/* for image upload */}

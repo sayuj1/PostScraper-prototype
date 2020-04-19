@@ -27,7 +27,7 @@ const UserEditProfile = () => {
   }, [user]);
   return (
     <Fragment>
-      <Row style={{ backgroundColor: "white" }}>
+      <Row className="backgroundContent">
         <Col
           xs={{ span: 22, offset: 1 }}
           sm={{ span: 22, offset: 1 }}

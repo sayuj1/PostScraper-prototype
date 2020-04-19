@@ -9,7 +9,7 @@ const UserProfileHeader = () => {
   return (
     <Fragment>
       {/* buttons */}
-      <Row style={{ backgroundColor: "white", paddingTop: "20px" }}>
+      <Row className="backgroundContent" style={{ paddingTop: "20px" }}>
         {/* go back btn */}
 
         <Col xs={{ span: 20, offset: 1 }}>

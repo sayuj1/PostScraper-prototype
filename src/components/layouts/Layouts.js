@@ -9,7 +9,7 @@ import Styles from "../../styles/Layouts.module.css";
 import PostState from "../../context/postContext/PostState";
 import CommentState from "../../context/commentContext/CommentState";
 import FollowingState from "../../context/followingContext/FollowingState";
-// import UserState from "../../context/userContext/UserState";
+import UserState from "../../context/userContext/UserState";
 // for Going to top from bottom
 import BackToTop from "./BackToTop";
 import Settings from "../pages/Settings";
@@ -29,59 +29,61 @@ const Layouts = () => {
     <Fragment>
       <div>
         <Router>
-          {/* <UserState> */}
-          <Suspense
-            fallback={
-              <div style={{ fontSize: "50px" }}>Loading Navbar....</div>
-            }
-          >
-            <div className="header">
-              <Navbar />
-            </div>
-          </Suspense>
-          <div className={Styles.content}>
-            <BackToTop />
-            {/* for sharing post values across the components */}
-            <FollowingState>
-              <PostState>
-                <CommentState>
-                  <Suspense
-                    fallback={
-                      <div style={{ fontSize: "50px" }}>Loading routes....</div>
-                    }
-                  >
-                    <Switch>
-                      <Route exact path="/" component={Home} />
-                      <Route exact path="/post/:id" component={ViewPost} />
-                      <Route
-                        exact
-                        path="/:userName/post/:id"
-                        component={ViewPost}
-                      />
+          <UserState>
+            <Suspense
+              fallback={
+                <div style={{ fontSize: "50px" }}>Loading Navbar....</div>
+              }
+            >
+              <div className="header">
+                <Navbar />
+              </div>
+            </Suspense>
+            <div className={`background ${Styles.content}`}>
+              <BackToTop />
+              {/* for sharing post values across the components */}
+              <FollowingState>
+                <PostState>
+                  <CommentState>
+                    <Suspense
+                      fallback={
+                        <div style={{ fontSize: "50px" }}>
+                          Loading routes....
+                        </div>
+                      }
+                    >
+                      <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/post/:id" component={ViewPost} />
+                        <Route
+                          exact
+                          path="/:userName/post/:id"
+                          component={ViewPost}
+                        />
 
-                      <Route
-                        exact
-                        path="/create-post/"
-                        component={PostCreate}
-                      />
-                      <Route exact path="/following" component={Following} />
-                      <Route exact path="/user/:user" component={User} />
-                      <Route
-                        exact
-                        path="/settings/:settingName"
-                        component={Settings}
-                      />
-                      <Route path="*" component={Page404} />
-                    </Switch>
-                  </Suspense>
-                </CommentState>
-              </PostState>
-            </FollowingState>
-          </div>
-          <div className={Styles.footer}>
-            Get Learn ©2020 Created By App-Devs
-          </div>
-          {/* </UserState> */}
+                        <Route
+                          exact
+                          path="/create-post/"
+                          component={PostCreate}
+                        />
+                        <Route exact path="/following" component={Following} />
+                        <Route exact path="/user/:user" component={User} />
+                        <Route
+                          exact
+                          path="/settings/:settingName"
+                          component={Settings}
+                        />
+                        <Route path="*" component={Page404} />
+                      </Switch>
+                    </Suspense>
+                  </CommentState>
+                </PostState>
+              </FollowingState>
+            </div>
+            <div className={Styles.footer}>
+              Get Learn ©2020 Created By App-Devs
+            </div>
+          </UserState>
         </Router>
       </div>
     </Fragment>

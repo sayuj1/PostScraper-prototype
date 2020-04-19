@@ -18,10 +18,13 @@ const UserTheme = () => {
     getUserTheme(userTheme);
 
     let b = document.querySelector("#testing");
+    let backgroundStyles = document.querySelector("#backgroundStyles");
     if (localStorage.getItem("theme") == "light") {
       b.href = "/styles/antd.dark.css";
+      backgroundStyles.href = "/styles/customBackgroundDark.css";
     } else if (localStorage.getItem("theme") == "dark") {
       b.href = "/styles/antd.css";
+      backgroundStyles.href = "/styles/customBackground.css";
     }
     console.log(`switch to ${checked}`);
   };

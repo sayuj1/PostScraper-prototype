@@ -32,7 +32,7 @@ const PostsTabs = () => {
 
   return (
     <Fragment>
-      <Row style={{ backgroundColor: "white" }}>
+      <Row className="backgroundContent">
         <Col
           xs={{ span: 24 }}
           sm={{ span: 24 }}
@@ -42,7 +42,7 @@ const PostsTabs = () => {
           <UserPostsCounter currentSelected={currentSelected} />
         </Col>
       </Row>
-      <Row style={{ backgroundColor: "white" }}>
+      <Row className="backgroundContent">
         {/* tabs */}
         <Col
           xs={{ span: 24 }}

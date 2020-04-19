@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 // import "../../../node_modules/antd/dist/antd.css";
 import PostSearch from "../posts/home/PostsSearch";
 import UserContext from "../../context/userContext/userContext";
-import { Menu, Avatar, Affix, Space } from "antd";
+import { Menu, Avatar, Affix } from "antd";
 import {
   HomeOutlined,
   SettingOutlined,
@@ -42,7 +42,6 @@ const Navbar = () => {
       <Menu
         selectedKeys={currentSelected}
         mode="horizontal"
-        theme="light"
         style={{ lineHeight: "70px", paddingRight: "5%" }}
       >
         <Item className="logo" style={{ float: "left" }}>

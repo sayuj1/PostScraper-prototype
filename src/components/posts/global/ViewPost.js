@@ -124,7 +124,7 @@ const ViewPost = (props) => {
         lg={{ span: 20, offset: 2 }}
       >
         {/* post box containing both image and information about image */}
-        <div className={Styles.postBox}>
+        <div className={`backgroundContent ${Styles.postBox}`}>
           <Row>
             <div className={Styles1.hideOnMdAndAbove} style={{ width: "100%" }}>
               <Row>
