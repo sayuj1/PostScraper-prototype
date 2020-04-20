@@ -11,6 +11,7 @@ import UserContext from "../../../context/userContext/userContext";
 import RemoveSavePostBtn from "../../buttons/posts/ViewPost/RemoveSavePostBtn";
 import SavePostBtn from "../../buttons/posts/ViewPost/SavePostBtn";
 import PostContext from "../../../context/postContext/postContext";
+import UserPostStyles from "../../../styles/posts/userProfile/UserPost.module.css";
 
 const { Meta } = Card;
 
@@ -57,14 +58,14 @@ const UserPost = (props) => {
             ) : (
               <Tooltip title={postAuthor} key={_id}>
                 <Avatar
-                  style={{ backgroundColor: "#87d068" }}
+                  className={UserPostStyles.userAvatar}
                   icon={<UserOutlined />}
                   size="small"
                   alt="avatar not supported"
                 />
               </Tooltip>
             ),
-            <span style={{ marginLeft: "10px" }} key={user.username}>
+            <span className={UserPostStyles.postAuthor} key={user.username}>
               {postAuthor}
             </span>,
           ]}
@@ -81,22 +82,24 @@ const UserPost = (props) => {
                   <DeletePostBtn _id={_id} key={user.username} />,
                 ]}
               >
-                <MoreOutlined style={{ fontSize: "20px" }} title="Settings" />
+                <MoreOutlined
+                  className={UserPostStyles.postSettingIcon}
+                  title="Settings"
+                />
               </Popover>
             ) : null
           }
         >
           <Card
-            className="innerCardBase"
+            className={UserPostStyles.innerCardBase}
             type="inner"
             extra={<ViewPostBtn _id={_id} postAuthor={postAuthor} />}
             bordered={true}
             title={postTitle}
-            style={{ width: "100%" }}
             cover={<PostImage postImg={postImg} height="300px" />}
           >
             <Meta
-              style={{ fontWeight: "bolder" }}
+              className={UserPostStyles.postDescription}
               description={tags.length !== 0 ? "Related To: " + tags : null}
             />
           </Card>

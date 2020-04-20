@@ -1,0 +1,8 @@
+.emptyMessageContainer {
+    padding: 30px;
+    margin: auto;
+}
+
+.emptyMessageDescription {
+    font-weight: bolder;
+}

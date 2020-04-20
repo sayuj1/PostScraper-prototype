@@ -1,9 +1,9 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import PostContext from "../../../context/postContext/postContext";
 import UserContext from "../../../context/userContext/userContext";
-import { Row } from "antd";
+import { Row, Empty } from "antd";
 import UserPost from "./UserPost";
-
+import UserSavePostsStyles from "../../../styles/posts/userProfile/UserSavePosts.module.css";
 const UserSavePosts = () => {
   const { user } = useContext(UserContext);
   const {
@@ -15,6 +15,18 @@ const UserSavePosts = () => {
     // loading user posts after page load
     getUserSavedPosts(user._id);
   }, []);
+
+  const emptyMessage = (message) => (
+    <div className={UserSavePostsStyles.emptyMessageContainer}>
+      <Empty
+        description={
+          <span className={UserSavePostsStyles.emptyMessageDescription}>
+            {message}
+          </span>
+        }
+      />
+    </div>
+  );
   return (
     <Fragment>
       <Row
@@ -23,24 +35,20 @@ const UserSavePosts = () => {
           { xs: 8, sm: 16, md: 24, lg: 48 },
         ]}
       >
-        {searchUserSavedPosts !== null ? (
-          searchUserSavedPosts.length !== 0 ? (
-            searchUserSavedPosts.map((searchUserSavedPosts) => (
-              <UserPost
-                key={searchUserSavedPosts._id}
-                post={searchUserSavedPosts}
-              />
+        {searchUserSavedPosts !== null
+          ? searchUserSavedPosts.length !== 0
+            ? searchUserSavedPosts.map((searchUserSavedPosts) => (
+                <UserPost
+                  key={searchUserSavedPosts._id}
+                  post={searchUserSavedPosts}
+                />
+              ))
+            : emptyMessage("No Posts Found!")
+          : userSavedPosts.length !== 0
+          ? userSavedPosts.map((userSavedPost) => (
+              <UserPost key={userSavedPost._id} post={userSavedPost} />
             ))
-          ) : (
-            <h2 style={{ padding: "30px" }}>No Posts Found!</h2>
-          )
-        ) : userSavedPosts.length !== 0 ? (
-          userSavedPosts.map((userSavedPost) => (
-            <UserPost key={userSavedPost._id} post={userSavedPost} />
-          ))
-        ) : (
-          <h2 style={{ padding: "30px" }}>You have not saved any post yet!</h2>
-        )}
+          : emptyMessage("You have Not Saved Any Posts!")}
       </Row>
     </Fragment>
   );

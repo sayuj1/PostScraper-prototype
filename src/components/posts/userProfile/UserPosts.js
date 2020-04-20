@@ -2,7 +2,8 @@ import React, { useEffect, useContext, Fragment } from "react";
 import UserContext from "../../../context/userContext/userContext";
 import PostContext from "../../../context/postContext/postContext";
 import UserPost from "../userProfile/UserPost";
-import { Row } from "antd";
+import { Row, Empty } from "antd";
+import UserPostsStyles from "../../../styles/posts/userProfile/UserPosts.module.css";
 
 const UserPosts = () => {
   const { user } = useContext(UserContext);
@@ -12,6 +13,18 @@ const UserPosts = () => {
     getUserPosts(user._id);
   }, []);
 
+  const emptyMessage = (message) => (
+    <div className={UserPostsStyles.emptyMessageContainer}>
+      <Empty
+        description={
+          <span className={UserPostsStyles.emptyMessageDescription}>
+            {message}
+          </span>
+        }
+      />
+    </div>
+  );
+
   return (
     <Fragment>
       <Row
@@ -20,21 +33,17 @@ const UserPosts = () => {
           { xs: 8, sm: 16, md: 24, lg: 48 },
         ]}
       >
-        {searchUserPosts !== null ? (
-          searchUserPosts.length !== 0 ? (
-            searchUserPosts.map((searchUserPosts) => (
-              <UserPost key={searchUserPosts._id} post={searchUserPosts} />
+        {searchUserPosts !== null
+          ? searchUserPosts.length !== 0
+            ? searchUserPosts.map((searchUserPosts) => (
+                <UserPost key={searchUserPosts._id} post={searchUserPosts} />
+              ))
+            : emptyMessage("No Posts Found!")
+          : userPosts.length !== 0
+          ? userPosts.map((userPost) => (
+              <UserPost key={userPost._id} post={userPost} />
             ))
-          ) : (
-            <h2 style={{ padding: "30px" }}>No Posts Found!</h2>
-          )
-        ) : userPosts.length !== 0 ? (
-          userPosts.map((userPost) => (
-            <UserPost key={userPost._id} post={userPost} />
-          ))
-        ) : (
-          <h2 style={{ padding: "30px" }}>You have not posted yet!</h2>
-        )}
+          : emptyMessage("You have not posted yet!")}
       </Row>
     </Fragment>
   );

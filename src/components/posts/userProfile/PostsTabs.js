@@ -7,7 +7,9 @@ import UserPostsSearchFilter from "./UserPostsSearchFilter";
 import UserPostsCounter from "./UserPostsCounter";
 import SelectedPostsTab from "./SelectedPostsTab";
 import UserSavedPostsSearchFilter from "./UserSavedPostsSearchFilter";
+import PostsTabsStyles from "../../../styles/posts/userProfile/PostsTabs.module.css";
 import Styles from "../../../styles/Global/GlobalResponsiveQueries.module.css";
+
 const { SubMenu, Item } = Menu;
 
 const PostsTabs = () => {
@@ -50,13 +52,13 @@ const PostsTabs = () => {
           md={{ span: 20, offset: 2 }}
           lg={{ span: 20, offset: 2 }}
         >
-          <div className="postsTabs" style={{ margin: "20px" }}>
+          <div className={PostsTabsStyles.postsTabs}>
             <Menu
+              className={PostsTabsStyles.postsTabsMenu}
               onClick={handleClick}
               selectedKeys={currentSelected}
               mode="horizontal"
               theme="light"
-              style={{ lineHeight: "50px", paddingRight: "5%" }}
             >
               <Item key="user-posts"> Posts</Item>
               <Item key="user-saved-posts">Saved Posts</Item>
@@ -77,10 +79,7 @@ const PostsTabs = () => {
                     <span className="submenu-title-wrapper">
                       Filter
                       <DownOutlined
-                        style={{
-                          verticalAlign: "middle",
-                          marginLeft: "10px",
-                        }}
+                        className={PostsTabsStyles.postsTabsFilter}
                       />
                     </span>
                   }
@@ -92,17 +91,7 @@ const PostsTabs = () => {
 
               <Item key="filter" disabled>
                 {currentSelected === "user-posts" ? (
-                  <span
-                    style={{
-                      borderRadius: "10px",
-                      backgroundColor: "#2db7f5",
-                      color: "white",
-                      padding: "5px",
-                      fontWeight: "bold",
-                      fontSize: "1rem",
-                      textTransform: "capitalize",
-                    }}
-                  >
+                  <span className={PostsTabsStyles.postsTabsFilterText}>
                     {userPostfilter}
                   </span>
                 ) : null}

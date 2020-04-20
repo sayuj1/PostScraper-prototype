@@ -1,0 +1,22 @@
+.postsTabs {
+    margin: 20px;
+}
+
+.postsTabsMenu {
+    padding-right: 5%;
+}
+
+.postsTabsFilter {
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.postsTabsFilterText {
+    border-radius: 10px;
+    background-color: #2db7f5;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: capitalize;
+}

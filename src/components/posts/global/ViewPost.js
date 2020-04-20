@@ -205,7 +205,7 @@ const ViewPost = (props) => {
                       expandable: true,
                       onExpand: handlingExpand,
                     }}
-                    style={{ padding: "20px" }}
+                    style={{ padding: "20px", whiteSpace: "pre-line" }}
                   >
                     {postDescription}
                   </Paragraph>

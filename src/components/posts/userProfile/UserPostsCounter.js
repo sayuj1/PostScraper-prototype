@@ -10,15 +10,23 @@ const UserPostsCounter = (props) => {
     userSavedPosts,
     searchUserSavedPosts,
   } = useContext(PostContext);
+
+  // inline css
+  const userPostsContainer = {
+    margin: "20px 20px 0px 20px",
+    fontSize: "1.2rem",
+    fontWeight: "600",
+  };
+  const userPostsCounter = {
+    marginLeft: "10px",
+    backgroundColor: "#faad14",
+    fontSize: "1.2rem",
+    fontWeight: "600",
+    padding: "0px 10px",
+  };
   return (
     <Fragment>
-      <div
-        style={{
-          margin: "20px 20px 0px 20px",
-          fontSize: "1.2rem",
-          fontWeight: "600",
-        }}
-      >
+      <div style={userPostsContainer}>
         Total Posts Found:
         {currentSelected === "user-posts" ? (
           <Badge
@@ -28,13 +36,7 @@ const UserPostsCounter = (props) => {
                 : userPosts.length
             }
             showZero={true}
-            style={{
-              marginLeft: "10px",
-              backgroundColor: "#faad14",
-              fontSize: "1.2rem",
-              fontWeight: "600",
-              padding: "0px 10px",
-            }}
+            style={userPostsCounter}
           />
         ) : (
           <Badge
@@ -44,13 +46,7 @@ const UserPostsCounter = (props) => {
                 : userSavedPosts.length
             }
             showZero={true}
-            style={{
-              marginLeft: "10px",
-              backgroundColor: "#faad14",
-              fontSize: "1.2rem",
-              fontWeight: "600",
-              padding: "0px 10px",
-            }}
+            style={userPostsCounter}
           />
         )}
       </div>

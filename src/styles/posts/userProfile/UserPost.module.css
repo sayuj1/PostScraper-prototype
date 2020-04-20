@@ -1,0 +1,19 @@
+.userAvatar {
+    background-color: #87d068;
+}
+
+.postAuthor {
+    margin-left: 10px;
+}
+
+.postSettingIcon {
+    font-size: 20px;
+}
+
+.innerCardBase {
+    width: 100%;
+}
+
+.postDescription {
+    font-weight: bolder;
+}

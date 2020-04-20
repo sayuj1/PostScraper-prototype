@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import PostContext from "../../../context/postContext/postContext";
 import { Select, Input, Popover } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
+import UserSavedPostsSearchFilterStyles from "../../../styles/posts/userProfile/UserPostsSearchFilter.module.css";
 const { Option } = Select;
 
 const UserSavedPostsSearchFilter = () => {
@@ -51,7 +52,7 @@ const UserSavedPostsSearchFilter = () => {
         onChange={handleSearchFilter}
       />
 
-      <span style={{ marginLeft: "5px", marginRight: "25px" }}>
+      <span className={UserSavedPostsSearchFilterStyles.tagInfoIconBox}>
         {filterType === "tags" ? (
           //* showing tag info icon
 
@@ -59,7 +60,9 @@ const UserSavedPostsSearchFilter = () => {
             trigger="click"
             content="Tags should be separated by comma ','"
           >
-            <InfoCircleOutlined style={{ fontSize: "25px" }} />
+            <InfoCircleOutlined
+              className={UserSavedPostsSearchFilterStyles.tagInfoIcon}
+            />
           </Popover>
         ) : null}
       </span>

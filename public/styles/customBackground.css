@@ -29,9 +29,9 @@ textarea:read-only {
 }
 
 .tagsAvailable {
-    background-color: #fafafa;
+    background-color: whitesmoke;
 }
 
 .selectedTags {
-    background-color: #fafafa;
+    background-color: whitesmoke;
 }
