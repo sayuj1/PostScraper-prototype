@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, Fragment } from "react";
 //components
-const PostsTabs = lazy(() => import("../../posts/userProfile/PostsTabs"));
+const PostsTabs = lazy(() => import("../../posts/user/profile/PostsTabs"));
 const UserProfileHeader = lazy(() => import("./UserProfileHeader"));
 const UserProfileContent = lazy(() => import("./UserProfileContent"));
 

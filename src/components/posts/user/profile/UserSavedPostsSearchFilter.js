@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import PostContext from "../../../context/postContext/postContext";
+import PostContext from "../../../../context/postContext/postContext";
 import { Select, Input, Popover } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
-import UserSavedPostsSearchFilterStyles from "../../../styles/posts/userProfile/UserPostsSearchFilter.module.css";
+import UserSavedPostsSearchFilterStyles from "../../../../styles/posts/userProfile/UserPostsSearchFilter.module.css";
 const { Option } = Select;
 
 const UserSavedPostsSearchFilter = () => {

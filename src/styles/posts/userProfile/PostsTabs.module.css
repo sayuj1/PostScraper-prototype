@@ -6,6 +6,14 @@
     padding-right: 5%;
 }
 
+.postsTabsFixed {
+    position: fixed;
+    z-index: 12;
+    margin-top: -354px;
+    width: 100%;
+    left: 0;
+}
+
 .postsTabsFilter {
     vertical-align: middle;
     margin-left: 10px;

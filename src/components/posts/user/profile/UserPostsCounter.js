@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
 import { Badge } from "antd";
-import PostContext from "../../../context/postContext/postContext";
+import PostContext from "../../../../context/postContext/postContext";
 
 const UserPostsCounter = (props) => {
   const { currentSelected } = props;

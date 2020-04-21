@@ -1,6 +1,6 @@
 import React, { Fragment, lazy, Suspense } from "react";
 import { Row, Col } from "antd";
-const UserPosts = lazy(() => import("../userProfile/UserPosts"));
+const UserPosts = lazy(() => import("./UserPosts"));
 const UserSavePosts = lazy(() => import("./UserSavePosts"));
 const SelectedPostsTab = (props) => {
   const { currentSelected } = props;

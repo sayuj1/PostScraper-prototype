@@ -2,13 +2,13 @@ import React, { Fragment, useState, useContext, useEffect } from "react";
 
 import { Row, Col, Menu } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import PostContext from "../../../context/postContext/postContext";
+import PostContext from "../../../../context/postContext/postContext";
 import UserPostsSearchFilter from "./UserPostsSearchFilter";
 import UserPostsCounter from "./UserPostsCounter";
 import SelectedPostsTab from "./SelectedPostsTab";
 import UserSavedPostsSearchFilter from "./UserSavedPostsSearchFilter";
-import PostsTabsStyles from "../../../styles/posts/userProfile/PostsTabs.module.css";
-import Styles from "../../../styles/Global/GlobalResponsiveQueries.module.css";
+import PostsTabsStyles from "../../../../styles/posts/userProfile/PostsTabs.module.css";
+import Styles from "../../../../styles/Global/GlobalResponsiveQueries.module.css";
 
 const { SubMenu, Item } = Menu;
 
@@ -21,14 +21,29 @@ const PostsTabs = () => {
     // filterUserSavedPosts,
   } = useContext(PostContext);
 
+  let a;
   useEffect(() => {
     // console.log(userSavedPostFilter);
     filterUserPosts(userPostfilter);
     // filterUserSavedPosts(userSavedPostFilter);
+    window.addEventListener("scroll", handlePostsTabs);
+    a = document.querySelector(".postsTabsMenu");
+
+    return () => {
+      window.removeEventListener("scroll", handlePostsTabs);
+    };
   }, []);
   const handleClick = (e) => {
     if (e.key === "user-posts" || e.key === "user-saved-posts") {
       setCurrentSelected(e.key);
+    }
+  };
+
+  const handlePostsTabs = () => {
+    if (window.pageYOffset > 352) {
+      a.classList.add(PostsTabsStyles.postsTabsFixed);
+    } else if (window.pageYOffset <= 352) {
+      a.classList.remove(PostsTabsStyles.postsTabsFixed);
     }
   };
 
@@ -54,7 +69,7 @@ const PostsTabs = () => {
         >
           <div className={PostsTabsStyles.postsTabs}>
             <Menu
-              className={PostsTabsStyles.postsTabsMenu}
+              className={`postsTabsMenu ${PostsTabsStyles.postsTabsMenu}`}
               onClick={handleClick}
               selectedKeys={currentSelected}
               mode="horizontal"

@@ -1,9 +1,9 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import PostContext from "../../../context/postContext/postContext";
-import UserContext from "../../../context/userContext/userContext";
+import PostContext from "../../../../context/postContext/postContext";
+import UserContext from "../../../../context/userContext/userContext";
 import { Row, Empty } from "antd";
 import UserPost from "./UserPost";
-import UserSavePostsStyles from "../../../styles/posts/userProfile/UserSavePosts.module.css";
+import UserSavePostsStyles from "../../../../styles/posts/userProfile/UserSavePosts.module.css";
 const UserSavePosts = () => {
   const { user } = useContext(UserContext);
   const {
