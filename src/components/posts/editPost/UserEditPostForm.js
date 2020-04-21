@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { Form } from "antd";
 import followingContext from "../../../context/followingContext/followingContext";
-import EditPostBtn from "../../buttons/posts/UserEditPostForm/EditPostBtn";
-import SaveEditPostBtn from "../../buttons/posts/UserEditPostForm/SaveEditPostBtn";
+import EditPostBtn from "../../buttons/posts/editPost/UserEditPostForm/EditPostBtn";
+import SaveEditPostBtn from "../../buttons/posts/editPost/UserEditPostForm/SaveEditPostBtn";
 import PostForm from "../global/PostForm";
 
-const UserEditPostForm = props => {
+const UserEditPostForm = (props) => {
   const { tags, getAllTags } = useContext(followingContext);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const UserEditPostForm = props => {
   const [postValues, setpostValues] = useState({
     postTitle: { focus: false, value: "", length: 0 },
     postDescription: { focus: false, value: "", length: 0 },
-    postTags: []
+    postTags: [],
   });
 
   const [readOnly, setreadOnly] = useState(true);
@@ -29,33 +29,33 @@ const UserEditPostForm = props => {
         postTitle: {
           ...postValues.postTitle,
           value: title,
-          length: title.length
+          length: title.length,
         },
         postDescription: {
           ...postValues.postDescription,
           value: description,
-          length: description.length
+          length: description.length,
         },
-        postTags: userPostTags
+        postTags: userPostTags,
       });
     } else {
       setpostValues({
         postTitle: {
           ...postValues.postTitle,
           value: title,
-          length: title.length
+          length: title.length,
         },
         postDescription: {
           ...postValues.postDescription,
           value: description,
-          length: description.length
+          length: description.length,
         },
-        postTags: []
+        postTags: [],
       });
     }
   }, []);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const inputField = e.target.name;
     const inputFieldValue = e.target.value;
     setpostValues({
@@ -63,17 +63,19 @@ const UserEditPostForm = props => {
       [inputField]: {
         ...postValues[inputField],
         value: inputFieldValue,
-        length: inputFieldValue.length
-      }
+        length: inputFieldValue.length,
+      },
     });
   };
 
   const OPTIONS = tags;
-  const filteredOptions = OPTIONS.filter(o => !postValues.postTags.includes(o));
-  const handleTags = selectedItems => {
+  const filteredOptions = OPTIONS.filter(
+    (o) => !postValues.postTags.includes(o)
+  );
+  const handleTags = (selectedItems) => {
     setpostValues({
       ...postValues,
-      postTags: selectedItems
+      postTags: selectedItems,
     });
   };
 
@@ -83,8 +85,8 @@ const UserEditPostForm = props => {
       ...postValues,
       [inputField]: {
         ...postValues[inputField],
-        focus: status
-      }
+        focus: status,
+      },
     });
     // console.log("focus", e.target.name);
   };

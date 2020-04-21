@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
-import { Row, Col } from "antd";
+import { Row, Col, Typography } from "antd";
 // Buttons
-import CreatePostBtn from "../../buttons/user/UserProfile/CreatePostBtn";
-import EditProfileBtn from "../../buttons/user/UserProfile/EditProfileBtn";
+import CreatePostBtn from "../../buttons/user/profile/UserProfileHeader/CreatePostBtn";
+import EditProfileBtn from "../../buttons/user/profile/UserProfileHeader/EditProfileBtn";
 import GoHomeBtn from "../../buttons/global/GoHomeBtn";
 import UserTheme from "./UserTheme";
+const { Title } = Typography;
 const UserProfileHeader = () => {
   return (
     <Fragment>
@@ -22,9 +23,9 @@ const UserProfileHeader = () => {
           md={{ span: 22, offset: 2 }}
           lg={{ span: 22 }}
         >
-          <span style={{ paddingLeft: "19px" }}>
+          <Title level={4} style={{ marginLeft: "18px" }}>
             Select Theme: <UserTheme />
-          </span>
+          </Title>
         </Col>
 
         {/* create post btn */}

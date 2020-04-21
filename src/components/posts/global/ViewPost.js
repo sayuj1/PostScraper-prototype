@@ -1,11 +1,4 @@
-import React, {
-  Fragment,
-  useState,
-  lazy,
-  Suspense,
-  useContext,
-  useEffect,
-} from "react";
+import React, { Fragment, useState, lazy, Suspense, useContext } from "react";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
 import { DownloadOutlined, UserOutlined } from "@ant-design/icons";
 import Styles from "../../../styles/posts/ViewPost.module.css";
@@ -16,8 +9,8 @@ import PostImage from "./PostImage";
 import { useParams } from "react-router-dom";
 import GoUserProfileBtn from "../../buttons/global/GoUserProfileBtn";
 import Styles1 from "../../../styles/Global/GlobalResponsiveQueries.module.css";
-import SavePostBtn from "../../buttons/posts/ViewPost/SavePostBtn";
-import RemoveSavePostBtn from "../../buttons/posts/ViewPost/RemoveSavePostBtn";
+import SavePostBtn from "../../buttons/posts/global/ViewPost/SavePostBtn";
+import RemoveSavePostBtn from "../../buttons/posts/global/ViewPost/RemoveSavePostBtn";
 const { Paragraph } = Typography;
 const CommentBox = lazy(() => import("../../comments/CommentBox"));
 const ViewComments = lazy(() => import("../../comments/ViewComments"));

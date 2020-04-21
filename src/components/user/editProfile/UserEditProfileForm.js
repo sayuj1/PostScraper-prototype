@@ -2,8 +2,8 @@ import React, { Fragment, useContext, useState, useEffect } from "react";
 import { Row, Col, Form, Input, Radio, Select, message, Empty } from "antd";
 
 import UserContext from "../../../context/userContext/userContext";
-import EditUserProfileBtn from "../../buttons/user/UserEditProfileForm/EditUserProfileBtn";
-import SaveUserProfileBtn from "../../buttons/user/UserEditProfileForm/SaveUserProfileBtn";
+import EditUserProfileBtn from "../../buttons/user/editProfile/UserEditProfileForm/EditUserProfileBtn";
+import SaveUserProfileBtn from "../../buttons/user/editProfile/UserEditProfileForm/SaveUserProfileBtn";
 import Styles from "../../../styles/user/UserEditProfileForm.module.css";
 const { TextArea } = Input;
 const { Option } = Select;

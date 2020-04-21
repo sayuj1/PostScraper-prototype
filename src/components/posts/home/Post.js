@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom";
 import PostImage from "../global/PostImage";
 
 import UserContext from "../../../context/userContext/userContext";
-import SavePostBtn from "../../buttons/posts/ViewPost/SavePostBtn";
-import RemoveSavePostBtn from "../../buttons/posts/ViewPost/RemoveSavePostBtn";
+import SavePostBtn from "../../buttons/posts/global/ViewPost/SavePostBtn";
+import RemoveSavePostBtn from "../../buttons/posts/global/ViewPost/RemoveSavePostBtn";
 
 const { Meta } = Card;
 

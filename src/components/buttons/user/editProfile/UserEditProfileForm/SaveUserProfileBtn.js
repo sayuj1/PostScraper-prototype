@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from "react";
 import { Button, message } from "antd";
-import UserContext from "../../../../context/userContext/userContext";
+import UserContext from "../../../../../context/userContext/userContext";
 
-const SaveUserProfileBtn = props => {
+const SaveUserProfileBtn = (props) => {
   const { setreadOnly, userInfo } = props;
   const { updateUser } = useContext(UserContext);
 
@@ -10,7 +10,7 @@ const SaveUserProfileBtn = props => {
     message.error(`${msg} is ${context}!`);
   };
 
-  const inputValidate = user => {
+  const inputValidate = (user) => {
     if (user.firstname === "" || !user.firstname.match(/^[A-Za-z]+$/)) {
       showErrorMsg("firstname", "invalid");
     } else if (user.lastname === "" || !user.lastname.match(/^[A-Za-z]+$/)) {
@@ -26,16 +26,16 @@ const SaveUserProfileBtn = props => {
       // save values to user state
       const updateUserInfo = new Promise((resolve, reject) => {
         resolve(updateUser(userInfo));
-        reject(err => err);
+        reject((err) => err);
       });
       updateUserInfo
-        .then(response => {
+        .then((response) => {
           message.success(response);
           // disabling editing mode
 
           setreadOnly(true);
         })
-        .catch(err => message.error(err));
+        .catch((err) => message.error(err));
     }
   };
   return (

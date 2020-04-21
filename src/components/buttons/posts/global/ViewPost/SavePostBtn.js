@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from "react";
 import { Button, message } from "antd";
-import PostContext from "../../../../context/postContext/postContext";
-import UserContext from "../../../../context/userContext/userContext";
+import PostContext from "../../../../../context/postContext/postContext";
+import UserContext from "../../../../../context/userContext/userContext";
 
 const SavePostBtn = (props) => {
   const { post, block } = props;

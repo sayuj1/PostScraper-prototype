@@ -1,10 +1,10 @@
 import React, { Fragment, useContext } from "react";
 import { Button, message } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
-import PostContext from "../../../../context/postContext/postContext";
+import PostContext from "../../../../../context/postContext/postContext";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
-import UserContext from "../../../../context/userContext/userContext";
+import UserContext from "../../../../../context/userContext/userContext";
 
 const SaveNewPostBtn = (props) => {
   const { postImg } = props;

@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from "react";
-import PostContext from "../../../../context/postContext/postContext";
+import PostContext from "../../../../../context/postContext/postContext";
 import { Popconfirm, Button, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 const DeletePostBtn = (props) => {
   const { _id } = props;

@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import PostContext from "../../../../context/postContext/postContext";
+import PostContext from "../../../../../context/postContext/postContext";
 import { useHistory } from "react-router-dom";
 import { Button } from "antd";
 // icons

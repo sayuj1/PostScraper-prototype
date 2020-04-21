@@ -1,11 +1,10 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Form } from "antd";
-
-import SaveNewPostBtn from "../../buttons/posts/CreatePostForm/SaveNewPostBtn";
 import followingContext from "../../../context/followingContext/followingContext";
 import PostForm from "../global/PostForm";
+import SaveNewPostBtn from "../../buttons/posts/createPost/CreatePostForm/SaveNewPostBtn";
 
-const CreatePostForm = props => {
+const CreatePostForm = (props) => {
   const { tags, getAllTags } = useContext(followingContext);
   const { postImg } = props;
 
@@ -17,12 +16,12 @@ const CreatePostForm = props => {
   const [postValues, setpostValues] = useState({
     postTitle: { focus: false, value: "", length: 0 },
     postDescription: { focus: false, value: "", length: 0 },
-    postTags: []
+    postTags: [],
   });
 
   const readOnly = false;
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const inputField = e.target.name;
     const inputFieldValue = e.target.value;
     setpostValues({
@@ -30,8 +29,8 @@ const CreatePostForm = props => {
       [inputField]: {
         ...postValues[inputField],
         value: inputFieldValue,
-        length: inputFieldValue.length
-      }
+        length: inputFieldValue.length,
+      },
     });
   };
   const handleFocus = (e, status) => {
@@ -40,18 +39,20 @@ const CreatePostForm = props => {
       ...postValues,
       [inputField]: {
         ...postValues[inputField],
-        focus: status
-      }
+        focus: status,
+      },
     });
     // console.log("focus", e.target.name);
   };
 
   const OPTIONS = tags;
-  const filteredOptions = OPTIONS.filter(o => !postValues.postTags.includes(o));
-  const handleTags = selectedItems => {
+  const filteredOptions = OPTIONS.filter(
+    (o) => !postValues.postTags.includes(o)
+  );
+  const handleTags = (selectedItems) => {
     setpostValues({
       ...postValues,
-      postTags: selectedItems
+      postTags: selectedItems,
     });
   };
 

@@ -1,15 +1,14 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext } from "react";
 // components
 import { Card, Col, Popover, Avatar, Tooltip } from "antd";
 import { UserOutlined, MoreOutlined } from "@ant-design/icons";
-import DeletePostBtn from "../../buttons/posts/UserPost/DeletePostBtn";
-
 import PostImage from "../global/PostImage";
-import ViewPostBtn from "../../buttons/posts/UserPost/ViewPostBtn";
-import EditPostBtn from "../../buttons/posts/UserPost/EditPostBtn";
+import ViewPostBtn from "../../buttons/posts/userProfile/UserPost/ViewPostBtn";
+import EditPostBtn from "../../buttons/posts/userProfile/UserPost/EditPostBtn";
+import DeletePostBtn from "../../buttons/posts/userProfile/UserPost/DeletePostBtn";
 import UserContext from "../../../context/userContext/userContext";
-import RemoveSavePostBtn from "../../buttons/posts/ViewPost/RemoveSavePostBtn";
-import SavePostBtn from "../../buttons/posts/ViewPost/SavePostBtn";
+import RemoveSavePostBtn from "../../buttons/posts/global/ViewPost/RemoveSavePostBtn";
+import SavePostBtn from "../../buttons/posts/global/ViewPost/SavePostBtn";
 import PostContext from "../../../context/postContext/postContext";
 import UserPostStyles from "../../../styles/posts/userProfile/UserPost.module.css";
 

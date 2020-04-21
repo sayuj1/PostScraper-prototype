@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import UserContext from "../../../../context/userContext/userContext";
+import UserContext from "../../../../../context/userContext/userContext";
 import { useHistory } from "react-router-dom";
 import { Button } from "antd";
 const ViewPostBtn = (props) => {
