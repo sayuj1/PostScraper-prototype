@@ -13,7 +13,7 @@ import {
 const UserState = (props) => {
   const initialState = {
     loading: false,
-    userTheme: false, // false --> light, true --> dark
+    userTheme: true, // false --> light, true --> dark
     user: {
       _id: 1,
       firstname: "sayuj",

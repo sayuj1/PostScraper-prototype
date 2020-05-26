@@ -95,7 +95,7 @@ const UserPost = (props) => {
             extra={<ViewPostBtn _id={_id} postAuthor={postAuthor} />}
             bordered={true}
             title={postTitle}
-            cover={<PostImage postImg={postImg} height="300px" />}
+            cover={<PostImage postImg={postImg} height="150px" />}
           >
             <Meta
               className={UserPostStyles.postDescription}

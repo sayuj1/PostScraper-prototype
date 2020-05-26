@@ -1,7 +1,7 @@
 import React, { Fragment, useState, lazy, Suspense, useContext } from "react";
 import { Col, Row, Button, Avatar, Typography, Tag } from "antd";
 import { DownloadOutlined, UserOutlined } from "@ant-design/icons";
-import Styles from "../../../styles/posts/ViewPost.module.css";
+import Styles from "../../../styles/posts/global/ViewPost.module.css";
 import GoHomeBtn from "../../buttons/global/GoHomeBtn";
 import moment from "moment";
 import UserContext from "../../../context/userContext/userContext";

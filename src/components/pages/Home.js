@@ -9,6 +9,7 @@ const Home = () => {
   useEffect(() => {
     getUser();
   }, []);
+
   return (
     <Fragment>
       <Suspense

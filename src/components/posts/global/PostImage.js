@@ -4,9 +4,9 @@ import {
   handleError,
   imgLoadFail,
   imgLoader,
-  noImgFound
+  noImgFound,
 } from "./checkImageLoad";
-const PostImage = props => {
+const PostImage = (props) => {
   const { postImg, height } = props;
   // initializing image load
   const [imgStatus, setimgStatus] = useState("loading");

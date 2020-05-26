@@ -29,8 +29,9 @@ export const imgLoadFail = (imgStatus) => {
     <div
       className="imgLoadFail"
       style={{
-        lineHeight: "20",
-        textAlign: "center",
+        height: "150px",
+        lineHeight: "10",
+        // textAlign: "center",
         fontWeight: "bold",
       }}
     >
@@ -44,7 +45,8 @@ export const noImgFound = () => {
     <div
       className="noImgFound"
       style={{
-        lineHeight: "20",
+        height: "150px",
+        lineHeight: "10",
         textAlign: "center",
         fontWeight: "bold",
       }}

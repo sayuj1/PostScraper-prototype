@@ -91,7 +91,7 @@ const Post = (props) => {
               )
             }
             style={{ width: "100%" }}
-            cover={<PostImage postImg={postImg} height="300px" />}
+            cover={<PostImage postImg={postImg} height="150px" />}
           >
             <Meta
               style={{ fontWeight: "bolder" }}
