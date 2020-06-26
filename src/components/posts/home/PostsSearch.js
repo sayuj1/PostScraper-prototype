@@ -1,31 +1,43 @@
-import React from "react";
-import { Input, AutoComplete } from "antd";
+import React from 'react';
+import { Input, AutoComplete } from 'antd';
+import { useState } from 'react';
 // import "../../../../node_modules/antd/dist/antd.css";
 const { Search } = Input;
 
+const mockVal = (str, repeat = 1) => ({
+  value: str.repeat(repeat),
+});
+
 const PostSearch = () => {
-  // const data = "hi";
-  const handleChange = () => {
-    console.log("Autocomplete loading data");
+  const [value, setValue] = useState('');
+  const [options, setOptions] = useState([]);
+
+  const onSearch = searchText => {
+    setOptions(
+      !searchText
+        ? []
+        : [mockVal(searchText), mockVal(searchText, 2), mockVal(searchText, 3)]
+    );
   };
-  const handleSearch = () => {
-    console.log("load data after hitting search button or enter");
+
+  const onSelect = data => {
+    console.log('onSelect', data);
   };
+
+  const onChange = data => {
+    setValue(data);
+  };
+
   return (
     <AutoComplete
-      dropdownMatchSelectWidth={500}
-      style={{
-        width: "100%",
-        verticalAlign: "middle"
-      }}
-      onChange={handleChange}
+      style={{ width: '100%' }}
+      value={value}
+      options={options}
+      onSelect={onSelect}
+      onSearch={onSearch}
+      onChange={onChange}
     >
-      <Search
-        size="large"
-        placeholder="Search here...."
-        onSearch={handleSearch}
-        enterButton
-      />
+      <Search size='large' placeholder='search here...' />
     </AutoComplete>
   );
 };
