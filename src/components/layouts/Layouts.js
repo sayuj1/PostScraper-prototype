@@ -1,28 +1,28 @@
-import React, { Suspense, lazy, Fragment } from "react";
+import React, { Suspense, lazy, Fragment } from 'react';
 
 // For Routing
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // For Styling
-import Styles from "../../styles/Layouts.module.css";
+import Styles from '../../styles/Layouts.module.css';
 
 // States for sharing values between components
-import PostState from "../../context/postContext/PostState";
-import CommentState from "../../context/commentContext/CommentState";
-import FollowingState from "../../context/followingContext/FollowingState";
-import UserState from "../../context/userContext/UserState";
+import PostState from '../../context/postContext/PostState';
+import CommentState from '../../context/commentContext/CommentState';
+import FollowingState from '../../context/followingContext/FollowingState';
+import UserState from '../../context/userContext/UserState';
 // for Going to top from bottom
-import BackToTop from "./BackToTop";
-import Settings from "../pages/Settings";
+import BackToTop from './BackToTop';
+import Settings from '../pages/Settings';
 
 // Navbar
-const Navbar = lazy(() => import("../layouts/Navbar"));
+const Navbar = lazy(() => import('../layouts/Navbar'));
 // pages
-const Home = lazy(() => import("../pages/Home"));
-const ViewPost = lazy(() => import("../pages/ViewPost"));
-const Following = lazy(() => import("../pages/Following"));
-const User = lazy(() => import("../pages/User"));
-const PostCreate = lazy(() => import("../pages/PostCreate"));
-const Page404 = lazy(() => import("../pages/Page404"));
+const Home = lazy(() => import('../pages/Home'));
+const ViewPost = lazy(() => import('../pages/ViewPost'));
+const Following = lazy(() => import('../pages/Following'));
+const User = lazy(() => import('../pages/User'));
+const PostCreate = lazy(() => import('../pages/PostCreate'));
+const Page404 = lazy(() => import('../pages/Page404'));
 
 const Layouts = () => {
   return (
@@ -32,10 +32,10 @@ const Layouts = () => {
           <UserState>
             <Suspense
               fallback={
-                <div style={{ fontSize: "50px" }}>Loading Navbar....</div>
+                <div style={{ fontSize: '50px' }}>Loading Navbar....</div>
               }
             >
-              <div className="header">
+              <div className='header'>
                 <Navbar />
               </div>
             </Suspense>
@@ -47,33 +47,33 @@ const Layouts = () => {
                   <CommentState>
                     <Suspense
                       fallback={
-                        <div style={{ fontSize: "50px" }}>
+                        <div style={{ fontSize: '50px' }}>
                           Loading routes....
                         </div>
                       }
                     >
                       <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/post/:id" component={ViewPost} />
+                        <Route exact path='/' component={Home} />
+                        <Route exact path='/post/:id' component={ViewPost} />
                         <Route
                           exact
-                          path="/:userName/post/:id"
+                          path='/:userName/post/:id'
                           component={ViewPost}
                         />
 
                         <Route
                           exact
-                          path="/create-post/"
+                          path='/create-post/'
                           component={PostCreate}
                         />
-                        <Route exact path="/following" component={Following} />
-                        <Route exact path="/user/:user" component={User} />
+                        <Route exact path='/following' component={Following} />
+                        <Route exact path='/user/:user' component={User} />
                         <Route
                           exact
-                          path="/settings/:settingName"
+                          path='/settings/:settingName'
                           component={Settings}
                         />
-                        <Route path="*" component={Page404} />
+                        <Route path='*' component={Page404} />
                       </Switch>
                     </Suspense>
                   </CommentState>
@@ -81,7 +81,7 @@ const Layouts = () => {
               </FollowingState>
             </div>
             <div className={Styles.footer}>
-              Get Learn ©2020 Created By App-Devs
+              PostScraper ©2020 Created By App-Devs
             </div>
           </UserState>
         </Router>
