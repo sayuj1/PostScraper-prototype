@@ -1,17 +1,17 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext } from 'react';
 // import "antd/dist/antd";
-import { Upload, message, Button } from "antd";
-import { UploadOutlined, DeleteFilled } from "@ant-design/icons";
+import { Upload, message, Button } from 'antd';
+import { UploadOutlined, DeleteFilled } from '@ant-design/icons';
 
-import PostContext from "../../../context/postContext/postContext";
-import PostImagePreview from "./PostImagePreview";
-import PreviewImagePostModal from "./PreviewImagePostModal";
-import InvalidFileWarning from "../InvalidFileWarning";
+import PostContext from '../../../context/postContext/postContext';
+import PostImagePreview from './PostImagePreview';
+import PreviewImagePostModal from './PreviewImagePostModal';
+import InvalidFileWarning from '../InvalidFileWarning';
 
 // image validation rules
-import { validateImageType, validateImageSize } from "../imageValidation";
+import { validateImageType, validateImageSize } from '../imageValidation';
 
-const UploadImg = (props) => {
+const UploadImg = props => {
   // const { saveImg, removeImg } = useContext(PostContext);
   const { setpostImg } = props;
   // image upload states
@@ -24,7 +24,7 @@ const UploadImg = (props) => {
   });
 
   //checking image file if its valid or not before uploading to the server, if it return false then image will not be uploaded to the server
-  const handleBeforeUpload = (file) => {
+  const handleBeforeUpload = file => {
     // console.log(file.size);
     // supported img --> jpeg, png
     const isJpgOrPng = validateImageType(file, setfileState, fileState);
@@ -36,30 +36,30 @@ const UploadImg = (props) => {
   };
 
   // for live previewing on the client page
-  const getBase64 = (file) => {
+  const getBase64 = file => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result); // when reading image file completed
-      reader.onerror = (error) => reject(error);
+      reader.onerror = error => reject(error);
     });
   };
 
   // for handling changes on the image upload
-  const handleChange = async (info) => {
+  const handleChange = async info => {
     // console.log("response", info.file.error);
     // console.log("file", info.file);
     const file = info.file;
     // handling server errors
     if (file.error) {
-      message.error("Server Error! We are Sorry :( Please try again!");
+      message.error('Server Error! We are Sorry :( Please try again!');
       setfileState({
         ...fileState,
         invalidFile: true,
       });
     }
     // checking file status (if user deleting the file)
-    if (file.status === "removed") {
+    if (file.status === 'removed') {
       // updating state value on image removal
       setfileState({
         ...fileState,
@@ -69,22 +69,22 @@ const UploadImg = (props) => {
       });
       //removing img from the post state
       // removeImg();
-      setpostImg("");
+      setpostImg('');
     } else {
       // if (file.status === "uploading") {
       //   console.log("uploading");
       // }
-      if (file.status === "done") {
+      if (file.status === 'done') {
         setfileState({
           ...fileState,
           invalidFile: false,
         });
-        message.success("Image uploaded successfully.");
+        message.success('Image uploaded successfully.');
         // for previewing image on the client side
         if (!file.url && !file.preview) {
           await getBase64(file.originFileObj)
-            .then((response) => (file.preview = response))
-            .catch((err) => {
+            .then(response => (file.preview = response))
+            .catch(err => {
               // console.error("error");
               message.error("Can't Preview this image!");
             });
@@ -102,8 +102,8 @@ const UploadImg = (props) => {
         setpostImg(file.response.url);
         // save this response to create post state (in future)
       }
-      if (file.status === "error") {
-        message.error("upload failed.");
+      if (file.status === 'error') {
+        message.error('upload failed.');
         setfileState({
           ...fileState,
           invalidFile: true,
@@ -121,23 +121,23 @@ const UploadImg = (props) => {
   };
 
   // deleting image file from the server
-  const handleRemove = (file) => {
+  const handleRemove = file => {
     // store the uploaded image path & then pass that path here to remove the image from the server
     return new Promise((resolve, reject) => {
-      resolve(console.log("removing from server"));
+      resolve(console.log('removing from server'));
       // logic for removing file from the server goes here
-      message.success("File removed successfully!");
+      message.success('File removed successfully!');
       setfileState({
         ...fileState,
         invalidFile: false,
       });
-      reject("File not removed");
+      reject('File not removed');
     });
   };
 
   return (
     <Fragment>
-      <div className="uploadContainer" style={{ textAlign: "center" }}>
+      <div className='uploadContainer' style={{ textAlign: 'center' }}>
         {/* Image preview box  */}
         <PostImagePreview
           previewImgShow={fileState.previewImgShow}
@@ -147,20 +147,20 @@ const UploadImg = (props) => {
         <Upload
           multiple={false}
           beforeUpload={handleBeforeUpload}
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76" // server location for uploading (upload route)
-          listType="picture"
+          action='https://www.mocky.io/v2/5cc8019d300000980a055e76' // server location for uploading (upload route)
+          listType='picture'
           onPreview={handlePreview}
           onChange={handleChange}
           onRemove={handleRemove}
           showUploadList={{
             showRemoveIcon: true,
-            removeIcon: <DeleteFilled style={{ color: "red" }} />,
+            removeIcon: <DeleteFilled style={{ color: 'red' }} />,
           }}
         >
-          <div style={{ width: "100% !important" }}>
+          <div style={{ width: '100% !important' }}>
             {!fileState.previewImgShow && !fileState.invalidFile ? (
-              <div style={{ marginTop: "20px" }}>
-                <Button type="primary">
+              <div style={{ marginTop: '20px' }}>
+                <Button type='primary'>
                   Upload
                   <UploadOutlined />
                 </Button>
